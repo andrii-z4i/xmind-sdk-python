@@ -112,12 +112,13 @@ class WorkbookElement(WorkbookMixinElement):
         self.updateModifiedTime()
 
     def getVersion(self):
-        return self.getAttribution(const.ATTR_VERSION)
+        return self.getAttribute(const.ATTR_VERSION)
 
 
 class WorkbookDocument(Document):
     """ `WorkbookDocument` as central object correspond XMind workbook.
     """
+
     def __init__(self, node=None, path=None):
         """
         Construct new `WorkbookDocument` object
@@ -252,6 +253,7 @@ class WorkbookDocument(Document):
 
 def main():
     pass
+
 
 if __name__ == '__main__':
     main()

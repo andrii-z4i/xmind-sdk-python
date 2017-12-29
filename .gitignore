@@ -22,6 +22,7 @@ lib64
 __pycache__
 
 # Installer logs
+logs
 pip-log.txt
 
 # Unit test / coverage reports
@@ -37,4 +38,8 @@ nosetests.xml
 .project
 .pydevproject
 
+# IDE folders
+
+.vscode
+.idea
 

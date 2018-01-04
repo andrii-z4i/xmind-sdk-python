@@ -44,6 +44,10 @@ class Node(object):
     All of components of XMind workbook subclass Node
     """
     def __init__(self, node):
+        # FIXME: WE HAVE TO CHECK IF node INHERITS dom.Node class
+        # it's needed because later in appendChild method we will call
+        # self._node.appendChild and if we pass wrong type then we will
+        # have exception!!!!
         self._node = node
 
     def _equals(self, obj=None):
@@ -110,6 +114,7 @@ class Node(object):
         """
         child_nodes = []
         for node in self._node.childNodes:
+            # FIXME: I think we have to use here 'Node' instead of 'node'. We have to revisit it later
             if node.nodeType == node.TEXT_NODE:
                 continue
 

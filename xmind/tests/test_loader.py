@@ -2,29 +2,12 @@ import unittest
 from unittest.mock import patch, Mock, MagicMock
 from xmind.core.loader import WorkbookLoader
 import logging
+from . import base
 
-LOGGER = logging.getLogger('loaderTest')
 
-
-class LoaderTest(unittest.TestCase):
+class LoaderTest(base.Base):
     """Loader test"""
-
-    def setUp(self):
-        LOGGER.info('Start test: %s', self._testMethodName)
-        self._patchers = []
-
-    def tearDown(self):
-        for patcher in self._patchers:
-            self._remove_patched_function(patcher)
-        LOGGER.info('End test: %s', self._testMethodName)
-
-    def _remove_patched_function(self, property_name):
-        """Remove patched function by name"""
-        _patcher = getattr(self, property_name, None)
-        if _patcher:
-            _patcher.stop()
-            delattr(self, property_name)
-            LOGGER.debug("Property '%s' has been deleted", property_name)
+    LOGGER = logging.getLogger('loaderTest')
 
     def _patch_get_abs_path(self, return_value=None, thrown_exception=None):
         """Patch get_abs_path function"""
@@ -34,36 +17,6 @@ class LoaderTest(unittest.TestCase):
         """Patch split_ext function"""
         return self._init_patch_with_name('_split_ext', 'xmind.utils.split_ext', return_value, thrown_exception)
 
-    def _init_patch_with_name(self, property_name, function_name, return_value=None, thrown_exception=None, autospec=None):
-        """Patches the function"""
-        def side_effect_function(*a, **kw):
-            """Side effect function"""
-            if thrown_exception:
-                LOGGER.error("%s => Throw exception: '%s'", function_name, thrown_exception)
-                raise thrown_exception
-            LOGGER.debug("%s => called with (%s), returns (%s)", function_name, a, return_value)
-            return return_value
-
-        _side_effect = side_effect_function
-
-        if getattr(self, property_name, None):
-            raise Exception('Can\'t set property, already exists')
-
-        _patch = patch(
-            function_name,
-            autospec=autospec
-        )
-
-        setattr(self, property_name, _patch)
-
-        _mock = _patch.start()
-        _mock.side_effect = _side_effect
-
-        self._patchers.append(property_name)
-        LOGGER.debug("Property '%s' for function '%s' has been set", property_name, function_name)
-        return _mock
-
-
     def test_init_get_abs_path_throws(self):
         """test case when get_abs_path throws exception"""
 
@@ -72,7 +25,7 @@ class LoaderTest(unittest.TestCase):
         with self.assertRaises(Exception) as ex:
             WorkbookLoader('dd')  # create loader and waits for Exception
 
-        LOGGER.warning("Exception: %s", ex.exception)
+        self.LOGGER.warning("Exception: %s", ex.exception)
 
     def test_init_split_ext_throws(self):
         """test case when split_ext throws exception"""
@@ -82,7 +35,7 @@ class LoaderTest(unittest.TestCase):
         with self.assertRaises(Exception) as ex:
             WorkbookLoader('dd')  # create loader and waits for Exception
 
-        LOGGER.warning("Exception: %s", ex.exception)
+        self.LOGGER.warning("Exception: %s", ex.exception)
 
     def test_init_throws_no_xmind_extension(self):
         """test case when exception comes because there is no xmind extension"""
@@ -92,7 +45,7 @@ class LoaderTest(unittest.TestCase):
         with self.assertRaises(Exception) as ex:
             WorkbookLoader('dd')  # create loader and waits for Exception
 
-        LOGGER.warning("Exception: %s", ex.exception)
+        self.LOGGER.warning("Exception: %s", ex.exception)
 
     def test_init_no_exception(self):
         """test case when no exception comes even though there are no data"""

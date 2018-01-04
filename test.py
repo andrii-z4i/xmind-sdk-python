@@ -6,6 +6,7 @@ from os import mkdir
 
 testModules = [
     'xmind.tests.test_loader',
+    'xmind.tests.test_node',
     ]
 
 suite = unittest.TestSuite()
@@ -32,6 +33,7 @@ elif not isdir('./logs'):
 
 
 logging.basicConfig(format=FORMAT, level=logging.DEBUG, filename='./logs/%s.log' % fileNameToStoreLogs)
-logging.getLogger('global').info('Start tests')
-unittest.TextTestRunner().run(suite)
-logging.getLogger('global').info('End tests')
+LOGGER = logging.getLogger('global') 
+LOGGER.info('Start tests')
+unittest.TextTestRunner(verbosity=2).run(suite)
+LOGGER.info('End tests')

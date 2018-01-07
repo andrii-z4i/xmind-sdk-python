@@ -29,7 +29,8 @@ class MarkerId:
     def getFamilly(self):
         return self.name.split('-')[0]
 
-
+ # FIXME: For me it is more logical to have all static atributes inside the class
+ # (may be they are out of the class to not inherit them)
 MarkerId.starRed         = 'star-red'
 MarkerId.starOrange      = 'star-orange'
 MarkerId.starYellow      = 'star-yellow'

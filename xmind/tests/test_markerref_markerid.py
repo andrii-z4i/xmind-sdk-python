@@ -1,5 +1,3 @@
-import unittest
-from unittest.mock import patch, Mock, MagicMock
 from xmind.core.markerref import MarkerId
 import logging
 from . import base

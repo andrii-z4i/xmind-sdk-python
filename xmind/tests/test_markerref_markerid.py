@@ -44,6 +44,11 @@ class MarkerrefTest(base.Base):
         _el = MarkerId('test-name')
         self.assertEqual(_el.getFamilly(), 'test')
 
+    def test_get_family_method_without_dash(self):
+        """test that getFamily method exists and returns correct value"""
+        _el = MarkerId('testname')
+        self.assertEqual(_el.getFamilly(), 'testname')
+
     def test_static_atributes(self):
         """test all static atributes of MfrkerId class"""
         _m_id = MarkerId('a')

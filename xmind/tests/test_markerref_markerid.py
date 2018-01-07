@@ -7,10 +7,11 @@ class MarkerrefTest(base.Base):
     """Markerref test"""
     LOGGER = logging.getLogger('MarkerefTest')
 
-    def test_init_set_name(self, name='test-name'):
+    def test_init_set_name(self):
         """test that object of the class could be created and will has correct name attribute"""
-        el = MarkerId(name)
-        self.assertEqual(el.name, name)
+        _name = 'test-name'
+        el = MarkerId(_name)
+        self.assertEqual(el.name, _name)
 
     def test_init_throws_missing_argument_exception(self):
         """test case when exception comes because the argument is missing"""
@@ -19,32 +20,34 @@ class MarkerrefTest(base.Base):
 
         self.LOGGER.warning("Exception: %s", ex.exception)
 
-    def test_init_throws_excessive_argument_exception(self, name='test-name', second_arg = 'arg'):
+    def test_init_throws_excessive_argument_exception(self):
         """test case when exception comes because of the excessive arguments"""
         with self.assertRaises(Exception) as ex:
-            MarkerId(name, second_arg)  # trying to create MarketId objectand waits for Exception
+            MarkerId('test-name', 'arg2')  # trying to create MarketId objectand waits for Exception
 
         self.LOGGER.warning("Exception: %s", ex.exception)
 
-    def test_str_method(self, name='test-name'):
+    def test_str_method(self):
         """test that __str__ method exists and returns correct representation"""
-        el = MarkerId(name)
-        self.assertEqual(el.__str__(), name)
+        _name = 'test-name'
+        el = MarkerId(_name)
+        self.assertEqual(el.__str__(), _name)
 
-    def test_repr_method(self, name='test-name'):
+    def test_repr_method(self):
         """test that __repr__ method exists and returns correct representation"""
-        el = MarkerId(name)
-        self.assertEqual(el.__repr__(), "<MarkerId: %s>" % name)
+        _name = 'test-name'
+        el = MarkerId(_name)
+        self.assertEqual(el.__repr__(), "<MarkerId: %s>" % _name)
 
-    def test_get_family_method(self, name='test-name', exp_output = 'test'):
+    def test_get_family_method(self):
         """test that getFamily method exists and returns correct value"""
-        el = MarkerId(name)
-        self.assertEqual(el.getFamilly(), exp_output)
+        el = MarkerId('test-name')
+        self.assertEqual(el.getFamilly(), 'test')
 
     def test_static_atributes(self):
         """test all static atributes of MfrkerId class"""
-        m_id = MarkerId('a')
-        parameters = [
+        _m_id = MarkerId('a')
+        _parameters = [
             ('starRed', 'star-red'),
             ('starOrange', 'star-orange'),
             ('starYellow', 'star-yellow'),
@@ -124,8 +127,8 @@ class MarkerrefTest(base.Base):
             ('weekSat', 'week-sat')
         ]
 
-        for pair in parameters:
-            with self.subTest(pair=pair):
-                self.LOGGER.info('Next pair %s', pair)
-                property = getattr(m_id, pair[0], None)
-                self.assertEqual(property, pair[1])
+        for _pair in _parameters:
+            with self.subTest(pair=_pair):
+                self.LOGGER.info('Next pair %s', _pair)
+                property = getattr(_m_id, _pair[0], None)
+                self.assertEqual(property, _pair[1])

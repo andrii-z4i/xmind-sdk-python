@@ -7,6 +7,7 @@ from os import mkdir
 testModules = [
     'xmind.tests.test_loader',
     'xmind.tests.test_node',
+    'xmind.tests.test_markerref_markerid'
     ]
 
 suite = unittest.TestSuite()

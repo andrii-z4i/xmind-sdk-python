@@ -7,6 +7,8 @@ from os import mkdir
 testModules = [
     'xmind.tests.test_loader',
     'xmind.tests.test_node',
+    'xmind.tests.test_document',
+    'xmind.tests.test_element',
     'xmind.tests.test_markerref_markerid'
     ]
 
@@ -30,11 +32,13 @@ fileNameToStoreLogs = now.strftime('%Y-%m-%d_%H-%M-%S')
 if not exists('./logs'):
     mkdir('./logs')
 elif not isdir('./logs'):
-    raise Exception('No directory logs for storing logs, remove file with a similar name')
+    raise Exception(
+        'No directory logs for storing logs, remove file with a similar name')
 
 
-logging.basicConfig(format=FORMAT, level=logging.DEBUG, filename='./logs/%s.log' % fileNameToStoreLogs)
-LOGGER = logging.getLogger('global') 
+logging.basicConfig(format=FORMAT, level=logging.DEBUG,
+                    filename='./logs/%s.log' % fileNameToStoreLogs)
+LOGGER = logging.getLogger('global')
 LOGGER.info('Start tests')
 unittest.TextTestRunner(verbosity=2).run(suite)
 LOGGER.info('End tests')

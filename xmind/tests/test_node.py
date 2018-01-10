@@ -8,7 +8,31 @@ from . import base
 
 class TestNode(base.Base):
     """Tests for Node class from core module"""
-    LOGGER = logging.getLogger('core')
+    LOGGER = logging.getLogger('node')
+
+    def test_excessive_parameters(self):
+        _node = Node(12)
+        _parameters = [
+            ('getImplementation', 0),
+            ('getOwnerDocument', 0),
+            ('setOwnerDocument', 1),
+            ('getLocalName', 1),
+            ('getPrefix', 1),
+            ('appendChild', 1),
+            ('insertBefore', 2),
+            ('getChildNodesByTagName', 1),
+            ('getFirstChildNodeByTagName', 1),
+            ('getParentNode', 0),
+            ('_isOrphanNode', 1),
+            ('isOrphanNode', 0),
+            ('iterChildNodesByTagName', 1),
+            ('removeChild', 1),
+            ('output', 1)
+        ]
+
+        for pair in _parameters:
+            with self.subTest(pair=pair):
+                self._test_method_by_excessive_parameters(pair, _node)
 
     def test_equals(self):
         """Complex test for _equals method"""
@@ -35,14 +59,16 @@ class TestNode(base.Base):
         _obj = Node('check me')
         with self.assertRaises(NotImplementedError) as ex:
             _obj.getOwnerDocument()
-        self.assertEqual(str(ex.exception), "This method requires an implementation!")
+        self.assertEqual(str(ex.exception),
+                         "This method requires an implementation!")
 
     def test_setOwnerDocument(self):
         """Checks if setOwnerDocument throws exception"""
         _obj = Node('check me')
         with self.assertRaises(NotImplementedError) as ex:
             _obj.setOwnerDocument(None)  # put here None as doc
-        self.assertEqual(str(ex.exception), "This method requires an implementation!")
+        self.assertEqual(str(ex.exception),
+                         "This method requires an implementation!")
 
     def test_getLocalName(self):
         """Checks getLocalName implementation"""
@@ -92,7 +118,8 @@ class TestNode(base.Base):
 
         getOwnerDocumentMock.assert_called()
         _mock_object.appendChild.assert_called_once_with(_get_implementation)
-        _object_to_append.setOwnerDocument.assert_called_once_with(_get_owner_document_mock)
+        _object_to_append.setOwnerDocument.assert_called_once_with(
+            _get_owner_document_mock)
         _object_to_append.getImplementation.assert_called_once()
 
     def test_insertBefore(self):
@@ -112,8 +139,10 @@ class TestNode(base.Base):
             _test_object.insertBefore(_new_node_object, _ref_node_object)
 
         getOwnerDocumentMock.assert_called()
-        _mock_object.insertBefore.assert_called_once_with(_get_implementation, _get_implementation)
-        _new_node_object.setOwnerDocument.assert_called_once_with(_get_owner_document_mock)
+        _mock_object.insertBefore.assert_called_once_with(
+            _get_implementation, _get_implementation)
+        _new_node_object.setOwnerDocument.assert_called_once_with(
+            _get_owner_document_mock)
         _new_node_object.getImplementation.assert_called_once()
         _ref_node_object.getImplementation.assert_called_once()
 
@@ -136,7 +165,8 @@ class TestNode(base.Base):
         _testParameters = [
             ([(1, 'abba'), (2, 'trara'), (3, 'child'), (4, 'child'), (3, 'child3')], 3),
             ([(1, 'abba'), (2, 'trara'), (4, 'child'), (4, 'child'), (3, 'child3')], 2),
-            ([(1, 'abba'), (2, 'trara'), (3, 'child'), (4, 'child4'), (3, 'child3')], None),
+            ([(1, 'abba'), (2, 'trara'), (3, 'child'),
+              (4, 'child4'), (3, 'child3')], None),
         ]
 
         for parameter in _testParameters:
@@ -180,7 +210,8 @@ class TestNode(base.Base):
             _result = _node._isOrphanNode(_node_to_check)
             self.assertTrue(_result)
 
-        self.assertListEqual(_mock.call_args_list, [call(_node_to_check), call(None)])
+        self.assertListEqual(_mock.call_args_list, [
+                             call(_node_to_check), call(None)])
         self.assertEqual(_mock.call_count, 2)
 
     def test_isOrphanNode_self(self):
@@ -204,7 +235,8 @@ class TestNode(base.Base):
         ])
         _test_object = Node(_node)
         values = list(_test_object.iterChildNodesByTagName('child'))
-        self.assertListEqual(values, [_node.childNodes[2], _node.childNodes[4]])
+        self.assertListEqual(
+            values, [_node.childNodes[2], _node.childNodes[4]])
 
     def test_removeChild(self):
         """Tests removeChild method"""
@@ -226,8 +258,8 @@ class TestNode(base.Base):
         _test_object = Node(_node)
         _return = _test_object.output(_output_stream)
         self.assertEqual(_return, 'Bla')
-        _node.writexml.assert_called_with(_output_stream, addindent="", newl="", encoding="utf-8")
-
+        _node.writexml.assert_called_with(
+            _output_stream, addindent="", newl="", encoding="utf-8")
 
     def _createNodeList(self, listOfTuples):
         _returnNodes = []

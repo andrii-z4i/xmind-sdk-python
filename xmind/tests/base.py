@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import patch, Mock, MagicMock
 
+
 class Base(unittest.TestCase):
     """Base class for any tests"""
 
@@ -29,9 +30,11 @@ class Base(unittest.TestCase):
         def side_effect_function(*a, **kw):
             """Side effect function"""
             if thrown_exception:
-                self.LOGGER.error("%s => Throw exception: '%s'", function_name, thrown_exception)
+                self.LOGGER.error("%s => Throw exception: '%s'",
+                                  function_name, thrown_exception)
                 raise thrown_exception
-            self.LOGGER.debug("%s => called with (%s), returns (%s)", function_name, a, return_value)
+            self.LOGGER.debug(
+                "%s => called with (%s), returns (%s)", function_name, a, return_value)
             return return_value
 
         _side_effect = side_effect_function
@@ -50,5 +53,24 @@ class Base(unittest.TestCase):
         _mock.side_effect = _side_effect
 
         self._patchers.append(property_name)
-        self.LOGGER.debug("Property '%s' for function '%s' has been set", property_name, function_name)
+        self.LOGGER.debug(
+            "Property '%s' for function '%s' has been set", property_name, function_name)
         return _mock
+
+    def _test_method_by_excessive_parameters(self, pair, _element):
+        _method_name_to_test = pair[0]
+        _parameters_count = pair[1]
+
+        _method_to_call = getattr(_element, _method_name_to_test)
+        _call_method_with_parameters = [
+            i for i in range(_parameters_count + 1)]
+        self.LOGGER.debug("Test method '%s' with %d parameters",
+                            _method_name_to_test, _parameters_count)
+        with self.assertRaises(Exception):
+            _method_to_call(*_call_method_with_parameters)
+
+        if _parameters_count > 0:  # Let's test with None as well
+            self.LOGGER.debug(
+                "Test method '%s' with 0 parameters", _method_name_to_test)
+            with self.assertRaises(Exception):
+                _method_to_call()

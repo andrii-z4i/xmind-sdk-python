@@ -9,7 +9,8 @@ testModules = [
     'xmind.tests.test_node',
     'xmind.tests.test_document',
     'xmind.tests.test_element',
-    'xmind.tests.test_markerref_markerid'
+    'xmind.tests.test_markerref_markerid',
+    'xmind.tests.test_markerref_markerrefselement'
     ]
 
 suite = unittest.TestSuite()

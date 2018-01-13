@@ -41,6 +41,25 @@ From root directory run
 
 > `python test.py`
 	
+Get coverage report
+---
+
+Install coverage package
+> `pip install coverage`
+
+Run tests under coverage
+
+> `coverage run --source=xmind.core test.py`
+
+Check coverage report
+
+> `coverage report`
+
+or
+
+> `coverage html -d coverage_html`
+
+to have rich visualisation
 
 LICENSE
 ---

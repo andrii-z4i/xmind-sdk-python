@@ -65,12 +65,21 @@ class Base(unittest.TestCase):
         _call_method_with_parameters = [
             i for i in range(_parameters_count + 1)]
         self.LOGGER.debug("Test method '%s' with %d parameters",
-                            _method_name_to_test, _parameters_count)
-        with self.assertRaises(Exception):
+                          _method_name_to_test, _parameters_count)
+        with self.assertRaises(TypeError) as _ex:
             _method_to_call(*_call_method_with_parameters)
+
+        self.LOGGER.debug("Got an exception: '%s'", _ex.exception.args[0])
+        self.assertTrue(_ex.exception.args[0].find(
+            "%s() takes" % _method_name_to_test) != -1)
 
         if _parameters_count > 0:  # Let's test with None as well
             self.LOGGER.debug(
                 "Test method '%s' with 0 parameters", _method_name_to_test)
-            with self.assertRaises(Exception):
+            with self.assertRaises(TypeError) as _exNone:
                 _method_to_call()
+
+            self.LOGGER.debug("Got an exception: '%s'",
+                              _exNone.exception.args[0])
+            self.assertTrue(_exNone.exception.args[0].find(
+                "%s() missing" % _method_name_to_test) != -1)

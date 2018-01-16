@@ -10,6 +10,8 @@ testModules = [
     'xmind.tests.test_document',
     'xmind.tests.test_element',
     'xmind.tests.test_markerref_markerid',
+    'xmind.tests.test_workbook_mixin_element',
+    'xmind.tests.test_topic_mixin_element',
     'xmind.tests.test_notes_element',
     'xmind.tests.test_markerref_markerrefselement',
     'xmind.tests.test_notes_plain_notes',

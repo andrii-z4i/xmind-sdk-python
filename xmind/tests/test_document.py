@@ -6,7 +6,11 @@ from unittest.mock import patch, MagicMock
 
 class TestDocument(base.Base):
     """Tests for Document class from __init__"""
-    LOGGER = logging.getLogger('document')
+
+    def getLogger(self):
+        if not getattr(self, '_logger', None):
+            self._logger = logging.getLogger('document')
+        return self._logger
 
     def test_excessive_parameters(self):
         _document = Document(12)

@@ -20,7 +20,11 @@ class InnerNode(object):
 
 class TestElement(base.Base):
     """Tests for Element class from __init__"""
-    LOGGER = logging.getLogger('element')
+
+    def getLogger(self):
+        if not getattr(self, '_logger', None):
+            self._logger = logging.getLogger('element')
+        return self._logger
 
     def test_excessive_parameters(self):
         _element = Element(12)

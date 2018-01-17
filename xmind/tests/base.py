@@ -1,21 +1,23 @@
 import unittest
+from abc import abstractmethod
 from unittest.mock import patch, Mock, MagicMock
 
 
 class Base(unittest.TestCase):
     """Base class for any tests"""
 
+    @abstractmethod
+    def getLogger(self):
+        raise NotImplementedError()
+
     def setUp(self):
-        _logger = getattr(self, 'LOGGER', None)
-        if not _logger:
-            raise Exception('Logger has to be set in your inherited class')
-        self.LOGGER.info('Start test: %s', self._testMethodName)
+        self.getLogger().info('Start test: %s', self._testMethodName)
         self._patchers = []
 
     def tearDown(self):
         for patcher in self._patchers:
             self._remove_patched_function(patcher)
-        self.LOGGER.info('End test: %s', self._testMethodName)
+        self.getLogger().info('End test: %s', self._testMethodName)
 
     def _remove_patched_function(self, property_name):
         """Remove patched function by name"""
@@ -23,17 +25,17 @@ class Base(unittest.TestCase):
         if _patcher:
             _patcher.stop()
             delattr(self, property_name)
-            self.LOGGER.debug("Property '%s' has been deleted", property_name)
+            self.getLogger().debug("Property '%s' has been deleted", property_name)
 
     def _init_patch_with_name(self, property_name, function_name, return_value=None, thrown_exception=None, autospec=None):
         """Patches the function"""
         def side_effect_function(*a, **kw):
             """Side effect function"""
             if thrown_exception:
-                self.LOGGER.error("%s => Throw exception: '%s'",
+                self.getLogger().error("%s => Throw exception: '%s'",
                                   function_name, thrown_exception)
                 raise thrown_exception
-            self.LOGGER.debug(
+            self.getLogger().debug(
                 "%s => called with (%s), returns (%s)", function_name, a, return_value)
             return return_value
 
@@ -53,7 +55,7 @@ class Base(unittest.TestCase):
         _mock.side_effect = _side_effect
 
         self._patchers.append(property_name)
-        self.LOGGER.debug(
+        self.getLogger().debug(
             "Property '%s' for function '%s' has been set", property_name, function_name)
         return _mock
 
@@ -64,22 +66,22 @@ class Base(unittest.TestCase):
         _method_to_call = getattr(_element, _method_name_to_test)
         _call_method_with_parameters = [
             i for i in range(_parameters_count + 1)]
-        self.LOGGER.debug("Test method '%s' with %d parameters",
+        self.getLogger().debug("Test method '%s' with %d parameters",
                           _method_name_to_test, _parameters_count)
         with self.assertRaises(TypeError) as _ex:
             _method_to_call(*_call_method_with_parameters)
 
-        self.LOGGER.debug("Got an exception: '%s'", _ex.exception.args[0])
+        self.getLogger().debug("Got an exception: '%s'", _ex.exception.args[0])
         self.assertTrue(_ex.exception.args[0].find(
             "%s() takes" % _method_name_to_test) != -1)
 
         if _parameters_count > 0:  # Let's test with None as well
-            self.LOGGER.debug(
+            self.getLogger().debug(
                 "Test method '%s' with 0 parameters", _method_name_to_test)
             with self.assertRaises(TypeError) as _exNone:
                 _method_to_call()
 
-            self.LOGGER.debug("Got an exception: '%s'",
+            self.getLogger().debug("Got an exception: '%s'",
                               _exNone.exception.args[0])
             self.assertTrue(_exNone.exception.args[0].find(
                 "%s() missing" % _method_name_to_test) != -1)

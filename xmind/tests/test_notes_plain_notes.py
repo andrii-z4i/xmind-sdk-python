@@ -6,7 +6,11 @@ from unittest.mock import Mock, MagicMock, call, PropertyMock
 
 class TestPlainNotes(base.Base):
     """Test class for PlainNotes class"""
-    LOGGER = logging.getLogger('plainnotes')
+
+    def getLogger(self):
+        if not getattr(self, '_logger', None):
+            self._logger = logging.getLogger('plainNotes')
+        return self._logger
 
     def test_init(self):
         _note_content_element_init = self._init_patch_with_name(

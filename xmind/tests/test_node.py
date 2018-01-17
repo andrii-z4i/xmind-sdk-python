@@ -8,7 +8,11 @@ from . import base
 
 class TestNode(base.Base):
     """Tests for Node class from core module"""
-    LOGGER = logging.getLogger('node')
+
+    def getLogger(self):
+        if not getattr(self, '_logger', None):
+            self._logger = logging.getLogger('node')
+        return self._logger
 
     def test_excessive_parameters(self):
         _node = Node(12)
@@ -44,7 +48,7 @@ class TestNode(base.Base):
         ]
         for pair in parameters:
             with self.subTest(pair=pair):
-                self.LOGGER.info('Next pair %s', pair)
+                self.getLogger().info('Next pair %s', pair)
                 _obj1 = Node(pair[0])
                 _obj2 = Node(pair[1])
                 self.assertEqual(_obj1._equals(_obj2), pair[2])
@@ -82,7 +86,7 @@ class TestNode(base.Base):
 
         for pair in parameters:
             with self.subTest(pair=pair):
-                self.LOGGER.info('Next pair %s', pair)
+                self.getLogger().info('Next pair %s', pair)
                 _obj = Node(pair[0])
                 self.assertEqual(_obj.getLocalName(pair[0]), pair[1])
 
@@ -98,7 +102,7 @@ class TestNode(base.Base):
 
         for pair in parameters:
             with self.subTest(pair=pair):
-                self.LOGGER.info('Next pair %s', pair)
+                self.getLogger().info('Next pair %s', pair)
                 _obj = Node(0)
                 self.assertEqual(_obj.getPrefix(pair[0]), pair[1])
 

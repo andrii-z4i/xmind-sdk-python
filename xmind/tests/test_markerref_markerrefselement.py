@@ -7,7 +7,11 @@ from unittest.mock import patch
 
 class MarkerRefsElementTest(base.Base):
     """MarkerRefsElementTest"""
-    LOGGER = logging.getLogger('MarkerRefsElementTest')
+
+    def getLogger(self):
+        if not getattr(self, '_logger', None):
+            self._logger = logging.getLogger('MarkerRefsElementTest')
+        return self._logger
 
     def test_init_without_parameters(self):
         """test that object of the class could be created with different number of parameters and it has correct static attribute"""

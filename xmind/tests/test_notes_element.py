@@ -7,7 +7,10 @@ from unittest.mock import Mock, MagicMock, call, PropertyMock
 class TestNotesElement(base.Base):
     """Test class for NotesElement class"""
 
-    LOGGER = logging.getLogger('noteselement')
+    def getLogger(self):
+        if not getattr(self, '_logger', None):
+            self._logger = logging.getLogger('notesElement')
+        return self._logger
 
     def test_init(self):
         _topic_mixin_element_init = self._init_patch_with_name(

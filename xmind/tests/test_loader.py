@@ -7,7 +7,11 @@ from . import base
 
 class LoaderTest(base.Base):
     """Loader test"""
-    LOGGER = logging.getLogger('loaderTest')
+
+    def getLogger(self):
+        if not getattr(self, '_logger', None):
+            self._logger = logging.getLogger('loaderTest')
+        return self._logger
 
     def _patch_get_abs_path(self, return_value=None, thrown_exception=None):
         """Patch get_abs_path function"""
@@ -25,7 +29,7 @@ class LoaderTest(base.Base):
         with self.assertRaises(Exception) as ex:
             WorkbookLoader('dd')  # create loader and waits for Exception
 
-        self.LOGGER.warning("Exception: %s", ex.exception)
+        self.getLogger().warning("Exception: %s", ex.exception)
 
     def test_init_split_ext_throws(self):
         """test case when split_ext throws exception"""
@@ -35,7 +39,7 @@ class LoaderTest(base.Base):
         with self.assertRaises(Exception) as ex:
             WorkbookLoader('dd')  # create loader and waits for Exception
 
-        self.LOGGER.warning("Exception: %s", ex.exception)
+        self.getLogger().warning("Exception: %s", ex.exception)
 
     def test_init_throws_no_xmind_extension(self):
         """test case when exception comes because there is no xmind extension"""
@@ -45,7 +49,7 @@ class LoaderTest(base.Base):
         with self.assertRaises(Exception) as ex:
             WorkbookLoader('dd')  # create loader and waits for Exception
 
-        self.LOGGER.warning("Exception: %s", ex.exception)
+        self.getLogger().warning("Exception: %s", ex.exception)
 
     def test_init_no_exception(self):
         """test case when no exception comes even though there are no data"""

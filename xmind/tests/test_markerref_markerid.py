@@ -5,7 +5,11 @@ from . import base
 
 class MarkerrefTest(base.Base):
     """Markerref test"""
-    LOGGER = logging.getLogger('MarkerefTest')
+
+    def getLogger(self):
+        if not getattr(self, '_logger', None):
+            self._logger = logging.getLogger('MarkerefTest')
+        return self._logger
 
     def test_init_set_name(self):
         """test that object of the class could be created and will has correct name attribute"""
@@ -18,14 +22,14 @@ class MarkerrefTest(base.Base):
         with self.assertRaises(Exception) as ex:
             MarkerId()  # trying to create MarketId objectand waits for Exception
 
-        self.LOGGER.warning("Exception: %s", ex.exception)
+        self.getLogger().warning("Exception: %s", ex.exception)
 
     def test_init_throws_excessive_argument_exception(self):
         """test case when exception comes because of the excessive arguments"""
         with self.assertRaises(Exception) as ex:
             MarkerId('test-name', 'arg2')  # trying to create MarketId objectand waits for Exception
 
-        self.LOGGER.warning("Exception: %s", ex.exception)
+        self.getLogger().warning("Exception: %s", ex.exception)
 
     def test_str_method(self):
         """test that __str__ method exists and returns correct representation"""
@@ -134,6 +138,6 @@ class MarkerrefTest(base.Base):
 
         for _pair in _parameters:
             with self.subTest(pair=_pair):
-                self.LOGGER.info('Next pair %s', _pair)
+                self.getLogger().info('Next pair %s', _pair)
                 _property = getattr(_m_id, _pair[0], None)
                 self.assertEqual(_property, _pair[1])

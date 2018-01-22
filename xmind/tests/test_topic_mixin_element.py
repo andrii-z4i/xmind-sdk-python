@@ -6,11 +6,11 @@ from unittest.mock import patch, MagicMock
 
 class TopicMixinElementTest(base.Base):
     """TopicMixinElementTest"""
-    LOGGER = logging.getLogger('TopicMixinElement') # should be deleted after https://github.com/andrii-z4i/xmind-sdk-python/pull/29/files is merged
 
     def setUp(self):
         super(TopicMixinElementTest, self).setUp()
-        self._init_method = self._init_patch_with_name('_init', 'xmind.core.Element.__init__')
+        self._init_method = self._init_patch_with_name(
+            '_init', 'xmind.core.Element.__init__')
         self._ownerTopic = MagicMock()
 
     def getLogger(self):

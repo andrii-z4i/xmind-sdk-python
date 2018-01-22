@@ -61,8 +61,10 @@ class RelationshipElement(WorkbookMixinElement):
     def getEnd1(self, end1_id):
         return self._find_end_point(end1_id)
 
-    def getEnd2(self, end2_id):
-        return self._find_end_point(end2_id)
+    # FIXME: methods are totally the same getEnd1 and getEnd2
+    # I comment this one till refectoring phase
+    # def getEnd2(self, end2_id):
+    #     return self._find_end_point(end2_id)
 
     def getTitle(self):
         title = self._get_title()
@@ -90,6 +92,7 @@ class RelationshipsElement(WorkbookMixinElement):
 
 def main():
     pass
+
 
 if __name__ == "__main__":
     main()

@@ -21,6 +21,7 @@ testModules = [
     'xmind.tests.test_position',
     'xmind.tests.test_markerrefelement',
     'xmind.tests.test_const',
+    'xmind.tests.test_topic_element',
 ]
 
 suite = unittest.TestSuite()

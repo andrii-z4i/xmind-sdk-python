@@ -1,10 +1,11 @@
 import logging
 from xmind.core.topic import TopicElement
 from xmind.tests import base
-from unittest.mock import patch, Mock, PropertyMock
+from unittest.mock import patch, Mock, PropertyMock, call
 from xmind.core.const import (
     TAG_TOPIC,
     TAG_TITLE,
+    TAG_MARKERREF,
     TAG_MARKERREFS,
     TAG_POSITION,
     TAG_CHILDREN,
@@ -271,4 +272,200 @@ class TestTopicElement(base.Base):
         _parent_node.assert_called_once()
         _owner_workbook.getSheets.assert_called_once()
         _sheet.getImplementation.assert_called_once()
+        self._assert_init_methods()
+
+    def test_getTitle_has_no_title(self):
+        _element = TopicElement()
+        _create_title_element = self._init_patch_with_name(
+            '_title_element', 'xmind.core.topic.TitleElement')
+        with patch.object(_element, '_get_title') as _mock:
+            _mock.return_value = None
+            self.assertIsNone(_element.getTitle())
+
+        _create_title_element.assert_not_called()
+        _mock.assert_called_once_with()
+        self._assert_init_methods()
+
+    def test_getTitle_has_title(self):
+        _element = TopicElement()
+        _title = Mock()
+        _title.getTextContent.return_value = 'NewValue'
+        _create_title_element = self._init_patch_with_name(
+            '_title_element', 'xmind.core.topic.TitleElement',
+            return_value=_title)
+        with patch.object(_element, 'getOwnerWorkbook') as _wb_mock:
+            _wb_mock.return_value = 'SomeWorkbook'
+            with patch.object(_element, '_get_title') as _mock:
+                _mock.return_value = 'SomeValue'
+                self.assertEqual('NewValue', _element.getTitle())
+
+        _create_title_element.assert_called_once_with(
+            'SomeValue', 'SomeWorkbook')
+        _wb_mock.assert_called_once_with()
+        _mock.assert_called_once_with()
+        _title.getTextContent.assert_called_once_with()
+        self._assert_init_methods()
+
+    def test_setTitle_title_is_None(self):
+        _element = TopicElement()
+
+        _title = Mock()
+        _title.setTextContent.return_value = None
+
+        _get_title_mock = self._init_patch_with_name('_get_title',
+                                                     'xmind.core.topic.TopicElement._get_title',
+                                                     return_value=None)
+        _title_element_mock = self._init_patch_with_name('_title_element',
+                                                         'xmind.core.topic.TitleElement',
+                                                         return_value=_title)
+        _append_child_mock = self._init_patch_with_name('_append_child',
+                                                        'xmind.core.topic.TopicElement.appendChild')
+        _get_owner_workbook_mock = self._init_patch_with_name('_get_owner_wb',
+                                                              'xmind.core.topic.TopicElement.getOwnerWorkbook',
+                                                              return_value='owner')
+
+        _element.setTitle('someTitle')
+
+        _get_title_mock.assert_called_once()
+        _title_element_mock.assert_called_once_with(None, 'owner')
+        _title.setTextContent.assert_called_once_with('someTitle')
+        _get_owner_workbook_mock.assert_called_once()
+        _append_child_mock.assert_called_once_with(_title)
+
+    def test_setTitle_title_is_not_None(self):
+        _element = TopicElement()
+
+        _title = Mock()
+        _title.setTextContent.return_value = None
+
+        _get_title_mock = self._init_patch_with_name('_get_title',
+                                                     'xmind.core.topic.TopicElement._get_title',
+                                                     return_value='NiceTitle')
+        _title_element_mock = self._init_patch_with_name('_title_element',
+                                                         'xmind.core.topic.TitleElement',
+                                                         return_value=_title)
+        _append_child_mock = self._init_patch_with_name('_append_child',
+                                                        'xmind.core.topic.TopicElement.appendChild')
+        _get_owner_workbook_mock = self._init_patch_with_name('_get_owner_wb',
+                                                              'xmind.core.topic.TopicElement.getOwnerWorkbook',
+                                                              return_value='owner')
+
+        _element.setTitle('someTitle')
+
+        _get_title_mock.assert_called_once()
+        _title_element_mock.assert_called_once_with('NiceTitle', 'owner')
+        _title.setTextContent.assert_called_once_with('someTitle')
+        _get_owner_workbook_mock.assert_called_once()
+        _append_child_mock.assert_not_called()
+
+    def test_getMarkers_refs_are_None(self):
+        _element = TopicElement()
+
+        _marker_refs_element_constructor_mock = self._init_patch_with_name(
+            '_marker_refs_element_constructor_mock',
+            'xmind.core.topic.MarkerRefsElement'
+        )
+
+        with patch.object(_element, '_get_markerrefs') as _mock:
+            _mock.return_value = None
+            self.assertIsNone(_element.getMarkers())
+
+        _mock.assert_called_once()
+        _marker_refs_element_constructor_mock.assert_not_called()
+
+        self._assert_init_methods()
+
+    def test_getMarkers_markers_are_None(self):
+        _element = TopicElement()
+
+        _marker_fefs_element = Mock()
+        _marker_fefs_element.getChildNodesByTagName.return_value = None
+        _marker_refs_element_constructor_mock = self._init_patch_with_name(
+            '_marker_refs_element_constructor_mock',
+            'xmind.core.topic.MarkerRefsElement',
+            return_value=_marker_fefs_element,
+            autospec=True
+        )
+        _refs_mock = Mock()
+        with patch.object(_element, 'getOwnerWorkbook') as _get_wb_mock:
+            with patch.object(_element, '_get_markerrefs') as _get_markerrefs_mock:
+                _get_wb_mock.return_value = 'OwnerWorkbook'
+                _get_markerrefs_mock.return_value = _refs_mock
+                self.assertListEqual([], _element.getMarkers())
+
+        _get_markerrefs_mock.assert_called_once()
+        _marker_refs_element_constructor_mock.assert_called_once_with(
+            _refs_mock,
+            'OwnerWorkbook')
+        _get_wb_mock.assert_called_once()
+        _marker_fefs_element.getChildNodesByTagName.assert_called_once_with(
+            TAG_MARKERREF)
+        self._assert_init_methods()
+
+    def test_getMarkers_markers_are_not_list(self):
+        _element = TopicElement()
+
+        _marker_fefs_element = Mock()
+        _marker_fefs_element.getChildNodesByTagName.return_value = 12
+        _marker_refs_element_constructor_mock = self._init_patch_with_name(
+            '_marker_refs_element_constructor_mock',
+            'xmind.core.topic.MarkerRefsElement',
+            return_value=_marker_fefs_element,
+            autospec=True
+        )
+        _refs_mock = Mock()
+        with patch.object(_element, 'getOwnerWorkbook') as _get_wb_mock:
+            with patch.object(_element, '_get_markerrefs') as _get_markerrefs_mock:
+                _get_wb_mock.return_value = 'OwnerWorkbook'
+                _get_markerrefs_mock.return_value = _refs_mock
+                with self.assertRaises(TypeError) as _ex:
+                    _element.getMarkers()
+
+        _get_markerrefs_mock.assert_called_once()
+        _marker_refs_element_constructor_mock.assert_called_once_with(
+            _refs_mock,
+            'OwnerWorkbook')
+        self.assertEqual("'int' object is not iterable", _ex.exception.args[0])
+        _get_wb_mock.assert_called_once()
+        _marker_fefs_element.getChildNodesByTagName.assert_called_once_with(
+            TAG_MARKERREF)
+        self._assert_init_methods()
+
+    def test_getMarkers(self):
+        _element = TopicElement()
+
+        _marker_fefs_element = Mock()
+        _marker_fefs_element.getChildNodesByTagName.return_value = [11, 12, 13]
+        _marker_refs_element_constructor_mock = patch(
+            'xmind.core.topic.MarkerRefsElement').start()
+        _marker_refs_element_constructor_mock.return_value = _marker_fefs_element
+
+        _marker_ref_element_constructor_mock = patch(
+            'xmind.core.topic.MarkerRefElement').start()
+        _marker_ref_element_constructor_mock.side_effect = [
+            111,
+            112,
+            113
+        ]
+
+        _refs_mock = Mock()
+        with patch.object(_element, 'getOwnerWorkbook') as _get_wb_mock:
+            with patch.object(_element, '_get_markerrefs') as _get_markerrefs_mock:
+                _get_wb_mock.return_value = 'OwnerWorkbook'
+                _get_markerrefs_mock.return_value = _refs_mock
+                self.assertListEqual(
+                    [111, 112, 113], _element.getMarkers())
+
+        _get_markerrefs_mock.assert_called_once()
+        _marker_refs_element_constructor_mock.assert_called_once_with(
+            _refs_mock,
+            'OwnerWorkbook')
+        self.assertEqual(3, _marker_ref_element_constructor_mock.call_count)
+        self.assertListEqual([
+            call(11, 'OwnerWorkbook'),
+            call(12, 'OwnerWorkbook'),
+            call(13, 'OwnerWorkbook')], _marker_ref_element_constructor_mock.call_args_list)
+        self.assertEqual(4, _get_wb_mock.call_count)
+        _marker_fefs_element.getChildNodesByTagName.assert_called_once_with(
+            TAG_MARKERREF)
         self._assert_init_methods()

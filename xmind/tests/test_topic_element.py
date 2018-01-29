@@ -4,6 +4,7 @@ from xmind.tests import base
 from unittest.mock import patch, Mock, PropertyMock, call
 from xmind.core.const import (
     TAG_TOPIC,
+    TAG_TOPICS,
     TAG_TITLE,
     TAG_MARKERREF,
     TAG_MARKERREFS,
@@ -14,6 +15,8 @@ from xmind.core.const import (
     ATTR_HREF,
     ATTR_BRANCH,
     VAL_FOLDED,
+    TOPIC_ROOT,
+    TOPIC_ATTACHED,
 )
 
 
@@ -1055,4 +1058,176 @@ class TestTopicElement(base.Base):
         _get_position_mock.assert_called_once()
         _get_impl_mock.assert_called_once()
         _impl_mock.removeChild.assert_called_once_with('newPosition')
+        self._assert_init_methods()
+    
+    def test_getType_parent_is_none(self):
+        _element = TopicElement()
+        _topics_element_constructor_mock = self._init_patch_with_name(
+            '_topics_element_contructor',
+            'xmind.core.topic.TopicsElement',
+            thrown_exception=Exception
+        )
+
+        with patch.object(_element, 'getParentNode') as _mock:
+            _mock.return_value = None
+            self.assertIsNone(_element.getType())
+        
+        _mock.assert_called_once()
+        _topics_element_constructor_mock.assert_not_called()
+
+        self._assert_init_methods()
+    
+    def test_getType_parent_tagName_is_tag_sheet(self):
+        _element = TopicElement()
+        _topics_element_constructor_mock = self._init_patch_with_name(
+            '_topics_element_contructor',
+            'xmind.core.topic.TopicsElement',
+            thrown_exception=Exception
+        )
+
+        _parent_mock = Mock(tagName = TAG_SHEET)
+
+        with patch.object(_element, 'getParentNode') as _mock:
+            _mock.return_value = _parent_mock
+            self.assertEqual(TOPIC_ROOT, _element.getType())
+        
+        _mock.assert_called_once()
+        _topics_element_constructor_mock.assert_not_called()
+
+        self._assert_init_methods()
+    
+    def test_getType_parent_tagName_is_tag_topics(self):
+        _element = TopicElement()
+
+        _topics_mock = Mock()
+        _topics_mock.getType.return_value = 'newType'
+
+        _topics_element_constructor_mock = self._init_patch_with_name(
+            '_topics_element_contructor',
+            'xmind.core.topic.TopicsElement',
+            return_value=_topics_mock
+        )
+
+        _parent_mock = Mock(tagName = TAG_TOPICS)
+        _getParentNode_mock = patch.object(_element, 'getParentNode').start()
+        _getParentNode_mock.return_value = _parent_mock
+        _get_owner_workbook_mock = patch.object(_element, 'getOwnerWorkbook').start()
+        _get_owner_workbook_mock.return_value = 'ownerWorkbook'
+
+        self.assertEqual('newType', _element.getType())
+        
+        _getParentNode_mock.assert_called_once()
+        _get_owner_workbook_mock.assert_called_once()
+        _topics_element_constructor_mock.assert_called_once_with(_parent_mock, 'ownerWorkbook')
+        _topics_mock.getType.assert_called_once()
+        self._assert_init_methods()
+    
+    def test_getTopics_topic_children_is_none(self):
+        _element = TopicElement()
+
+        _get_children_mock = patch.object(_element, '_get_children').start()
+        _get_children_mock.return_value = None
+
+        _children_element_constructor_mock = self._init_patch_with_name(
+            '_children_element_constructor',
+            'xmind.core.topic.ChildrenElement',
+            thrown_exception=Exception
+        )
+        _get_owner_workbook_mock = patch.object(_element, 'getOwnerWorkbook').start()
+        _get_owner_workbook_mock.side_effect = Exception
+
+        self.assertIsNone(_element.getTopics('newType'))
+
+        _get_children_mock.assert_called_once()
+        _children_element_constructor_mock.assert_not_called()
+        _get_owner_workbook_mock.assert_not_called()
+
+        self._assert_init_methods()
+    
+    def test_getTopics_topic_children_is_not_none(self):
+        _element = TopicElement()
+
+        _get_children_mock = patch.object(_element, '_get_children').start()
+        _get_children_mock.return_value = 'some_topic_children'
+
+        _topic_children_mock = Mock()
+        _topic_children_mock.getTopics.return_value = 'newTopics'
+
+        _children_element_constructor_mock = self._init_patch_with_name(
+            '_children_element_constructor',
+            'xmind.core.topic.ChildrenElement',
+            return_value=_topic_children_mock
+        )
+        _get_owner_workbook_mock = patch.object(_element, 'getOwnerWorkbook').start()
+        _get_owner_workbook_mock.return_value = 'ownerWorkbook'
+
+        self.assertEqual('newTopics', _element.getTopics('newType'))
+
+        _get_children_mock.assert_called_once()
+        _get_owner_workbook_mock.assert_called_once()
+        _children_element_constructor_mock.assert_called_once_with(
+            'some_topic_children',
+            'ownerWorkbook'
+        )
+        _topic_children_mock.getTopics.assert_called_once_with('newType')
+
+        self._assert_init_methods()
+
+    def test_getSubTopics_topics_are_none(self):
+        _element = TopicElement()
+        with patch.object(_element, 'getTopics') as _getTopics_mock:
+            _getTopics_mock.return_value = None
+            self.assertIsNone(_element.getSubTopics())
+        _getTopics_mock.assert_called_once_with(TOPIC_ATTACHED)
+        self._assert_init_methods()
+    
+    def test_getSubTopics_topics_are_not_none(self):
+        _element = TopicElement()
+        _topics_mock = Mock()
+        _topics_mock.getSubTopics.return_value = 12
+        with patch.object(_element, 'getTopics') as _getTopics_mock:
+            _getTopics_mock.return_value = _topics_mock
+            self.assertEqual(12, _element.getSubTopics())
+        _getTopics_mock.assert_called_once_with(TOPIC_ATTACHED)
+        _topics_mock.getSubTopics.assert_called_once()
+        self._assert_init_methods()
+    
+    def test_getSubTopicByIndex_sub_topics_are_none(self):
+        _element = TopicElement()
+
+        with patch.object(_element, 'getSubTopics') as _getSubTopics_mock:
+            _getSubTopics_mock.return_value = None
+            self.assertIsNone(_element.getSubTopicByIndex(0))
+        
+        _getSubTopics_mock.assert_called_once_with(TOPIC_ATTACHED)
+        self._assert_init_methods()
+    
+    def test_getSubTopicByIndex_index_less_than_zero(self):
+        _element = TopicElement()
+
+        with patch.object(_element, 'getSubTopics') as _getSubTopics_mock:
+            _getSubTopics_mock.return_value = [1, 2]
+            self.assertListEqual([1, 2], _element.getSubTopicByIndex(-1))
+        
+        _getSubTopics_mock.assert_called_once_with(TOPIC_ATTACHED)
+        self._assert_init_methods()
+    
+    def test_getSubTopicByIndex_index_greater_than_list_len(self):
+        _element = TopicElement()
+
+        with patch.object(_element, 'getSubTopics') as _getSubTopics_mock:
+            _getSubTopics_mock.return_value = [1, 2]
+            self.assertListEqual([1, 2], _element.getSubTopicByIndex(4))
+        
+        _getSubTopics_mock.assert_called_once_with(TOPIC_ATTACHED)
+        self._assert_init_methods()
+    
+    def test_getSubTopicByIndex_returns_sub_topic_by_index(self):
+        _element = TopicElement()
+
+        with patch.object(_element, 'getSubTopics') as _getSubTopics_mock:
+            _getSubTopics_mock.return_value = [1, 2]
+            self.assertEqual(1, _element.getSubTopicByIndex(0))
+        
+        _getSubTopics_mock.assert_called_once_with(TOPIC_ATTACHED)
         self._assert_init_methods()

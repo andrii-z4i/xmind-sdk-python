@@ -293,16 +293,17 @@ class TestTopicElement(base.Base):
         _create_title_element = self._init_patch_with_name(
             '_title_element', 'xmind.core.topic.TitleElement',
             return_value=_title)
-        with patch.object(_element, 'getOwnerWorkbook') as _wb_mock:
-            _wb_mock.return_value = 'SomeWorkbook'
-            with patch.object(_element, '_get_title') as _mock:
-                _mock.return_value = 'SomeValue'
-                self.assertEqual('NewValue', _element.getTitle())
+        _wb_mock = patch.object(_element, 'getOwnerWorkbook').start()
+        _wb_mock.return_value = 'SomeWorkbook'
+        _get_title_mock = patch.object(_element, '_get_title').start()
+        _get_title_mock.return_value = 'SomeValue'
+
+        self.assertEqual('NewValue', _element.getTitle())
 
         _create_title_element.assert_called_once_with(
             'SomeValue', 'SomeWorkbook')
         _wb_mock.assert_called_once_with()
-        _mock.assert_called_once_with()
+        _get_title_mock.assert_called_once_with()
         _title.getTextContent.assert_called_once_with()
         self._assert_init_methods()
 
@@ -387,11 +388,14 @@ class TestTopicElement(base.Base):
             autospec=True
         )
         _refs_mock = Mock()
-        with patch.object(_element, 'getOwnerWorkbook') as _get_wb_mock:
-            with patch.object(_element, '_get_markerrefs') as _get_markerrefs_mock:
-                _get_wb_mock.return_value = 'OwnerWorkbook'
-                _get_markerrefs_mock.return_value = _refs_mock
-                self.assertListEqual([], _element.getMarkers())
+        _get_wb_mock = patch.object(_element, 'getOwnerWorkbook').start()
+        _get_wb_mock.return_value = 'OwnerWorkbook'
+
+        _get_markerrefs_mock = patch.object(
+            _element, '_get_markerrefs').start()
+        _get_markerrefs_mock.return_value = _refs_mock
+
+        self.assertListEqual([], _element.getMarkers())
 
         _get_markerrefs_mock.assert_called_once()
         _marker_refs_element_constructor_mock.assert_called_once_with(
@@ -414,12 +418,15 @@ class TestTopicElement(base.Base):
             autospec=True
         )
         _refs_mock = Mock()
-        with patch.object(_element, 'getOwnerWorkbook') as _get_wb_mock:
-            with patch.object(_element, '_get_markerrefs') as _get_markerrefs_mock:
-                _get_wb_mock.return_value = 'OwnerWorkbook'
-                _get_markerrefs_mock.return_value = _refs_mock
-                with self.assertRaises(TypeError) as _ex:
-                    _element.getMarkers()
+        _get_wb_mock = patch.object(_element, 'getOwnerWorkbook').start()
+        _get_wb_mock.return_value = 'OwnerWorkbook'
+
+        _get_markerrefs_mock = patch.object(
+            _element, '_get_markerrefs').start()
+        _get_markerrefs_mock.return_value = _refs_mock
+
+        with self.assertRaises(TypeError) as _ex:
+            _element.getMarkers()
 
         _get_markerrefs_mock.assert_called_once()
         _marker_refs_element_constructor_mock.assert_called_once_with(
@@ -449,12 +456,14 @@ class TestTopicElement(base.Base):
         ]
 
         _refs_mock = Mock()
-        with patch.object(_element, 'getOwnerWorkbook') as _get_wb_mock:
-            with patch.object(_element, '_get_markerrefs') as _get_markerrefs_mock:
-                _get_wb_mock.return_value = 'OwnerWorkbook'
-                _get_markerrefs_mock.return_value = _refs_mock
-                self.assertListEqual(
-                    [111, 112, 113], _element.getMarkers())
+        _get_wb_mock = patch.object(_element, 'getOwnerWorkbook').start()
+        _get_wb_mock.return_value = 'OwnerWorkbook'
+        _get_markerrefs_mock = patch.object(
+            _element, '_get_markerrefs').start()
+        _get_markerrefs_mock.return_value = _refs_mock
+
+        self.assertListEqual(
+            [111, 112, 113], _element.getMarkers())
 
         _get_markerrefs_mock.assert_called_once()
         _marker_refs_element_constructor_mock.assert_called_once_with(
@@ -468,4 +477,397 @@ class TestTopicElement(base.Base):
         self.assertEqual(4, _get_wb_mock.call_count)
         _marker_fefs_element.getChildNodesByTagName.assert_called_once_with(
             TAG_MARKERREF)
+        self._assert_init_methods()
+
+    def test_addMarker_markerId_is_none(self):
+        _element = TopicElement()
+
+        _get_markerrefs = patch.object(_element, '_get_markerrefs').start()
+
+        self.assertIsNone(_element.addMarker(None))
+        _get_markerrefs.assert_not_called()
+        self._assert_init_methods()
+
+    def test_addMarker_markerId_is_str(self):
+        _element = TopicElement()
+
+        _get_markerrefs = patch.object(_element, '_get_markerrefs').start()
+        _get_markerrefs.side_effect = Exception('test exception')
+
+        _marker_refs_element_constructor_mock = self._init_patch_with_name(
+            '_marker_refs_element_constructor_mock',
+            'xmind.core.topic.MarkerRefsElement'
+        )
+
+        _marker_id_constructor = self._init_patch_with_name(
+            '_marker_id_constructor',
+            'xmind.core.topic.MarkerId',
+            return_value='new_marker_id'
+        )
+
+        with self.assertRaises(Exception) as _ex_mock:
+            _element.addMarker('marker_test')
+
+        self.assertTrue(_ex_mock.exception.args[0].find(
+            "test exception") != -1)
+
+        _get_markerrefs.assert_called_once()
+        _marker_refs_element_constructor_mock.assert_not_called()
+        _marker_id_constructor.assert_called_once_with('marker_test')
+        self._assert_init_methods()
+
+    def test_addMarker_markerId_is_object(self):
+        _element = TopicElement()
+
+        _get_markerrefs = patch.object(_element, '_get_markerrefs').start()
+        _get_markerrefs.side_effect = Exception('test exception')
+
+        _marker_refs_element_constructor_mock = self._init_patch_with_name(
+            '_marker_refs_element_constructor_mock',
+            'xmind.core.topic.MarkerRefsElement'
+        )
+
+        _marker_id_constructor = self._init_patch_with_name(
+            '_marker_id_constructor',
+            'xmind.core.topic.MarkerId',
+            return_value='new_marker_id'
+        )
+
+        with self.assertRaises(Exception) as _ex_mock:
+            _element.addMarker(Mock())
+
+        self.assertTrue(_ex_mock.exception.args[0].find(
+            "test exception") != -1)
+        _get_markerrefs.assert_called_once()
+        _marker_refs_element_constructor_mock.assert_not_called()
+        _marker_id_constructor.assert_not_called()
+        self._assert_init_methods()
+
+    def test_addMarker_markerrefs_are_none(self):
+        _element = TopicElement()
+
+        _get_markerrefs = patch.object(_element, '_get_markerrefs').start()
+        _get_markerrefs.return_value = None
+
+        _marker_refs_element = Mock()
+        _marker_refs_element.getChildNodesByTagName.side_effect = Exception(
+            'test exception')
+        _marker_refs_element_constructor_mock = self._init_patch_with_name(
+            '_marker_refs_element_constructor_mock',
+            'xmind.core.topic.MarkerRefsElement',
+            return_value=_marker_refs_element
+        )
+        _get_owner_workbook_mock = patch.object(
+            _element, 'getOwnerWorkbook').start()
+        _get_owner_workbook_mock.return_value = 'ownerWorkbook'
+        _append_child_mock = patch.object(_element, 'appendChild').start()
+
+        _marker_id_constructor = self._init_patch_with_name(
+            '_marker_id_constructor',
+            'xmind.core.topic.MarkerId',
+            return_value='new_marker_id'
+        )
+
+        with self.assertRaises(Exception) as _ex_mock:
+            _element.addMarker('marker_test')
+
+        self.assertTrue(_ex_mock.exception.args[0].find(
+            "test exception") != -1)
+        _marker_id_constructor.assert_called_once_with('marker_test')
+        _get_markerrefs.assert_called_once()
+        _get_owner_workbook_mock.assert_called_once()
+        _marker_refs_element_constructor_mock.assert_called_once_with(
+            None, 'ownerWorkbook')
+        _append_child_mock.assert_called_once_with(_marker_refs_element)
+        _marker_refs_element.getChildNodesByTagName.assert_called_once_with(
+            TAG_MARKERREF)
+
+        self._assert_init_methods()
+
+    def test_addMarker_markerrefs_are_object(self):
+        _element = TopicElement()
+
+        _get_markerrefs = patch.object(_element, '_get_markerrefs').start()
+        _get_markerrefs.return_value = 'refs_value'
+
+        _marker_refs_element = Mock()
+        _marker_refs_element.getChildNodesByTagName.side_effect = Exception(
+            'test exception')
+        _marker_refs_element_constructor_mock = self._init_patch_with_name(
+            '_marker_refs_element_constructor_mock',
+            'xmind.core.topic.MarkerRefsElement',
+            return_value=_marker_refs_element
+        )
+        _get_owner_workbook_mock = patch.object(
+            _element, 'getOwnerWorkbook').start()
+        _get_owner_workbook_mock.return_value = 'ownerWorkbook'
+        _append_child_mock = patch.object(_element, 'appendChild').start()
+
+        _marker_id_constructor = self._init_patch_with_name(
+            '_marker_id_constructor',
+            'xmind.core.topic.MarkerId',
+            return_value='new_marker_id'
+        )
+
+        with self.assertRaises(Exception) as _ex_mock:
+            _element.addMarker('marker_test')
+
+        self.assertTrue(_ex_mock.exception.args[0].find(
+            "test exception") != -1)
+        _marker_id_constructor.assert_called_once_with('marker_test')
+        _get_markerrefs.assert_called_once()
+        _get_owner_workbook_mock.assert_called_once()
+        _marker_refs_element_constructor_mock.assert_called_once_with(
+            'refs_value', 'ownerWorkbook')
+        _append_child_mock.assert_not_called()
+        _marker_refs_element.getChildNodesByTagName.assert_called_once_with(
+            TAG_MARKERREF)
+
+        self._assert_init_methods()
+
+    def test_addMarker_markers_are_none(self):
+        _element = TopicElement()
+
+        _get_markerrefs = patch.object(_element, '_get_markerrefs').start()
+        _get_markerrefs.return_value = 'refs_value'
+
+        _marker_refs_element = Mock()
+        _marker_refs_element.getChildNodesByTagName.return_value = None
+        _marker_refs_element_constructor_mock = self._init_patch_with_name(
+            '_marker_refs_element_constructor_mock',
+            'xmind.core.topic.MarkerRefsElement',
+            return_value=_marker_refs_element
+        )
+        _get_owner_workbook_mock = patch.object(
+            _element, 'getOwnerWorkbook').start()
+        _get_owner_workbook_mock.return_value = 'ownerWorkbook'
+        _append_child_mock = patch.object(_element, 'appendChild').start()
+
+        _marker_id_constructor = self._init_patch_with_name(
+            '_marker_id_constructor',
+            'xmind.core.topic.MarkerId',
+            return_value='new_marker_id'
+        )
+        _marker_ref_element = Mock()
+        _marker_ref_element.setMarkerId.side_effect = Exception(
+            'test exception')
+        _marker_ref_element.appendChild.side_effect = Exception
+        _marker_ref_element_constructor_mock = self._init_patch_with_name(
+            '_marker_ref_element_constructor_mock',
+            'xmind.core.topic.MarkerRefElement',
+            return_value=_marker_ref_element
+        )
+
+        with self.assertRaises(Exception) as _ex_mock:
+            _element.addMarker('marker_test')
+
+        self.assertTrue(_ex_mock.exception.args[0].find(
+            "test exception") != -1)
+        _marker_id_constructor.assert_called_once_with('marker_test')
+        _get_markerrefs.assert_called_once()
+        self.assertEqual(2, _get_owner_workbook_mock.call_count)
+        _marker_refs_element_constructor_mock.assert_called_once_with(
+            'refs_value', 'ownerWorkbook')
+        _append_child_mock.assert_not_called()
+        _marker_refs_element.getChildNodesByTagName.assert_called_once_with(
+            TAG_MARKERREF)
+        _marker_ref_element_constructor_mock.assert_called_once_with(
+            None, 'ownerWorkbook')
+        _marker_ref_element.setMarkerId.assert_called_once_with(
+            'new_marker_id')
+        _marker_ref_element.appendChild.assert_not_called()
+
+        self._assert_init_methods()
+
+    def test_addMarker_markers_are_not_list(self):
+        _element = TopicElement()
+
+        _get_markerrefs = patch.object(_element, '_get_markerrefs').start()
+        _get_markerrefs.return_value = 'refs_value'
+
+        _marker_refs_element = Mock()
+        _marker_refs_element.getChildNodesByTagName.return_value = 12
+        _marker_refs_element_constructor_mock = self._init_patch_with_name(
+            '_marker_refs_element_constructor_mock',
+            'xmind.core.topic.MarkerRefsElement',
+            return_value=_marker_refs_element
+        )
+        _get_owner_workbook_mock = patch.object(
+            _element, 'getOwnerWorkbook').start()
+        _get_owner_workbook_mock.return_value = 'ownerWorkbook'
+        _append_child_mock = patch.object(_element, 'appendChild').start()
+
+        _marker_id_constructor = self._init_patch_with_name(
+            '_marker_id_constructor',
+            'xmind.core.topic.MarkerId',
+            return_value='new_marker_id'
+        )
+        _marker_ref_element = Mock()
+        _marker_ref_element.setMarkerId.side_effect = Exception("exception1")
+        _marker_ref_element.appendChild.side_effect = Exception("exception2")
+        _marker_ref_element_constructor_mock = self._init_patch_with_name(
+            '_marker_ref_element_constructor_mock',
+            'xmind.core.topic.MarkerRefElement',
+            return_value=_marker_ref_element
+        )
+
+        with self.assertRaises(Exception) as _ex_mock:
+            _element.addMarker('marker_test')
+
+        self.assertTrue(_ex_mock.exception.args[0].find(
+            "'int' object is not iterable") != -1, _ex_mock.exception.args[0])
+        _marker_id_constructor.assert_called_once_with('marker_test')
+        _get_markerrefs.assert_called_once()
+        self.assertEqual(1, _get_owner_workbook_mock.call_count)
+        _marker_refs_element_constructor_mock.assert_called_once_with(
+            'refs_value', 'ownerWorkbook')
+        _append_child_mock.assert_not_called()
+        _marker_refs_element.getChildNodesByTagName.assert_called_once_with(
+            TAG_MARKERREF)
+        _marker_ref_element_constructor_mock.assert_not_called()
+        _marker_ref_element.setMarkerId.assert_not_called()
+        _marker_ref_element.appendChild.assert_not_called()
+
+        self._assert_init_methods()
+
+    def test_addMarker_mre_family_equals_to_markerid(self):
+        _element = TopicElement()
+
+        _get_markerrefs = patch.object(_element, '_get_markerrefs').start()
+        _get_markerrefs.return_value = 'refs_value'
+
+        _marker_refs_element = Mock()
+        _marker_refs_element.getChildNodesByTagName.return_value = ['m1', 'm2']
+        _marker_refs_element_constructor_mock = self._init_patch_with_name(
+            '_marker_refs_element_constructor_mock',
+            'xmind.core.topic.MarkerRefsElement',
+            return_value=_marker_refs_element
+        )
+        _get_owner_workbook_mock = patch.object(
+            _element, 'getOwnerWorkbook').start()
+        _get_owner_workbook_mock.return_value = 'ownerWorkbook'
+        _append_child_mock = patch.object(_element, 'appendChild').start()
+
+        _marker_id_element = Mock()
+        _marker_id_element.getFamilly.return_value = 15
+
+        _marker_id_constructor = self._init_patch_with_name(
+            '_marker_id_constructor',
+            'xmind.core.topic.MarkerId',
+            return_value=_marker_id_element
+        )
+        _marker_ref_element = Mock()
+        _marker_ref_element.setMarkerId.side_effect = Exception
+        _marker_ref_element.appendChild.side_effect = Exception
+        _marker_ref_element_constructor_mock = patch(
+            'xmind.core.topic.MarkerRefElement'
+        ).start()
+
+        _marker_with_family = Mock()
+        _marker_with_family.getFamilly.side_effect = [5, 15]
+
+        _element_not_equal = Mock()
+        _element_not_equal.getMarkerId.return_value = _marker_with_family
+        _element_equal = Mock()
+        _element_equal.getMarkerId.return_value = _marker_with_family
+        _element_equal.setMarkerId.return_value = None
+
+        _marker_ref_element_constructor_mock.side_effect = [
+            _element_not_equal,
+            _element_equal
+        ]
+
+        self.assertEqual(_element_equal, _element.addMarker('marker_test'))
+
+        _marker_id_constructor.assert_called_once_with('marker_test')
+        _get_markerrefs.assert_called_once()
+        self.assertEqual(3, _get_owner_workbook_mock.call_count)
+        _marker_refs_element_constructor_mock.assert_called_once_with(
+            'refs_value', 'ownerWorkbook')
+        _append_child_mock.assert_not_called()
+        _marker_refs_element.getChildNodesByTagName.assert_called_once_with(
+            TAG_MARKERREF)
+        self.assertEqual(2, _marker_ref_element_constructor_mock.call_count)
+        self.assertListEqual(
+            [call('m1', 'ownerWorkbook'), call('m2', 'ownerWorkbook')],
+            _marker_ref_element_constructor_mock.call_args_list
+        )
+        _marker_ref_element.setMarkerId.assert_not_called()
+        _marker_ref_element.appendChild.assert_not_called()
+        self.assertEqual(2, _marker_id_element.getFamilly.call_count)
+        self.assertEqual(2, _marker_with_family.getFamilly.call_count)
+        _element_equal.setMarkerId.assert_called_once_with(_marker_id_element)
+
+        self._assert_init_methods()
+
+    def test_addMarker_mre_family_does_not_equal_to_markerid(self):
+        _element = TopicElement()
+
+        _get_markerrefs = patch.object(_element, '_get_markerrefs').start()
+        _get_markerrefs.return_value = 'refs_value'
+
+        _marker_refs_element = Mock()
+        _marker_refs_element.getChildNodesByTagName.return_value = ['m1', 'm2']
+        _marker_refs_element_constructor_mock = self._init_patch_with_name(
+            '_marker_refs_element_constructor_mock',
+            'xmind.core.topic.MarkerRefsElement',
+            return_value=_marker_refs_element
+        )
+        _get_owner_workbook_mock = patch.object(
+            _element, 'getOwnerWorkbook').start()
+        _get_owner_workbook_mock.return_value = 'ownerWorkbook'
+        _append_child_mock = patch.object(_element, 'appendChild').start()
+
+        _marker_id_element = Mock()
+        _marker_id_element.getFamilly.return_value = 15
+
+        _marker_id_constructor = self._init_patch_with_name(
+            '_marker_id_constructor',
+            'xmind.core.topic.MarkerId',
+            return_value=_marker_id_element
+        )
+        _marker_ref_element = Mock()
+        _marker_ref_element_constructor_mock = patch(
+            'xmind.core.topic.MarkerRefElement'
+        ).start()
+
+        _marker_with_family = Mock()
+        _marker_with_family.getFamilly.side_effect = [5, 6]
+
+        _element_not_equal = Mock()
+        _element_not_equal.getMarkerId.return_value = _marker_with_family
+
+        _marker_ref_element_constructor_mock.side_effect = [
+            _element_not_equal,
+            _element_not_equal,
+            _marker_ref_element
+        ]
+
+        self.assertEqual(_marker_ref_element,
+                         _element.addMarker('marker_test'))
+
+        _marker_id_constructor.assert_called_once_with('marker_test')
+        _get_markerrefs.assert_called_once()
+        self.assertEqual(4, _get_owner_workbook_mock.call_count)
+        _marker_refs_element_constructor_mock.assert_called_once_with(
+            'refs_value', 'ownerWorkbook')
+        _append_child_mock.assert_not_called()
+        _marker_refs_element.getChildNodesByTagName.assert_called_once_with(
+            TAG_MARKERREF)
+        self.assertEqual(3, _marker_ref_element_constructor_mock.call_count)
+        self.assertListEqual(
+            [
+                call('m1', 'ownerWorkbook'),
+                call('m2', 'ownerWorkbook'),
+                call(None, 'ownerWorkbook')
+            ],
+            _marker_ref_element_constructor_mock.call_args_list
+        )
+        _marker_ref_element.setMarkerId.assert_called_once_with(
+            _marker_id_element)
+        _marker_refs_element.appendChild.assert_called_once_with(
+            _marker_ref_element)
+        self.assertEqual(2, _marker_id_element.getFamilly.call_count)
+        self.assertEqual(2, _marker_with_family.getFamilly.call_count)
+
         self._assert_init_methods()

@@ -26,6 +26,7 @@ class MarkerId:
     def __repr__(self):
         return "<MarkerId: %s>" % self
 
+    # FIXME: fix mistypo 'Fmailly' should have one 'l'
     def getFamilly(self):
         return self.name.split('-')[0]
 

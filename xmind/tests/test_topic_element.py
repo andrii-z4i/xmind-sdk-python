@@ -12,6 +12,8 @@ from xmind.core.const import (
     TAG_SHEET,
     ATTR_ID,
     ATTR_HREF,
+    ATTR_BRANCH,
+    VAL_FOLDED,
 )
 
 
@@ -870,4 +872,187 @@ class TestTopicElement(base.Base):
         self.assertEqual(2, _marker_id_element.getFamilly.call_count)
         self.assertEqual(2, _marker_with_family.getFamilly.call_count)
 
+        self._assert_init_methods()
+
+    def test_setFolded(self):
+        _element = TopicElement()
+
+        with patch.object(_element, 'setAttribute') as _mock:
+            self.assertIsNone(_element.setFolded())
+
+        _mock.assert_called_once_with(ATTR_BRANCH, VAL_FOLDED)
+        self._assert_init_methods()
+
+    def test_getPosition_position_is_none(self):
+        _element = TopicElement()
+        _position_element_construction_mock = self._init_patch_with_name(
+            '_position_element',
+            'xmind.core.topic.PositionElement',
+            thrown_exception=Exception,
+            autospec=True)
+
+        with patch.object(_element, '_get_position') as _mock:
+            _mock.return_value = None
+            self.assertIsNone(_element.getPosition())
+
+        _mock.assert_called_once()
+        _position_element_construction_mock.assert_not_called()
+
+        self._assert_init_methods()
+
+    def test_getPosition_x_is_none_and_y_is_none(self):
+        # import ipdb; ipdb.set_trace()
+        _element = TopicElement()
+        _position_element_mock = Mock()
+        _position_element_mock.getX.return_value = None
+        _position_element_mock.getY.return_value = None
+        _position_element_construction_mock = self._init_patch_with_name(
+            '_position_element',
+            'xmind.core.topic.PositionElement',
+            return_value=_position_element_mock,
+            autospec=True)
+
+        _get_position_mock = patch.object(_element, '_get_position').start()
+        _get_position_mock.return_value = 'position'
+
+        _get_owner_workbook_mock = patch.object(_element, 'getOwnerWorkbook').start()
+        _get_owner_workbook_mock.return_value = 'ownerWorkbook'
+
+        self.assertIsNone(_element.getPosition())
+
+        _get_owner_workbook_mock.assert_called_once()
+        _get_position_mock.assert_called_once()
+        _position_element_construction_mock.assert_called_once_with(
+            'position', 
+            'ownerWorkbook'
+        )
+        _position_element_mock.getX.assert_called_once()
+        _position_element_mock.getY.assert_called_once()
+
+        self._assert_init_methods()
+
+    def test_getPosition_position_x_is_none(self):
+        _element = TopicElement()
+        _position_element_mock = Mock()
+        _position_element_mock.getX.return_value = None
+        _position_element_mock.getY.return_value = 5
+        _position_element_construction_mock = self._init_patch_with_name(
+            '_position_element',
+            'xmind.core.topic.PositionElement',
+            return_value=_position_element_mock,
+            autospec=True)
+
+        _get_position_mock = patch.object(_element, '_get_position').start()
+        _get_position_mock.return_value = 'position'
+
+        _get_owner_workbook_mock = patch.object(_element, 'getOwnerWorkbook').start()
+        _get_owner_workbook_mock.return_value = 'ownerWorkbook'
+
+        self.assertEqual((0, 5), _element.getPosition())
+
+        _get_owner_workbook_mock.assert_called_once()
+        _get_position_mock.assert_called_once()
+        _position_element_construction_mock.assert_called_once_with(
+            'position', 
+            'ownerWorkbook'
+        )
+        _position_element_mock.getX.assert_called_once()
+        _position_element_mock.getY.assert_called_once()
+
+        self._assert_init_methods()
+    
+    def test_setPosition_position_is_none(self):
+        _element = TopicElement()
+        _position_element_mock = Mock()
+        _position_element_mock.setX.return_value = None
+        _position_element_mock.setY.return_value = None
+        _position_element_construction_mock = self._init_patch_with_name(
+            '_position_element',
+            'xmind.core.topic.PositionElement',
+            return_value=_position_element_mock,
+            autospec=True)
+        
+        _append_child_mock = patch.object(_element, 'appendChild').start()
+
+        _get_position_mock = patch.object(_element, '_get_position').start()
+        _get_position_mock.return_value = None
+
+        _get_owner_workbook_mock = patch.object(_element, 'getOwnerWorkbook').start()
+        _get_owner_workbook_mock.return_value = 'ownerWorkbook'
+
+        self.assertIsNone(_element.setPosition(0, 6))
+
+        _get_owner_workbook_mock.assert_called_once()
+        _get_position_mock.assert_called_once()
+        _position_element_construction_mock.assert_called_once_with(
+            ownerWorkbook='ownerWorkbook'
+        )
+        _append_child_mock.assert_called_once_with(_position_element_mock)
+        _position_element_mock.setX.assert_called_once_with(0)
+        _position_element_mock.setY.assert_called_once_with(6)
+
+        self._assert_init_methods()
+    
+    def test_setPosition_position_is_not_none(self):
+        _element = TopicElement()
+        _position_element_mock = Mock()
+        _position_element_mock.setX.return_value = None
+        _position_element_mock.setY.return_value = None
+        _position_element_construction_mock = self._init_patch_with_name(
+            '_position_element',
+            'xmind.core.topic.PositionElement',
+            return_value=_position_element_mock,
+            autospec=True)
+        
+        _append_child_mock = patch.object(_element, 'appendChild').start()
+
+        _get_position_mock = patch.object(_element, '_get_position').start()
+        _get_position_mock.return_value = 'newPosition'
+
+        _get_owner_workbook_mock = patch.object(_element, 'getOwnerWorkbook').start()
+        _get_owner_workbook_mock.return_value = 'ownerWorkbook'
+
+        self.assertIsNone(_element.setPosition(0, 6))
+
+        _get_owner_workbook_mock.assert_called_once()
+        _get_position_mock.assert_called_once()
+        _position_element_construction_mock.assert_called_once_with(
+            'newPosition',
+            'ownerWorkbook'
+        )
+        _append_child_mock.assert_not_called()
+        _position_element_mock.setX.assert_called_once_with(0)
+        _position_element_mock.setY.assert_called_once_with(6)
+
+        self._assert_init_methods()
+
+    def test_removePosition_position_is_none(self):
+        _element = TopicElement()
+        _impl_mock = Mock()
+        _impl_mock.removeChild.side_effect = Exception
+
+        _get_position_mock = patch.object(_element, '_get_position').start()
+        _get_position_mock.return_value = None
+
+        _get_impl_mock = patch.object(_element, 'getImplementation').start()
+        _get_impl_mock.return_value = _impl_mock
+        self.assertIsNone(_element.removePosition())
+        _get_position_mock.assert_called_once()
+        _get_impl_mock.assert_not_called()
+        _impl_mock.removeChild.assert_not_called()
+        self._assert_init_methods()
+    
+    def test_removePosition_position_is_not_none(self):
+        _element = TopicElement()
+        _impl_mock = Mock()
+
+        _get_position_mock = patch.object(_element, '_get_position').start()
+        _get_position_mock.return_value = 'newPosition'
+
+        _get_impl_mock = patch.object(_element, 'getImplementation').start()
+        _get_impl_mock.return_value = _impl_mock
+        self.assertIsNone(_element.removePosition())
+        _get_position_mock.assert_called_once()
+        _get_impl_mock.assert_called_once()
+        _impl_mock.removeChild.assert_called_once_with('newPosition')
         self._assert_init_methods()

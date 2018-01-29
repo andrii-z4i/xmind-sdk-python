@@ -16,6 +16,7 @@ testModules = [
     'xmind.tests.test_markerref_markerrefselement',
     'xmind.tests.test_notes_plain_notes',
     'xmind.tests.test_notes_note_content_element',
+    'xmind.tests.test_sheet_element',
     'xmind.tests.test_relationship_element',
     'xmind.tests.test_relationships_element',
     'xmind.tests.test_position',

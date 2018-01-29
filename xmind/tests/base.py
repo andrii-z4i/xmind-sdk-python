@@ -3,6 +3,12 @@ from abc import abstractmethod
 from unittest.mock import patch, Mock, MagicMock
 
 
+class PatcherWrapper(object):
+    def __init__(self, patch, name):
+        self.patch = patch
+        self.name = name
+        self.deleted = False
+
 class Base(unittest.TestCase):
     """Base class for any tests"""
 
@@ -15,17 +21,28 @@ class Base(unittest.TestCase):
         self._patchers = []
 
     def tearDown(self):
-        for patcher in self._patchers:
-            self._remove_patched_function(patcher)
+        _patcher_names = map(lambda x: x.name, self._patchers)
+        for name in _patcher_names:
+            self._remove_patched_function(name)
         self.getLogger().info('End test: %s', self._testMethodName)
 
     def _remove_patched_function(self, property_name):
         """Remove patched function by name"""
-        _patcher = getattr(self, property_name, None)
-        if _patcher:
-            _patcher.stop()
-            delattr(self, property_name)
-            self.getLogger().debug("Property '%s' has been deleted", property_name)
+        _patch = filter(lambda x: x.name == property_name, self._patchers)
+        _patches = [i for i in _patch]
+        if not len(_patches):
+            raise Exception("No patches with a name '%s'" % property_name)
+        if len(_patches) > 1:
+            raise Exception("More than one patch with a name '%s'" % property_name)
+        if _patches[0].deleted:
+            self.getLogger().debug("Property '%s' has already been marked as deleted", property_name)
+            return
+
+        _patches[0].patch.stop()
+        self.getLogger().debug("Property '%s' has been deleted", property_name)
+        _patches[0].deleted = True
+
+
 
     def _init_patch_with_name(self, property_name, function_name, return_value=None, thrown_exception=None, autospec=None):
         """Patches the function"""
@@ -49,12 +66,11 @@ class Base(unittest.TestCase):
             autospec=autospec
         )
 
-        setattr(self, property_name, _patch)
+        self._patchers.append(PatcherWrapper(_patch, property_name))
 
         _mock = _patch.start()
         _mock.side_effect = _side_effect
 
-        self._patchers.append(property_name)
         self.getLogger().debug(
             "Property '%s' for function '%s' has been set", property_name, function_name)
         return _mock

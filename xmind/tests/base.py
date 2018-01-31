@@ -9,6 +9,7 @@ class PatcherWrapper(object):
         self.name = name
         self.deleted = False
 
+
 class Base(unittest.TestCase):
     """Base class for any tests"""
 
@@ -28,21 +29,22 @@ class Base(unittest.TestCase):
 
     def _remove_patched_function(self, property_name):
         """Remove patched function by name"""
-        _patch = filter(lambda x: x.name == property_name, self._patchers)
-        _patches = [i for i in _patch]
-        if not len(_patches):
-            raise Exception("No patches with a name '%s'" % property_name)
-        if len(_patches) > 1:
-            raise Exception("More than one patch with a name '%s'" % property_name)
-        if _patches[0].deleted:
-            self.getLogger().debug("Property '%s' has already been marked as deleted", property_name)
+        _exisiting_patches = [i for i in filter(
+            lambda x: x.name == property_name, self._patchers)]
+        _exisiting_running_patches = [i for i in filter(
+            lambda x: not x.deleted, _exisiting_patches)]
+        if len(_exisiting_running_patches) > 1:
+            raise Exception(
+                "More than one patch with a name '%s'" % property_name)
+
+        if not len(_exisiting_running_patches):
+            self.getLogger().debug('No running mock for with a name "%s". Nothing to stop', property_name)
             return
 
-        _patches[0].patch.stop()
+        _patch_wrapper = _exisiting_running_patches[0]
+        _patch_wrapper.patch.stop()
         self.getLogger().debug("Property '%s' has been deleted", property_name)
-        _patches[0].deleted = True
-
-
+        _patch_wrapper.deleted = True
 
     def _init_patch_with_name(self, property_name, function_name, return_value=None, thrown_exception=None, autospec=None):
         """Patches the function"""
@@ -58,8 +60,15 @@ class Base(unittest.TestCase):
 
         _side_effect = side_effect_function
 
-        if getattr(self, property_name, None):
-            raise Exception('Can\'t set property, already exists')
+        _exisiting_patches = [i for i in filter(
+            lambda x: x.name == property_name, self._patchers)]
+        _exisiting_running_patches = [i for i in filter(
+            lambda x: not x.deleted, _exisiting_patches)]
+
+        if len(_exisiting_running_patches):
+            raise Exception(
+                "Can\'t init patch '%s' for '%s', it already exists with the same name" %
+                (property_name, function_name))
 
         _patch = patch(
             function_name,

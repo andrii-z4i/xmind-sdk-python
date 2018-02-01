@@ -17,7 +17,8 @@ from xmind.core.const import (
     VAL_FOLDED,
     TOPIC_ROOT,
     TOPIC_ATTACHED,
-)
+    ATTR_TYPE,
+    TAG_NOTES)
 
 
 class TestTopicElement(base.Base):
@@ -1231,3 +1232,544 @@ class TestTopicElement(base.Base):
         
         _getSubTopics_mock.assert_called_once_with(TOPIC_ATTACHED)
         self._assert_init_methods()
+
+    def test_addSubTopic_topic_is_none_get_children_throws(self):
+        _element = TopicElement()
+        _getOwnerWorkbook_mock = patch.object(_element, 'getOwnerWorkbook').start()
+        _getOwnerWorkbook_mock.return_value = 'owner'
+        _get_children_mock = patch.object(_element, '_get_children').start()
+        _get_children_mock.side_effect = Exception('our exception')
+        __class__mock = self._init_patch_with_name('_class_mock', 'xmind.core.topic.TopicElement.__init__')
+
+        with self.assertRaises(Exception) as _ex:
+            _element.addSubTopic()
+        
+        self.assertEqual("our exception", _ex.exception.args[0])
+
+        _getOwnerWorkbook_mock.assert_called_once()
+        __class__mock.assert_called_once_with(None, 'owner')
+        _get_children_mock.assert_called_once()
+        self._assert_init_methods()
+
+    def test_addSubTopic_topic_is_not_none_get_children_throws(self):
+        _element = TopicElement()
+        _getOwnerWorkbook_mock = patch.object(_element, 'getOwnerWorkbook').start()
+        _getOwnerWorkbook_mock.return_value = 'owner'
+        _get_children_mock = patch.object(_element, '_get_children').start()
+        _get_children_mock.side_effect = Exception('our exception')
+        __class__mock = self._init_patch_with_name('_class_mock', 'xmind.core.topic.TopicElement.__init__')
+
+        with self.assertRaises(Exception) as _ex:
+            _element.addSubTopic('value')
+
+        self.assertEqual("our exception", _ex.exception.args[0])
+
+        _getOwnerWorkbook_mock.assert_called_once()
+        __class__mock.assert_not_called()
+        _get_children_mock.assert_called_once()
+        self._assert_init_methods()
+
+    def test_addSubTopic_get_children_returns_none_append_child_throws(self):
+        _element = TopicElement()
+        _topic_children_element = Mock()
+
+        _getOwnerWorkbook_mock = patch.object(_element, 'getOwnerWorkbook').start()
+        _getOwnerWorkbook_mock.return_value = 'owner'
+        _get_children_mock = patch.object(_element, '_get_children').start()
+        _get_children_mock.return_value = None
+        _ChildrenElement_mock = self._init_patch_with_name(
+            '_ChildrenElement_mock',
+            'xmind.core.topic.ChildrenElement',
+            return_value=_topic_children_element
+        )
+        _appendChild_mock = patch.object(_element, 'appendChild').start()
+        _appendChild_mock.side_effect = Exception("appendChildException")
+        _topic_children_element.getTopics.side_effect = Exception('getTopicsException')
+
+        with self.assertRaises(Exception) as _ex:
+            _element.addSubTopic('value')
+        
+        self.assertEqual('appendChildException', _ex.exception.args[0])
+
+        _getOwnerWorkbook_mock.assert_called_once()
+        _get_children_mock.assert_called_once()
+        _ChildrenElement_mock.assert_called_once_with(ownerWorkbook='owner')
+        _appendChild_mock.assert_called_once_with(_topic_children_element)
+        _topic_children_element.getTopics.assert_not_called()
+        self._assert_init_methods()
+
+    def test_addSubTopic_get_children_returns_value_getTopics_throws(self):
+        _element = TopicElement()
+        _topic_children_element = Mock()
+
+        _getOwnerWorkbook_mock = patch.object(_element, 'getOwnerWorkbook').start()
+        _getOwnerWorkbook_mock.return_value = 'owner'
+        _get_children_mock = patch.object(_element, '_get_children').start()
+        _get_children_mock.return_value = 'topic_children_value'
+        _ChildrenElement_mock = self._init_patch_with_name(
+            '_ChildrenElement_mock',
+            'xmind.core.topic.ChildrenElement',
+            return_value=_topic_children_element
+        )
+        _appendChild_mock = patch.object(_element, 'appendChild').start()
+        _appendChild_mock.side_effect = Exception('appendChildException')
+        _topic_children_element.getTopics.side_effect = Exception('getTopicsException')
+
+        with self.assertRaises(Exception) as _ex:
+            _element.addSubTopic('value')
+        
+        self.assertEqual('getTopicsException', _ex.exception.args[0])
+
+        _getOwnerWorkbook_mock.assert_called_once()
+        _get_children_mock.assert_called_once()
+        _ChildrenElement_mock.assert_called_once_with('topic_children_value', 'owner')
+        _appendChild_mock.assert_not_called()
+        _topic_children_element.getTopics.assert_called_once_with(TOPIC_ATTACHED)
+        self._assert_init_methods()
+
+    def test_addSubTopic_getTopics_returns_none_appendChild_throws(self):
+        _element = TopicElement()
+        _topic_children_element = Mock()
+        _topic_children_element.getTopics.return_value = None
+        _topic_children_element.appendChild.side_effect = Exception('appendChildExceptionTopic')
+
+        _getOwnerWorkbook_mock = patch.object(_element, 'getOwnerWorkbook').start()
+        _getOwnerWorkbook_mock.return_value = 'owner'
+        _get_children_mock = patch.object(_element, '_get_children').start()
+        _get_children_mock.return_value = 'topic_children_value'
+        _ChildrenElement_mock = self._init_patch_with_name(
+            '_ChildrenElement_mock',
+            'xmind.core.topic.ChildrenElement',
+            return_value=_topic_children_element
+        )
+        _appendChild_mock = patch.object(_element, 'appendChild').start()
+        _appendChild_mock.side_effect = Exception('appendChildException')
+        _topics_element = Mock()
+        _TopicsElement_mock = self._init_patch_with_name(
+            '_TopicsElement_mock',
+            'xmind.core.topic.TopicsElement',
+            return_value=_topics_element
+        )
+
+        with self.assertRaises(Exception) as _ex:
+            _element.addSubTopic('value')
+        
+        self.assertEqual('appendChildExceptionTopic', _ex.exception.args[0])
+
+        _getOwnerWorkbook_mock.assert_called_once()
+        _get_children_mock.assert_called_once()
+        _ChildrenElement_mock.assert_called_once_with('topic_children_value', 'owner')
+        _appendChild_mock.assert_not_called()
+        _topic_children_element.getTopics.assert_called_once_with(TOPIC_ATTACHED)
+        _TopicsElement_mock.assert_called_once_with(ownerWorkbook='owner')
+        _topics_element.setAttribute.assert_called_once_with(ATTR_TYPE, TOPIC_ATTACHED)
+        _topic_children_element.appendChild.assert_called_once_with(_topics_element)
+        self._assert_init_methods()
+
+
+    def test_addSubTopic_getTopics_returns_value_topics_appendChild_called(self):
+        _element = TopicElement()
+        _topics_element = Mock()
+        _topics_element.getChildNodesByTagName.return_value = []
+        _topic_children_element = Mock()
+        _topic_children_element.getTopics.return_value = _topics_element
+
+        _getOwnerWorkbook_mock = patch.object(_element, 'getOwnerWorkbook').start()
+        _getOwnerWorkbook_mock.return_value = 'owner'
+        _get_children_mock = patch.object(_element, '_get_children').start()
+        _get_children_mock.return_value = 'topic_children_value'
+        _ChildrenElement_mock = self._init_patch_with_name(
+            '_ChildrenElement_mock',
+            'xmind.core.topic.ChildrenElement',
+            return_value=_topic_children_element
+        )
+        _appendChild_mock = patch.object(_element, 'appendChild').start()
+        _appendChild_mock.side_effect = Exception
+        _TopicsElement_mock = self._init_patch_with_name(
+            '_TopicsElement_mock',
+            'xmind.core.topic.TopicsElement',
+            return_value=_topics_element
+        )
+
+        self.assertEqual('value', _element.addSubTopic('value'))
+
+        _getOwnerWorkbook_mock.assert_called_once()
+        _get_children_mock.assert_called_once()
+        _ChildrenElement_mock.assert_called_once_with('topic_children_value', 'owner')
+        _appendChild_mock.assert_not_called()
+        _topic_children_element.getTopics.assert_called_once_with(TOPIC_ATTACHED)
+        _TopicsElement_mock.assert_not_called()
+        _topics_element.setAttribute.assert_not_called()
+        _topic_children_element.appendChild.assert_not_called()
+        _topics_element.getChildNodesByTagName.assert_called_once_with(TAG_TOPIC)
+        _topics_element.appendChild.assert_called_once_with('value')
+        self._assert_init_methods()
+
+    def test_addSubTopic_getTopics_returns_value_insertBefore_called(self):
+        _element = TopicElement()
+        _topics_element = Mock()
+        _topics_element.getChildNodesByTagName.return_value = [311, 322]
+        _topic_children_element = Mock()
+        _topic_children_element.getTopics.return_value = _topics_element
+
+        _getOwnerWorkbook_mock = patch.object(_element, 'getOwnerWorkbook').start()
+        _getOwnerWorkbook_mock.return_value = 'owner'
+        _get_children_mock = patch.object(_element, '_get_children').start()
+        _get_children_mock.return_value = 'topic_children_value'
+        _ChildrenElement_mock = self._init_patch_with_name(
+            '_ChildrenElement_mock',
+            'xmind.core.topic.ChildrenElement',
+            return_value=_topic_children_element
+        )
+        _appendChild_mock = patch.object(_element, 'appendChild').start()
+        _appendChild_mock.side_effect = Exception
+        _TopicsElement_mock = self._init_patch_with_name(
+            '_TopicsElement_mock',
+            'xmind.core.topic.TopicsElement',
+            return_value=_topics_element
+        )
+        
+        with patch('xmind.core.topic.TopicElement') as _TopicElement_mock:
+            _TopicElement_mock.side_effect = [66, 77]
+            self.assertEqual('value', _element.addSubTopic('value', 0))
+
+        _getOwnerWorkbook_mock.assert_called_once()
+        _get_children_mock.assert_called_once()
+        _ChildrenElement_mock.assert_called_once_with('topic_children_value', 'owner')
+        _appendChild_mock.assert_not_called()
+        _topic_children_element.getTopics.assert_called_once_with(TOPIC_ATTACHED)
+        _TopicsElement_mock.assert_not_called()
+        _topics_element.setAttribute.assert_not_called()
+        _topic_children_element.appendChild.assert_not_called()
+        self.assertEqual(2, _TopicElement_mock.call_count)
+        self.assertListEqual([call(311, 'owner'), call(322, 'owner')], _TopicElement_mock.call_args_list)
+        _topics_element.getChildNodesByTagName.assert_called_once_with(TAG_TOPIC)
+        _topics_element.appendChild.assert_not_called()
+        _topics_element.insertBefore.assert_called_once_with('value', 66)
+        self._assert_init_methods()
+
+    def test_getIndex_parent_is_none(self):
+        _element = TopicElement()
+        _getParentNode_mock = patch.object(_element, 'getParentNode').start()
+        _getParentNode_mock.return_value = None
+
+        self.assertEqual(-1, _element.getIndex())
+        _getParentNode_mock.assert_called_once()
+        self._assert_init_methods()
+
+    def test_getIndex_parent_tagName_is_not_topic(self):
+        _element = TopicElement()
+        _tagName_mock = PropertyMock(return_value=TAG_CHILDREN)
+        _parent = Mock()
+        type(_parent).tagName = _tagName_mock
+        _getParentNode_mock = patch.object(_element, 'getParentNode').start()
+        _getParentNode_mock.return_value = _parent
+
+        self.assertEqual(-1, _element.getIndex())
+        _getParentNode_mock.assert_called_once()
+        _tagName_mock.assert_called_once()
+        self._assert_init_methods()
+
+    def test_getIndex_parent_childNodes_is_empty_list(self):
+        _element = TopicElement()
+        _tagName_mock = PropertyMock(return_value=TAG_TOPICS)
+        _childNodes_mock = PropertyMock(return_value=[])
+        _parent = Mock()
+        type(_parent).tagName = _tagName_mock
+        type(_parent).childNodes = _childNodes_mock
+        _getParentNode_mock = patch.object(_element, 'getParentNode').start()
+        _getParentNode_mock.return_value = _parent
+
+        self.assertEqual(-1, _element.getIndex())
+        _getParentNode_mock.assert_called_once()
+        _tagName_mock.assert_called_once()
+        _childNodes_mock.assert_called_once()
+        self._assert_init_methods()
+
+    def test_getIndex_none_of_childs_in_childNodes_equals_by_implementation(self):
+        _element = TopicElement()
+        _tagName_mock = PropertyMock(return_value=TAG_TOPICS)
+        _childNodes_mock = PropertyMock(return_value=['a', 'b', 'c'])
+        _parent = Mock()
+        type(_parent).tagName = _tagName_mock
+        type(_parent).childNodes = _childNodes_mock
+        _getParentNode_mock = patch.object(_element, 'getParentNode').start()
+        _getParentNode_mock.return_value = _parent
+        _getImplementation_mock = patch.object(_element, 'getImplementation').start()
+        _getImplementation_mock.return_value = 'd'
+
+        self.assertEqual(-1, _element.getIndex())
+        _getParentNode_mock.assert_called_once()
+        _tagName_mock.assert_called_once()
+        _childNodes_mock.assert_called_once()
+        self.assertEqual(3, _getImplementation_mock.call_count)
+        self._assert_init_methods()
+
+    def test_getIndex_third_child_in_childNodes_equals_by_implementation(self):
+        _element = TopicElement()
+        _tagName_mock = PropertyMock(return_value=TAG_TOPICS)
+        _childNodes_mock = PropertyMock(return_value=['a', 'b', 'c', 'd', 'e'])
+        _parent = Mock()
+        type(_parent).tagName = _tagName_mock
+        type(_parent).childNodes = _childNodes_mock
+        _getParentNode_mock = patch.object(_element, 'getParentNode').start()
+        _getParentNode_mock.return_value = _parent
+        _getImplementation_mock = patch.object(_element, 'getImplementation').start()
+        _getImplementation_mock.return_value = 'c'
+
+        self.assertEqual(2, _element.getIndex())
+        _getParentNode_mock.assert_called_once()
+        _tagName_mock.assert_called_once()
+        _childNodes_mock.assert_called_once()
+        self.assertEqual(3, _getImplementation_mock.call_count)
+        self._assert_init_methods()
+
+    def test_getHyperlink(self):
+        _element = TopicElement()
+        with patch.object(_element, 'getAttribute') as _mock:
+            _mock.return_value = 'http://go.here/'
+            self.assertEqual('http://go.here/', _element.getHyperlink())
+        _mock.assert_called_once_with(ATTR_HREF)
+        self._assert_init_methods()
+
+    def test_setFileHyperlink_protocol_is_none(self):
+        _element = TopicElement()
+        _split_hyperlink_mock = self._init_patch_with_name(
+            '_split_hyperlink_mock',
+            'xmind.core.topic.split_hyperlink',
+            return_value=(None, 'someContent')
+        )
+        _get_abs_path_mock = self._init_patch_with_name(
+            '_get_abs_path_mock',
+            'xmind.core.topic.utils.get_abs_path',
+            return_value='/some/file/here'
+        )
+
+        _set_hyperlink_mock = patch.object(_element, '_set_hyperlink').start()
+
+        self.assertIsNone(_element.setFileHyperlink('here'))
+
+        _split_hyperlink_mock.assert_called_once_with('here')
+        _get_abs_path_mock.assert_called_once_with('here')
+        _set_hyperlink_mock.assert_called_once_with('file:///some/file/here')
+        self._assert_init_methods()
+
+    def test_setFileHyperlink_protocol_is_not_none(self):
+        _element = TopicElement()
+        _split_hyperlink_mock = self._init_patch_with_name(
+            '_split_hyperlink_mock',
+            'xmind.core.topic.split_hyperlink',
+            return_value=('http://', 'someContent')
+        )
+        _get_abs_path_mock = self._init_patch_with_name(
+            '_get_abs_path_mock',
+            'xmind.core.topic.utils.get_abs_path',
+            return_value='/some/file/here'
+        )
+
+        _set_hyperlink_mock = patch.object(_element, '_set_hyperlink').start()
+
+        self.assertIsNone(_element.setFileHyperlink('http://here'))
+
+        _split_hyperlink_mock.assert_called_once_with('http://here')
+        _get_abs_path_mock.assert_not_called()
+        _set_hyperlink_mock.assert_called_once_with('http://here')
+        self._assert_init_methods()
+
+    def test_setTopicHyperlink_protocol_is_not_none(self):
+        _element = TopicElement()
+        _split_hyperlink_mock = self._init_patch_with_name(
+            '_split_hyperlink_mock',
+            'xmind.core.topic.split_hyperlink',
+            return_value=('http://', 'someContent')
+        )
+        _set_hyperlink_mock = patch.object(_element, '_set_hyperlink').start()
+
+        self.assertIsNone(_element.setTopicHyperlink('http://here'))
+
+        _split_hyperlink_mock.assert_called_once_with('http://here')
+        _set_hyperlink_mock.assert_called_once_with('http://here')
+        self._assert_init_methods()
+
+    def test_setTopicHyperlink_protocol_is_none_tid_starts_with_sharp(self):
+        _element = TopicElement()
+        _split_hyperlink_mock = self._init_patch_with_name(
+            '_split_hyperlink_mock',
+            'xmind.core.topic.split_hyperlink',
+            return_value=(None, 'someContent')
+        )
+        _set_hyperlink_mock = patch.object(_element, '_set_hyperlink').start()
+
+        self.assertIsNone(_element.setTopicHyperlink('#TheBest'))
+
+        _split_hyperlink_mock.assert_called_once_with('#TheBest')
+        _set_hyperlink_mock.assert_called_once_with('xmind:#TheBest')
+        self._assert_init_methods()
+
+    def test_setTopicHyperlink_protocol_is_none(self):
+        _element = TopicElement()
+        _split_hyperlink_mock = self._init_patch_with_name(
+            '_split_hyperlink_mock',
+            'xmind.core.topic.split_hyperlink',
+            return_value=(None, 'someContent')
+        )
+        _set_hyperlink_mock = patch.object(_element, '_set_hyperlink').start()
+
+        self.assertIsNone(_element.setTopicHyperlink('TheBest'))
+
+        _split_hyperlink_mock.assert_called_once_with('TheBest')
+        _set_hyperlink_mock.assert_called_once_with('xmind:#TheBest')
+        self._assert_init_methods()
+
+    def test_setURLHyperlink_protocol_is_none(self):
+        _element = TopicElement()
+        _split_hyperlink_mock = self._init_patch_with_name(
+            '_split_hyperlink_mock',
+            'xmind.core.topic.split_hyperlink',
+            return_value=(None, 'TheBest')
+        )
+        _set_hyperlink_mock = patch.object(_element, '_set_hyperlink').start()
+
+        self.assertIsNone(_element.setURLHyperlink('TheBest'))
+
+        _split_hyperlink_mock.assert_called_once_with('TheBest')
+        _set_hyperlink_mock.assert_called_once_with('http://TheBest')
+        self._assert_init_methods()
+
+    def test_setURLHyperlink_protocol_is_not_none(self):
+        _element = TopicElement()
+        _split_hyperlink_mock = self._init_patch_with_name(
+            '_split_hyperlink_mock',
+            'xmind.core.topic.split_hyperlink',
+            return_value=('someProtocol://', 'TheBest')
+        )
+        _set_hyperlink_mock = patch.object(_element, '_set_hyperlink').start()
+
+        self.assertIsNone(_element.setURLHyperlink('someProtocol://TheBest'))
+
+        _split_hyperlink_mock.assert_called_once_with('someProtocol://TheBest')
+        _set_hyperlink_mock.assert_called_once_with('someProtocol://TheBest')
+        self._assert_init_methods()
+
+    def test_getNotes_notes_are_none(self):
+        _element = TopicElement()
+        _NotesElement_mock = self._init_patch_with_name(
+            '_NotesElement_mock',
+            'xmind.core.topic.NotesElement',
+            return_value='notes'
+        )
+        _getFirstChildNodeByTagName_mock = patch.object(_element, 'getFirstChildNodeByTagName').start()
+        _getFirstChildNodeByTagName_mock.return_value = None
+
+        self.assertIsNone(_element.getNotes())
+
+        _NotesElement_mock.assert_not_called()
+        _getFirstChildNodeByTagName_mock.assert_called_once_with(TAG_NOTES)
+        self._assert_init_methods()
+
+    def test_getNotes_notes_are_not_none(self):
+        _element = TopicElement()
+        _NotesElement_mock = self._init_patch_with_name(
+            '_NotesElement_mock',
+            'xmind.core.topic.NotesElement',
+            return_value='notes'
+        )
+        _getFirstChildNodeByTagName_mock = patch.object(_element, 'getFirstChildNodeByTagName').start()
+        _getFirstChildNodeByTagName_mock.return_value = 'someNotes'
+
+        self.assertEqual('notes', _element.getNotes())
+
+        _NotesElement_mock.assert_called_once_with('someNotes', _element)
+        _getFirstChildNodeByTagName_mock.assert_called_once_with(TAG_NOTES)
+        self._assert_init_methods()
+
+    def test__set_notes_notes_are_none(self):
+        _element = TopicElement()
+        _getNotes_mock = patch.object(_element, 'getNotes').start()
+        _getNotes_mock.return_value = None
+
+        _NotesElement_mock = self._init_patch_with_name(
+            '_NotesElement_mock',
+            'xmind.core.topic.NotesElement',
+            return_value='notes'
+        )
+        _appendChild_mock = patch.object(_element, 'appendChild').start()
+
+        self.assertEqual('notes', _element._set_notes())
+
+        _getNotes_mock.assert_called_once()
+        _NotesElement_mock.assert_called_once_with(ownerTopic=_element)
+        _appendChild_mock.assert_called_once_with('notes')
+        self._assert_init_methods()
+
+    def test__set_notes_notes_are_not_none(self):
+        _element = TopicElement()
+        _getNotes_mock = patch.object(_element, 'getNotes').start()
+        _getNotes_mock.return_value = 'someNotes'
+
+        _NotesElement_mock = self._init_patch_with_name(
+            '_NotesElement_mock',
+            'xmind.core.topic.NotesElement',
+            return_value='notes'
+        )
+        _appendChild_mock = patch.object(_element, 'appendChild').start()
+
+        self.assertEqual('someNotes', _element._set_notes())
+
+        _getNotes_mock.assert_called_once()
+        _NotesElement_mock.assert_not_called()
+        _appendChild_mock.assert_not_called()
+        self._assert_init_methods()
+
+    def test_setPlainNotes_old_is_not_none(self):
+        _element = TopicElement()
+        _notes_elemet = Mock()
+        _notes_elemet.getFirstChildNodeByTagName.return_value = 'value'
+        _getImplementation_mock = Mock()
+        _notes_elemet.getImplementation.return_value = _getImplementation_mock
+
+        _set_notes_mock = patch.object(_element, '_set_notes').start()
+        _set_notes_mock.return_value = _notes_elemet
+
+        _plain_notes_element = Mock()
+        _plain_notes_element.getFormat.return_value = 'format'
+
+        _PlainNotes_mock = self._init_patch_with_name(
+            '_PlainNotes_mock',
+            'xmind.core.topic.PlainNotes',
+            return_value=_plain_notes_element
+        )
+        self.assertIsNone(_element.setPlainNotes('notesContent'))
+        _set_notes_mock.assert_called_once()
+        _PlainNotes_mock.assert_called_once_with('notesContent', None, _element)
+        _notes_elemet.getFirstChildNodeByTagName.assert_called_once_with('format')
+        _getImplementation_mock.removeChild.assert_called_once_with('value')
+        _notes_elemet.appendChild.assert_called_once_with(_plain_notes_element)
+        self._assert_init_methods()
+
+    def test_setPlainNotes_old_is_none(self):
+        _element = TopicElement()
+        _notes_elemet = Mock()
+        _notes_elemet.getFirstChildNodeByTagName.return_value = None
+        _getImplementation_mock = Mock()
+        _notes_elemet.getImplementation.return_value = _getImplementation_mock
+
+        _set_notes_mock = patch.object(_element, '_set_notes').start()
+        _set_notes_mock.return_value = _notes_elemet
+
+        _plain_notes_element = Mock()
+        _plain_notes_element.getFormat.return_value = 'format'
+
+        _PlainNotes_mock = self._init_patch_with_name(
+            '_PlainNotes_mock',
+            'xmind.core.topic.PlainNotes',
+            return_value=_plain_notes_element
+        )
+        self.assertIsNone(_element.setPlainNotes('notesContent'))
+        _set_notes_mock.assert_called_once()
+        _PlainNotes_mock.assert_called_once_with('notesContent', None, _element)
+        _notes_elemet.getFirstChildNodeByTagName.assert_called_once_with('format')
+        _getImplementation_mock.removeChild.assert_not_called()
+        _notes_elemet.appendChild.assert_called_once_with(_plain_notes_element)
+        self._assert_init_methods()
+

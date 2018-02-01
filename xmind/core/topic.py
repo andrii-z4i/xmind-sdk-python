@@ -261,7 +261,7 @@ class TopicElement(WorkbookMixinElement):
         for i in topics.getChildNodesByTagName(const.TAG_TOPIC):
             topic_list.append(TopicElement(i, ownerWorkbook))
 
-        if index < 0 or len(topic_list) >= index:
+        if index < 0 or index >= len(topic_list):
             topics.appendChild(topic)
         else:
             topics.insertBefore(topic, topic_list[index])

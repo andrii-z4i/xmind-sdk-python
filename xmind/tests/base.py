@@ -38,7 +38,8 @@ class Base(unittest.TestCase):
                 "More than one patch with a name '%s'" % property_name)
 
         if not len(_exisiting_running_patches):
-            self.getLogger().debug('No running mock for with a name "%s". Nothing to stop', property_name)
+            self.getLogger().debug(
+                'No running mock for with a name "%s". Nothing to stop', property_name)
             return
 
         _patch_wrapper = _exisiting_running_patches[0]

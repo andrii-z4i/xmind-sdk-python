@@ -32,7 +32,8 @@ class WorkbookLoader(object):
         file_name, ext = utils.split_ext(self._input_source)
 
         if ext != const.XMIND_EXT:
-            raise Exception("The XMind filename is missing the '%s' extension!" % const.XMIND_EXT)
+            raise Exception(
+                "The XMind filename is missing the '%s' extension!" % const.XMIND_EXT)
 
         # Input Stream
         self._content_stream = None
@@ -54,10 +55,3 @@ class WorkbookLoader(object):
 
         workbook = WorkbookDocument(content, path)
         return workbook
-
-
-def main():
-    pass
-
-if __name__ == "__main__":
-    main()

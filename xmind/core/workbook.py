@@ -250,10 +250,3 @@ class WorkbookDocument(Document):
     def set_path(self, path):
         self._path = utils.get_abs_path(path)
 
-
-def main():
-    pass
-
-
-if __name__ == '__main__':
-    main()

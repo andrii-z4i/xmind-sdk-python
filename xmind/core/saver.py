@@ -50,16 +50,10 @@ class WorkbookSaver(object):
         file_name, ext = utils.split_ext(path)
 
         if ext != const.XMIND_EXT:
-            raise Exception("XMind filenames require a '%s' extension" % const.XMIND_EXT)
+            raise Exception(
+                "XMind filenames require a '%s' extension" % const.XMIND_EXT)
 
         content = self._get_content()
 
-        f=utils.compress(path)
+        f = utils.compress(path)
         f.write(content, const.CONTENT_XML)
-
-
-def main():
-    pass
-
-if __name__ == "__main__":
-    main()

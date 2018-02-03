@@ -38,6 +38,7 @@ def compress(path):
 
 ########################             Path             #########################
 
+
 join_path = os.path.join
 split_ext = os.path.splitext
 
@@ -151,10 +152,3 @@ def check(attr):
             return None
         return wrapper
     return decorator
-
-
-def main():
-    pass
-
-if __name__ == '__main__':
-    main()

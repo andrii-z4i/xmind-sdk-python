@@ -69,10 +69,3 @@ class PlainNotes(_NoteContentElement):
 
     def setContent(self, content):
         self.setTextContent(content)
-
-
-def main():
-    pass
-
-if __name__ == '__main__':
-    main()

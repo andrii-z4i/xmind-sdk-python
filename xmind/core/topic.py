@@ -400,11 +400,3 @@ class TopicsElement(WorkbookMixinElement):
             return sub_topics
 
         return sub_topics[index]
-
-
-def main():
-    pass
-
-
-if __name__ == '__main__':
-    main()

@@ -24,6 +24,7 @@ testModules = [
     'xmind.tests.test_const',
     'xmind.tests.test_topic_element',
     'xmind.tests.test_workbook_saver',
+    'xmind.tests.test_workbook_document',
 ]
 
 suite = unittest.TestSuite()

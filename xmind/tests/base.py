@@ -47,7 +47,7 @@ class Base(unittest.TestCase):
         self.getLogger().debug("Property '%s' has been deleted", property_name)
         _patch_wrapper.deleted = True
 
-    def _init_patch_with_name(self, property_name, function_name, return_value=None, thrown_exception=None, autospec=None):
+    def _init_patch_with_name(self, property_name, function_name, return_value=None, thrown_exception=None, autospec=None, return_value_as_side_effect=False):
         """Patches the function"""
         def side_effect_function(*a, **kw):
             """Side effect function"""
@@ -59,7 +59,8 @@ class Base(unittest.TestCase):
                 "%s => called with (%s), returns (%s)", function_name, a, return_value)
             return return_value
 
-        _side_effect = side_effect_function
+        _side_effect = return_value if isinstance(
+            return_value, list) and return_value_as_side_effect else side_effect_function
 
         _exisiting_patches = [i for i in filter(
             lambda x: x.name == property_name, self._patchers)]

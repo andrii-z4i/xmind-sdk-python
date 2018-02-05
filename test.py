@@ -23,6 +23,7 @@ testModules = [
     'xmind.tests.test_markerrefelement',
     'xmind.tests.test_const',
     'xmind.tests.test_topic_element',
+    'xmind.tests.test_topic_children_element',
     'xmind.tests.test_topics_element',
     'xmind.tests.test_workbook_saver',
     'xmind.tests.test_workbook_document',
@@ -57,5 +58,7 @@ logging.basicConfig(format=FORMAT, level=logging.DEBUG,
                     filename='./logs/%s.log' % fileNameToStoreLogs)
 LOGGER = logging.getLogger('global')
 LOGGER.info('Start tests')
-unittest.TextTestRunner(verbosity=2).run(suite)
+return_code = not unittest.TextTestRunner(
+    verbosity=2).run(suite).wasSuccessful()
 LOGGER.info('End tests')
+exit(return_code)

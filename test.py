@@ -28,7 +28,8 @@ testModules = [
     'xmind.tests.test_workbook_saver',
     'xmind.tests.test_workbook_element',
     'xmind.tests.test_workbook_document',
-    'xmind.tests.test_title_element'
+    'xmind.tests.test_title_element',
+    'xmind.tests.test_utils',
 ]
 
 suite = unittest.TestSuite()

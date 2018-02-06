@@ -68,7 +68,7 @@ def get_current_time():
     """
     Get the current time in milliseconds
     """
-    return long(round(time.time() * 1000))
+    return int(round(time.time() * 1000))
 
 
 def readable_time(timestamp):
@@ -118,7 +118,7 @@ def generate_id():
 
     id = timestamp[19:] + lotter[:13]
 
-    return id.decode("utf8")
+    return id
 
 
 ############################        Decorator       ###########################

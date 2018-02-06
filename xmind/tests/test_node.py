@@ -2,7 +2,7 @@ import logging
 import xml
 from unittest.mock import MagicMock, patch, Mock, PropertyMock, call
 
-from xmind.core import Node
+from xmind.core import Node, create_document, create_element
 from . import base
 
 
@@ -50,8 +50,10 @@ class TestNode(base.Base):
             with self.subTest(pair=pair):
                 self.getLogger().info('Next pair %s', pair)
                 _obj1 = Node(pair[0])
-                _obj2 = Node(pair[1])
+                _obj2 = None if not pair[1] else Node(pair[1])
                 self.assertEqual(_obj1._equals(_obj2), pair[2])
+        _objSelf = Node(1)
+        self.assertTrue(_objSelf._equals(_objSelf))
 
     def test_getImplementation(self):
         """Checks if getImplementation returns self"""
@@ -284,3 +286,43 @@ class TestNode(base.Base):
                 return self.nodeType == other.nodeType and self.tagName == other.tagName
 
         return InnerNode(nodeType, tagName)
+
+    def test_global_create_document(self):
+        _dom_document_mock = self._init_patch_with_name(
+            '_dom_document_mock',
+            'xmind.core.DOM.Document',
+            return_value='new_document'
+        )
+        self.assertEqual('new_document', create_document())
+        _dom_document_mock.assert_called_once_with()
+
+    def test_global_create_element_complex(self):
+
+        with patch('xmind.core.DOM.Element') as _dom_element_mock:
+            _dom_element_mock.side_effect = [
+                'a', 'b', 'c', 'd', 'e', 'f', 'g'
+            ]
+            self.assertEqual('a', create_element('tag_a'))
+            self.assertEqual('b', create_element('tag_b', 'uri'))
+            self.assertEqual('c', create_element('tag_c', None, 'prefix'))
+            self.assertEqual('d', create_element(
+                'tag_d', None, None, 'localName'))
+            self.assertEqual('e', create_element(
+                'tag_e', localName='localName2'))
+            self.assertEqual('f', create_element('tag_f', prefix='prefix2'))
+            self.assertEqual('g', create_element('tag_g', namespaceURI='uri2'))
+
+        self.assertEqual(7, _dom_element_mock.call_count)
+        self.assertListEqual(
+            [
+                call('tag_a', None, None, None),
+                call('tag_b', 'uri', None, None),
+                call('tag_c', None, 'prefix', None),
+                call('tag_d', None, None, 'localName'),
+                call('tag_e', None, None, 'localName2'),
+                call('tag_f', None, 'prefix2', None),
+                call('tag_g', 'uri2', None, None),
+
+            ],
+            _dom_element_mock.call_args_list
+        )

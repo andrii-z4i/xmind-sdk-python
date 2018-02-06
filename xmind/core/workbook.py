@@ -59,7 +59,7 @@ class WorkbookElement(WorkbookMixinElement):
     def getSheetByIndex(self, index):
         sheets = self.getSheets()
 
-        if index < 0 or index >= len(sheets):
+        if index is None or index < 0 or index >= len(sheets): #Temp fix to not fail on python 3 when index = None
             return
 
         return sheets[index]
@@ -70,7 +70,7 @@ class WorkbookElement(WorkbookMixinElement):
 
     def addSheet(self, sheet, index=None):
         sheets = self.getSheets()
-        if index < 0 or index >= len(sheets):
+        if index is None or index < 0 or index >= len(sheets): #temp fix to unblock
             self.appendChild(sheet)
         else:
             self.insertBefore(sheet, sheets[index])
@@ -95,11 +95,11 @@ class WorkbookElement(WorkbookMixinElement):
             return
 
         sheet = sheets[original_index]
-        if not target_index < 0 and target_index < len(sheets) - 1:
+        if not target_index < 0 and target_index < len(sheets) - 1: #should fail on python3 if index is None
             if original_index < target_index:
                 target_index += 1
             else:
-                target_index = target_index
+                target_index = target_index # I do not understand why this else is needed
 
             target = sheets[target_index]
             if target != sheet:

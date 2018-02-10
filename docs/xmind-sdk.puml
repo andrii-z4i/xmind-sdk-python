@@ -1,0 +1,231 @@
+@startuml Xmind-Sdk
+
+class WorkbookLoader {
+    __init__(path)
+    get_workbook: WorkbookDocument
+}
+
+class WorkbookDocument {
+    __init__(node=None, path=None)
+    getWorkbookElement()
+    _create_relationship()
+    createRelationship(end1, end2)
+    createTopic()
+    getSheets()
+    getPrimarySheet()
+    createSheet()
+    addSheet(sheet, index=None)
+    removeSheet(sheet)
+    moveSheet(original_index, target_index)
+    getVersion()
+    getModifiedTime()
+    updateModifiedTime()
+    setModifiedTime()
+    get_path()
+    set_path(path)
+}
+class MarkerId {
+    __init__(name)
+    __str__()
+    __repr__()
+    getFamilly()
+}
+class MarkerRefsElement {
+    __init__(node=None, ownerWorkbook=None)
+}
+class MarkerRefElement {
+    __init__(node=None, ownerWorkbook=None)
+    getMarkerId()
+    setMarkerId(val)
+}
+class WorkbookMixinElement {
+    __init__(node=None, ownerWorkbook=None)
+    registOwnerWorkbook()
+    getOwnerWorkbook()
+    setOwnerWorkbook(workbook)
+    getModifiedTime()
+    setModifiedTime(time)
+    updateModifiedTime()
+    getID()
+}
+class TopicMixinElement {
+    __init__(node, ownerTopic)
+    getOwnerTopic()
+    getOwnerSheet()
+    getOwnerWorkbook()
+}
+class NotesElement {
+    __init__(node=None, ownerTopic=None)
+    getContent(format=const.PLAIN_FORMAT_NOTE)
+}
+class _NoteContentElement {
+    __init__(node=None, ownerTopic=None)
+    getFormat()
+}
+class PlainNotes {
+    __init__(content=None, node=None, ownerTopic=None)
+    setContent(content)
+}
+class PositionElement {
+    __init__(node=None, ownerWorkbook=None)
+    getX()
+    getY()
+    setX(x)
+    setY(y)
+}
+class RelationshipElement {
+    __init__(node=None, ownerWorkbook=None)
+    _get_title()
+    _find_end_point(id)
+    getEnd1ID()
+    setEnd1ID(id)
+    getEnd2ID()
+    setEnd2ID(id)
+    getEnd1(end1_id)
+    getTitle()
+    setTitle(text)
+}
+class RelationshipsElement {
+    __init__(node=None, ownerWorkbook=None)
+}
+class WorkbookSaver {
+    __init__(workbook)
+    _get_content()
+    save(path=None)
+}
+class SheetElement {
+    __init__(node=None, ownerWorkbook=None)
+    _get_root_topic()
+    createRelationship(end1, end2, title=None)
+    _getRelationships()
+    addRelationship(rel)
+    removeRelationship(rel)
+    getRootTopic()
+    _get_title()
+    getTitle()
+    setTitle(text)
+    getParent()
+    updateModifiedTime()
+}
+class TitleElement {
+    __init__(node=None, ownerWorkbook=None)
+}
+class TopicElement {
+    __init__(node=None, ownerWorkbook=None)
+    _get_title()
+    _get_markerrefs()
+    _get_position()
+    _get_children()
+    _set_hyperlink(hyperlink)
+    getOwnerSheet()
+    getTitle()
+    setTitle(text)
+    getMarkers()
+    addMarker(markerId)
+    setFolded()
+    getPosition()
+    setPosition(x, y)
+    removePosition()
+    getType()
+    getTopics(topics_type=const.TOPIC_ATTACHED)
+    getSubTopics(topics_type=const.TOPIC_ATTACHED)
+    getSubTopicByIndex(index, topics_type=const.TOPIC_ATTACHED)
+    getIndex()
+    getHyperlink()
+    setFileHyperlink(path)
+    setTopicHyperlink(tid)
+    setURLHyperlink(url)
+    getNotes()
+    _set_notes()
+    setPlainNotes(content)
+}
+class ChildrenElement {
+    __init__(node=None, ownerWorkbook=None)
+    getTopics(topics_type)
+}
+class TopicsElement {
+    __init__(node=None, ownerWorkbook=None)
+    getType()
+    getSubTopics()
+    getSubTopicByIndex(index)
+}
+class WorkbookElement {
+    __init__(node=None, ownerWorkbook=None)
+    setOwnerWorkbook(workbook)
+    getSheets()
+    getSheetByIndex(index)
+    createSheet()
+    addSheet(sheet, index=None)
+    removeSheet(sheet)
+    moveSheet(original_index, target_index)
+    getVersion()
+}
+class Node {
+    __init__(node)
+    # _equals(obj=None): bool
+    getImplementation(): dom.Node
+    getOwnerDocument()
+    setOwnerDocument(doc)
+    getLocalName(qualifiedName)
+    getPrefix(qualifiedName)
+    appendChild(node)
+    insertBefore(new_node, ref_node)
+    getChildNodesByTagName(tag_name)
+    getFirstChildNodeByTagName(tag_name)
+    getParentNode()
+    # _isOrphanNode(node)
+    isOrphanNode()
+    iterChildNodesByTagName(tag_name)
+    removeChild(child_node)
+    output(output_stream)
+}
+class Document {
+    __init__(node=None)
+    _documentConstructor()
+    documentElement()
+    getOwnerDocument()
+    createElement(tag_name)
+    setVersion(version)
+    replaceVersion(version)
+    getElementById(id)
+}
+class Element {
+    __init__(node=None)
+    getOwnerDocument()
+    setOwnerDocument(doc_imple)
+    setAttributeNS(namespace, attr)
+    getAttribute(attr_name)
+    setAttribute(attr_name, attr_value=None)
+    createElement(tag_name)
+    addIdAttribute(attr_name)
+    getIndex()
+    getTextContent()
+    setTextContent(data)
+}
+
+WorkbookDocument <-- WorkbookLoader : creates
+Element --|> Node
+Document --|> Node
+WorkbookDocument --|> Document
+
+WorkbookElement --|> WorkbookMixinElement
+TopicsElement --|> WorkbookMixinElement
+ChildrenElement --|> WorkbookMixinElement
+TopicElement --|> WorkbookMixinElement
+TopicsElement --|> WorkbookMixinElement
+TitleElement --|> WorkbookMixinElement
+SheetElement --|> WorkbookMixinElement
+RelationshipElement --|> WorkbookMixinElement
+RelationshipsElement --|> WorkbookMixinElement
+PositionElement --|> WorkbookMixinElement
+MarkerRefElement --|> WorkbookMixinElement
+MarkerRefsElement --|> WorkbookMixinElement
+
+PlainNotes --|> _NoteContentElement
+_NoteContentElement --|> TopicMixinElement
+NotesElement --|> TopicMixinElement
+
+TopicMixinElement --|> Element
+WorkbookMixinElement --|> Element
+
+@enduml

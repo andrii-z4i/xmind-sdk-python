@@ -34,6 +34,13 @@ or:
 	
 > `xmind.save(workbook, /save/file/to/path)`
 
+UML diagram
+----
+
+Diagram
+![click](https://raw.githubusercontent.com/andrii-z4i/xmind-sdk-python/master/docs/Xmind-Sdk.png "Diagram")
+
+
 Tests
 ---
 

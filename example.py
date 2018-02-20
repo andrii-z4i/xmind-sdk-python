@@ -16,20 +16,20 @@ r2=s2.getRootTopic()
 r2.setTitle("root node")
 
 
-t1=TopicElement() # create a new element
+t1=TopicElement(ownerWorkbook=w) # create a new element
 t1.setTopicHyperlink(s1.getID()) # set a link from this topic to the first sheet given by s1.getID()
 t1.setTitle("redirection to the first sheet") # set its title
 
-t2=TopicElement()
+t2=TopicElement(ownerWorkbook=w)
 t2.setTitle("second node")
 t2.setURLHyperlink("https://xmind.net") # set an hyperlink
 
-t3=TopicElement()
+t3=TopicElement(ownerWorkbook=w)
 t3.setTitle("third node")
 t3.setPlainNotes("notes for this topic") # set notes (F4 in XMind)
 t3.setTitle("topic with \n notes")
 
-t4=TopicElement()
+t4=TopicElement(ownerWorkbook=w)
 t4.setFileHyperlink("logo.jpeg") # set a file hyperlink
 t4.setTitle("topic with a file")
 

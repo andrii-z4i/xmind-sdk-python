@@ -84,8 +84,7 @@ class TestElement(base.Base):
         _created_element = _element._elementConstructor('a')
         self.assertEqual(_created_element, _inner_element)
         self.assertEqual(_inner_element.prefix, 'aaa')
-        self.assertEqual(_inner_element.localName, 'local')
-        _dom_element.assert_called_once_with('a', None, None, None)
+        _dom_element.assert_called_once_with('a', None, None, 'local')
         _element_get_prefix.assert_called_once_with(_element, 'a')
         _element_get_local_name.assert_called_once_with(_element, 'a')
 

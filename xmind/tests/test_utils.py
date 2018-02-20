@@ -223,8 +223,8 @@ class TestUtils(base.Base):
         self.assertEqual(2, md5_mock.call_count)
         self.assertListEqual(
             [
-                call('567890'),
-                call('345345')
+                call(b'567890'),
+                call(b'345345')
             ],
             md5_mock.call_args_list
         )

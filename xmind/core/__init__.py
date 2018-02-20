@@ -212,13 +212,12 @@ class Element(Node):
     def _elementConstructor(self, tag_name,
                             namespaceURI=None,
                             prefix=None, localName=None):
-        element = DOM.Element(tag_name, namespaceURI, prefix, localName)
+
+        _localName_from_tag_name = self.getLocalName(tag_name)
+        element = DOM.Element(tag_name, namespaceURI, prefix, _localName_from_tag_name)
 
         prefix = self.getPrefix(tag_name)
-        localName = self.getLocalName(tag_name)
-
         element.prefix = prefix
-        element.localName = localName
 
         return element
 

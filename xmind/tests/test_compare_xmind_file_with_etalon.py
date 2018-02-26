@@ -8,6 +8,29 @@ from xmlscomparator.comparators.type_comparator import TypeComparator
 from xmlscomparator.comparators.text_comparator import TextComparator
 from xmlscomparator.comparators.attr_comparator_policy import AttrComparatorPolicy
 from xmlscomparator.comparators.attr_comparator import AttrComparator
+import logging
+import datetime
+from os import mkdir
+from os.path import exists, isdir
+
+FORMAT = '[%(name)s - %(levelname)s] %(asctime)-15s: %(message)s'
+now = datetime.datetime.now()
+fileNameToStoreLogs = now.strftime('%Y-%m-%d_%H-%M-%S')
+
+if not exists('./logs'):
+    mkdir('./logs')
+elif not isdir('./logs'):
+    raise Exception(
+        'No directory logs for storing logs, remove file with a similar name')
+
+
+logging.basicConfig(format=FORMAT, level=logging.DEBUG,
+                    filename='./logs/%s.log' % fileNameToStoreLogs)
+logging.basicConfig(format=FORMAT, level=logging.DEBUG)
+
+
+def get_logger(name):
+    return logging.getLogger(name)
 
 w = xmind.load("test.xmind") # load an existing file or create a new workbook if nothing is found
 '''
@@ -227,6 +250,20 @@ test_file_to_compare = test1.read(test1.namelist()[0])
 
 test2 = zipfile.ZipFile('test_file.xmind', 'r')
 test_file = test2.read(test2.namelist()[1])
+print(test_file)
+print(test_file_to_compare)
 
-_comparator = create_xml_diff_from_strings(test_file_to_compare, test_file)
+_type_comparator = TypeComparator(get_logger('type'))
+_text_comparator = TextComparator(get_logger('text'))
+_attr_comparator = AttrComparator(get_logger('attr_comparator'))
+_attr_policy = AttrComparatorPolicy(get_logger('attr_comparator_policy'))
+_attr_policy.add_attribute_name_to_skip_compare('extensions')
+_attr_comparator.set_attr_comparator_policy(_attr_policy)
+_attr_comparator.set_check_values(True)
+_text_comparator.set_next_comparator(_attr_comparator)
+_type_comparator.set_next_comparator(_text_comparator)
+_comparator = create_xml_diff_from_strings(test_file, test_file_to_compare, get_logger('%s' % "aaaaaaaaaaaaaaa"))
+_comparator.set_comparator(_type_comparator)
+_comparator.compare()
+
 print(_comparator.compare())

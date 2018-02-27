@@ -1,15 +1,12 @@
 #-*- coding: utf-8 -*-
-import xmind, zipfile
+import xmind, zipfile, logging, datetime, json
 from xmind.core import workbook, saver
 from xmind.core.topic import TopicElement
-
 from xmlscomparator.xml_diff import create_xml_diff_from_strings
 from xmlscomparator.comparators.type_comparator import TypeComparator
 from xmlscomparator.comparators.text_comparator import TextComparator
 from xmlscomparator.comparators.attr_comparator_policy import AttrComparatorPolicy
 from xmlscomparator.comparators.attr_comparator import AttrComparator
-import logging
-import datetime
 from os import mkdir
 from os.path import exists, isdir
 
@@ -32,16 +29,19 @@ logging.basicConfig(format=FORMAT, level=logging.DEBUG)
 def get_logger(name):
     return logging.getLogger(name)
 
+
+json_data = json.load(open('test_file.json'))
+print(json_data)
+
 w = xmind.load("test.xmind") # load an existing file or create a new workbook if nothing is found
-'''
+
 s1 = w.getPrimarySheet() # get the first sheet
 s1.setTitle("Source of IcMs") # set its title
 r1 = s1.getRootTopic() # get the root topic of this sheet
 r1.setTitle("we don't care of this sheet") # set its title
-'''
+
 ''' Sheet Scenarios '''
-#s2 = w.createSheet() # create a new sheet
-s2 = w.getPrimarySheet() # get the first sheet
+s2 = w.createSheet() # create a new sheet
 s2.setTitle("Scenarios")
 
 ''' Main Topic Scenarios  '''
@@ -253,6 +253,7 @@ test_file = test2.read(test2.namelist()[1])
 print(test_file)
 print(test_file_to_compare)
 
+'''
 _type_comparator = TypeComparator(get_logger('type'))
 _text_comparator = TextComparator(get_logger('text'))
 _attr_comparator = AttrComparator(get_logger('attr_comparator'))
@@ -267,3 +268,4 @@ _comparator.set_comparator(_type_comparator)
 _comparator.compare()
 
 print(_comparator.compare())
+'''

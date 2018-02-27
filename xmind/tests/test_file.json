@@ -1,0 +1,334 @@
+{
+  "xmap-content": {
+    "-xmlns": "urn:xmind:xmap:xmlns:content:2.0",
+    "-xmlns:fo": "http://www.w3.org/1999/XSL/Format",
+    "-xmlns:svg": "http://www.w3.org/2000/svg",
+    "-xmlns:xhtml": "http://www.w3.org/1999/xhtml",
+    "-xmlns:xlink": "http://www.w3.org/1999/xlink",
+    "-modified-by": "Vlad",
+    "-timestamp": "1519741284933",
+    "-version": "2.0",
+    "parsererror": {
+      "-style": "display: block; white-space: pre; border: 2px solid #c77; padding: 0 1em 0 1em; margin: 1em; background-color: #fdd; color: black",
+      "h3": [
+        "This page contains the following errors:",
+        "Below is a rendering of the page up to the first error."
+      ],
+      "div": {
+        "-style": "font-family:monospace;font-size:12px",
+        "#text": "error on line 1 at column 6195: Extra content at the end of the document"
+      }
+    },
+    "extensions": {
+      "extension": { "-provider": "org.xmind.ui.presentation.stories" }
+    },
+    "sheet": {
+      "-id": "2ik7rm8o7e9hq3a2glv89mu5s3",
+      "-modified-by": "ankozin",
+      "-theme": "65et4tbn548nr5o54og1bhmv4m",
+      "-timestamp": "1517910735978",
+      "topic": {
+        "-id": "23flpmdjijals51tsngios4emm",
+        "-modified-by": "z4i",
+        "-structure-class": "org.xmind.ui.map.unbalanced",
+        "-timestamp": "1516718724400",
+        "title": "Scenarios",
+        "extensions": {
+          "extension": {
+            "-provider": "org.xmind.ui.map.unbalanced",
+            "content": { "right-number": "1" }
+          }
+        },
+        "children": {
+          "topics": {
+            "-type": "attached",
+            "topic": [
+              {
+                "-id": "1g9hctbcnkebo6hp17337hceuu",
+                "-modified-by": "z4i",
+                "-timestamp": "1516718597044",
+                "title": "Core",
+                "children": {
+                  "topics": {
+                    "-type": "attached",
+                    "topic": [
+                      {
+                        "-id": "7p82ng0j6hmn5m0btrelbm7q96",
+                        "-modified-by": "z4i",
+                        "-timestamp": "1516718607813",
+                        "title": "behind the jail (85% threshold)",
+                        "children": {
+                          "topics": {
+                            "-type": "attached",
+                            "topic": [
+                              {
+                                "-id": "76n8ln0hlso2fgpks1cbsbdgdq",
+                                "-modified-by": "z4i",
+                                "-timestamp": "1516718577888",
+                                "title": "add_participant"
+                              },
+                              {
+                                "-id": "4dh9it878f263je0skpgkvtjsq",
+                                "-modified-by": "z4i",
+                                "-timestamp": "1516718588184",
+                                "title": "create_group_call"
+                              },
+                              {
+                                "-id": "79rlu1r9k810j8d78j2jik9ap9",
+                                "-modified-by": "z4i",
+                                "-timestamp": "1516718588184",
+                                "title": "join_group_call"
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "-id": "340g05u8jhrfe4thilllpdl3rp",
+                        "-modified-by": "z4i",
+                        "-timestamp": "1516718624530",
+                        "title": "normal one (90% threshold)",
+                        "children": {
+                          "topics": {
+                            "-type": "attached",
+                            "topic": [
+                              {
+                                "-id": "0ai4cb1g54ojf03aijsfmg4q5m",
+                                "-modified-by": "z4i",
+                                "-timestamp": "1516718598460",
+                                "title": "screen_sharing_sender_end"
+                              },
+                              {
+                                "-id": "2p1mkup1n3ud093d85tcc9mcog",
+                                "-modified-by": "z4i",
+                                "-timestamp": "1516718598460",
+                                "title": "start_video"
+                              },
+                              {
+                                "-id": "19iak61tudilcbl11bce3h6a7j",
+                                "-modified-by": "z4i",
+                                "-timestamp": "1516718598460",
+                                "title": "stop_video"
+                              },
+                              {
+                                "-id": "2n831abrved4fjlaa9fi6pc9sm",
+                                "-modified-by": "z4i",
+                                "-timestamp": "1516718598460",
+                                "title": "video_stream_rendering"
+                              },
+                              {
+                                "-id": "09qqv53mj5vg2iuab7rioq38mg",
+                                "-modified-by": "z4i",
+                                "-timestamp": "1516718598460",
+                                "title": "screen_sharing_sender"
+                              },
+                              {
+                                "-id": "16e1m7i3bt27bqcnpaf6q9o62b",
+                                "-modified-by": "z4i",
+                                "-timestamp": "1516718598460",
+                                "title": "join_or_create_call_from_link"
+                              },
+                              {
+                                "-id": "08duu8ssu2p49n3kka6395on20",
+                                "-modified-by": "z4i",
+                                "-timestamp": "1516718598460",
+                                "title": "calling_service_init"
+                              },
+                              {
+                                "-id": "3gea736r46bjnjo4ba6t41h1vb",
+                                "-modified-by": "z4i",
+                                "-timestamp": "1516718598460",
+                                "title": "calling_relay_manager_query_relays_async"
+                              },
+                              {
+                                "-id": "5qk2d4dsf4o03e5sfipsb8sa1k",
+                                "-modified-by": "z4i",
+                                "-timestamp": "1516718598460",
+                                "title": "ecs_config_request"
+                              },
+                              {
+                                "-id": "2hlle1hutsfedvpfdv4s36dqvd",
+                                "-modified-by": "z4i",
+                                "-timestamp": "1516718598460",
+                                "title": "add_pstn_participant"
+                              },
+                              {
+                                "-id": "34a822s99q9flrm9dtsjm0pkbe",
+                                "-modified-by": "z4i",
+                                "-timestamp": "1516718598460",
+                                "title": "call_me_back"
+                              },
+                              {
+                                "-id": "6p663gf3ukpq7fe2u900n9361n",
+                                "-modified-by": "z4i",
+                                "-timestamp": "1516718598460",
+                                "title": "calling_mute_participant"
+                              },
+                              {
+                                "-id": "42a4tvu1nbqg8oevr9li34664h",
+                                "-modified-by": "z4i",
+                                "-timestamp": "1516718598460",
+                                "title": "server_unmute_self"
+                              },
+                              {
+                                "-id": "4ekogfooarskbd4tf9543212nv",
+                                "-modified-by": "z4i",
+                                "-timestamp": "1516718598460",
+                                "title": "calling_mute_all"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "-id": "3aairf1djgvpn28q22phnmmmq7",
+                "-modified-by": "ankozin",
+                "-timestamp": "1517910730689",
+                "title": "Optimal",
+                "children": {
+                  "topics": {
+                    "-type": "attached",
+                    "topic": [
+                      {
+                        "-id": "50eskd3p03acofgkkrp4uauohp",
+                        "-modified-by": "ankozin",
+                        "-timestamp": "1513239274039",
+                        "title": "get_meeting_info"
+                      },
+                      {
+                        "-id": "4pctor3nlsdjk3o9h6k247chq0",
+                        "-modified-by": "z4i",
+                        "-timestamp": "1515434278282",
+                        "title": "get_exchange_meeting_info"
+                      },
+                      {
+                        "-id": "1bjieqbbccgq2puj0hru7t5cqu",
+                        "-modified-by": "ankozin",
+                        "-timestamp": "1517910705741",
+                        "title": "start_recording"
+                      },
+                      {
+                        "-id": "41l0gk837oajnvpudfdamn7tjt",
+                        "-modified-by": "ankozin",
+                        "-timestamp": "1517910735978",
+                        "title": "stop_recording???"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "-id": "21igq2ogn5j00047d4qf90hn7l",
+                "-modified-by": "z4i",
+                "-timestamp": "1516718724400",
+                "title": "Dialtone",
+                "children": {
+                  "topics": {
+                    "-type": "attached",
+                    "topic": [
+                      {
+                        "-id": "055i6romc3me1cm0hnlukuje97",
+                        "-modified-by": "z4i",
+                        "-timestamp": "1516718712355",
+                        "title": "behind the jail (80%)",
+                        "children": {
+                          "topics": {
+                            "-type": "attached",
+                            "topic": [
+                              {
+                                "-id": "2ir3hdg6b3ea232ha4rcron0fb",
+                                "-modified-by": "andriikozin",
+                                "-timestamp": "1517825520586",
+                                "title": "create_one_to_one_call",
+                                "children": {
+                                  "topics": {
+                                    "-type": "attached",
+                                    "topic": {
+                                      "-id": "0c03473n0shgh2c51apugek80a",
+                                      "-modified-by": "andriikozin",
+                                      "-timestamp": "1517825520580",
+                                      "title": "https://domoreexp.visualstudio.com/MSTeams/_queries?id=222450&fullScreen=false&_a=edit"
+                                    }
+                                  }
+                                }
+                              },
+                              {
+                                "-id": "6k7c1t81c9fhbd5eobiqj1dqdn",
+                                "-modified-by": "z4i",
+                                "-timestamp": "1517232430563",
+                                "title": "join_or_create_meetup_from_link",
+                                "children": {
+                                  "topics": {
+                                    "-type": "attached",
+                                    "topic": {
+                                      "-id": "1tt7gfadf0nda4s7to96eo02vb",
+                                      "-modified-by": "z4i",
+                                      "-timestamp": "1517232430555",
+                                      "title": "https://domoreexp.visualstudio.com/MSTeams/_workitems/edit/221727"
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "-id": "45lk3k84qqahq5v4b058bofimc",
+                        "-modified-by": "z4i",
+                        "-timestamp": "1516718725613",
+                        "title": "normal one (90%)",
+                        "children": {
+                          "topics": {
+                            "-type": "attached",
+                            "topic": [
+                              {
+                                "-id": "7h41ek121jl1j6iocrvp8dlqnk",
+                                "-modified-by": "z4i",
+                                "-timestamp": "1516718725587",
+                                "title": "media_connected"
+                              },
+                              {
+                                "-id": "0g29pdps8ae7u5ffefmkn0vgc1",
+                                "-modified-by": "z4i",
+                                "-timestamp": "1516718725587",
+                                "title": "create_meetup"
+                              },
+                              {
+                                "-id": "0eo71r0f0sinqksqk9m782ekot",
+                                "-modified-by": "z4i",
+                                "-timestamp": "1516718725587",
+                                "title": "join_meetup_reply_chain"
+                              },
+                              {
+                                "-id": "2ogccs8qb007aeqc1kfbhcm6l7",
+                                "-modified-by": "z4i",
+                                "-timestamp": "1516718725587",
+                                "title": "join_scheduled_meetup"
+                              },
+                              {
+                                "-id": "7h9evf8nud676lip8nic05os7l",
+                                "-modified-by": "z4i",
+                                "-timestamp": "1516718725587",
+                                "title": "call_accept"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "title": "Scenarios"
+    }
+  }
+}

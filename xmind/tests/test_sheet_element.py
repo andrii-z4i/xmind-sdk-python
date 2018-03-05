@@ -1,4 +1,4 @@
-import logging
+from xmind.tests import logging_configuration as lc
 from xmind.core.sheet import SheetElement
 from xmind.tests import base
 from unittest.mock import patch, Mock, MagicMock
@@ -10,7 +10,7 @@ class TestSheetElement(base.Base):
 
     def getLogger(self):
         if not getattr(self, '_logger', None):
-            self._logger = logging.getLogger('sheetElement')
+            self._logger = lc.get_logger('sheetElement')
         return self._logger
 
     def setUp(self):

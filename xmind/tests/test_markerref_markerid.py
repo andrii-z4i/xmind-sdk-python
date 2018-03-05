@@ -1,6 +1,6 @@
 from xmind.core.markerref import MarkerId
-import logging
-from . import base
+from xmind.tests import logging_configuration as lc
+from xmind.tests import base
 
 
 class MarkerrefTest(base.Base):
@@ -8,7 +8,7 @@ class MarkerrefTest(base.Base):
 
     def getLogger(self):
         if not getattr(self, '_logger', None):
-            self._logger = logging.getLogger('MarkerefTest')
+            self._logger = lc.get_logger('MarkerefTest')
         return self._logger
 
     def test_init_set_name(self):
@@ -27,7 +27,8 @@ class MarkerrefTest(base.Base):
     def test_init_throws_excessive_argument_exception(self):
         """test case when exception comes because of the excessive arguments"""
         with self.assertRaises(Exception) as ex:
-            MarkerId('test-name', 'arg2')  # trying to create MarketId objectand waits for Exception
+            # trying to create MarketId objectand waits for Exception
+            MarkerId('test-name', 'arg2')
 
         self.getLogger().warning("Exception: %s", ex.exception)
 

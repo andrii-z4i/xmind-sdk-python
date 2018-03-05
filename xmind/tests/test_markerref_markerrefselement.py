@@ -1,7 +1,7 @@
 from xmind.core.markerref import MarkerRefsElement
 from xmind.core.const import TAG_MARKERREFS
-import logging
-from . import base
+from xmind.tests import logging_configuration as lc
+from xmind.tests import base
 from unittest.mock import patch
 
 
@@ -10,7 +10,7 @@ class MarkerRefsElementTest(base.Base):
 
     def getLogger(self):
         if not getattr(self, '_logger', None):
-            self._logger = logging.getLogger('MarkerRefsElementTest')
+            self._logger = lc.get_logger('MarkerRefsElementTest')
         return self._logger
 
     def test_init_without_parameters(self):
@@ -32,4 +32,4 @@ class MarkerRefsElementTest(base.Base):
                 MarkerRefsElement('test', 2, 4)
 
             self.assertEqual(WorkbookMixinElementMock.call_count, 4)
-            self.assertEqual(_test_object.TAG_NAME, TAG_MARKERREFS )
+            self.assertEqual(_test_object.TAG_NAME, TAG_MARKERREFS)

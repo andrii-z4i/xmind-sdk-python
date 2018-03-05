@@ -1,5 +1,5 @@
-import logging
-from . import base
+from xmind.tests import logging_configuration as lc
+from xmind.tests import base
 from unittest.mock import patch, MagicMock, mock_open
 from xmind.core.saver import WorkbookSaver
 from xmind.core.const import CONTENT_XML, XMIND_EXT
@@ -14,7 +14,7 @@ class WorkbookSaverTest(base.Base):
 
     def getLogger(self):
         if not getattr(self, '_logger', None):
-            self._logger = logging.getLogger('WoorkbookSaverTest')
+            self._logger = lc.get_logger('WoorkbookSaverTest')
         return self._logger
 
     def test_excessive_parameters(self):
@@ -30,7 +30,7 @@ class WorkbookSaverTest(base.Base):
     def test_WoorkbookSaver_init(self):
         # Call with one parameter
         _test_object = WorkbookSaver('workbook')
-        self.assertEqual(_test_object._workbook,'workbook')
+        self.assertEqual(_test_object._workbook, 'workbook')
 
     def test_get_content(self):
         _utils_join_path = patch('xmind.utils.join_path').start()
@@ -57,7 +57,8 @@ class WorkbookSaverTest(base.Base):
         with self.assertRaises(Exception) as _ex:
             _test_el.save()
 
-        self.assertTrue(_ex.exception.args[0].find("Please specify a filename for the XMind file") != -1)
+        self.assertTrue(_ex.exception.args[0].find(
+            "Please specify a filename for the XMind file") != -1)
         _get_path.assert_called_once_with()
 
     def test_save_is_path(self):
@@ -91,7 +92,8 @@ class WorkbookSaverTest(base.Base):
         with self.assertRaises(Exception) as _ex:
             self._test_el.save('path')
 
-        self.assertTrue(_ex.exception.args[0].find("XMind filenames require a '%s' extension" % XMIND_EXT) != -1)
+        self.assertTrue(_ex.exception.args[0].find(
+            "XMind filenames require a '%s' extension" % XMIND_EXT) != -1)
         _get_abs_path.assert_called_once_with('path')
         _split_ext.assert_called_once_with('abs path')
 

@@ -1,22 +1,21 @@
 from xmind.core.markerref import MarkerRefElement
 from xmind.core.const import TAG_MARKERREF, ATTR_MARKERID
-import logging
-from . import base
+from xmind.tests import logging_configuration as lc
+from xmind.tests import base
 from unittest.mock import patch
 
 
 class MarkerRefElementTest(base.Base):
     """MarkerRefElementTest"""
-    LOGGER = logging.getLogger('MarkerRefElementTest') # should be deleted after https://github.com/andrii-z4i/xmind-sdk-python/pull/29/files is merged
 
     def setUp(self):
         super(MarkerRefElementTest, self).setUp()
-        self._WorkbookMixinElementMock = self._init_patch_with_name('_init', 'xmind.core.mixin.WorkbookMixinElement.__init__')
-
+        self._WorkbookMixinElementMock = self._init_patch_with_name(
+            '_init', 'xmind.core.mixin.WorkbookMixinElement.__init__')
 
     def getLogger(self):
         if not getattr(self, '_logger', None):
-            self._logger = logging.getLogger('MarkerRefElementTest')
+            self._logger = lc.get_logger('MarkerRefElementTest')
         return self._logger
 
     def test_excessive_parameters(self):

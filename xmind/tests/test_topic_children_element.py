@@ -1,4 +1,4 @@
-import logging
+from xmind.tests import logging_configuration as lc
 from xmind.core.topic import ChildrenElement, split_hyperlink
 from xmind.tests import base
 from unittest.mock import patch, Mock, PropertyMock, call
@@ -18,7 +18,7 @@ class TestChildrenElement(base.Base):
 
     def getLogger(self):
         if not getattr(self, '_logger', None):
-            self._logger = logging.getLogger('ChildrenElement')
+            self._logger = lc.get_logger('ChildrenElement')
         return self._logger
 
     def test_excessive_parameters(self):

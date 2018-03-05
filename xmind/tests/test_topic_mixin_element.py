@@ -1,6 +1,6 @@
 from xmind.core.mixin import TopicMixinElement
-import logging
-from . import base
+from xmind.tests import logging_configuration as lc
+from xmind.tests import base
 from unittest.mock import patch, MagicMock
 
 
@@ -15,7 +15,7 @@ class TopicMixinElementTest(base.Base):
 
     def getLogger(self):
         if not getattr(self, '_logger', None):
-            self._logger = logging.getLogger('TopicMixinElementTest')
+            self._logger = lc.get_logger('TopicMixinElementTest')
         return self._logger
 
     def test_excessive_parameters(self):

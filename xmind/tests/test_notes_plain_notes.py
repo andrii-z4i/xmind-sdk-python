@@ -1,4 +1,4 @@
-import logging
+from xmind.tests import logging_configuration as lc
 from xmind.core.notes import PlainNotes
 from xmind.tests import base
 from unittest.mock import Mock, MagicMock, call, PropertyMock
@@ -9,7 +9,7 @@ class TestPlainNotes(base.Base):
 
     def getLogger(self):
         if not getattr(self, '_logger', None):
-            self._logger = logging.getLogger('plainNotes')
+            self._logger = lc.get_logger('plainNotes')
         return self._logger
 
     def test_init(self):

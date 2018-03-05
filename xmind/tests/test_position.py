@@ -1,4 +1,4 @@
-import logging
+from xmind.tests import logging_configuration as lc
 from xmind.core.position import PositionElement
 from xmind.tests import base
 from unittest.mock import patch
@@ -10,7 +10,7 @@ class TestPositionElement(base.Base):
 
     def getLogger(self):
         if not getattr(self, '_logger', None):
-            self._logger = logging.getLogger('positionElement')
+            self._logger = lc.get_logger('positionElement')
         return self._logger
 
     def test_init(self):

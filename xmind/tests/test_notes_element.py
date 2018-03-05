@@ -1,4 +1,4 @@
-import logging
+from xmind.tests import logging_configuration as lc
 from xmind.core.notes import NotesElement
 from xmind.tests import base
 from unittest.mock import Mock, MagicMock, call, PropertyMock
@@ -9,7 +9,7 @@ class TestNotesElement(base.Base):
 
     def getLogger(self):
         if not getattr(self, '_logger', None):
-            self._logger = logging.getLogger('notesElement')
+            self._logger = lc.get_logger('notesElement')
         return self._logger
 
     def test_init(self):
@@ -72,7 +72,8 @@ class TestNotesElement(base.Base):
         with self.assertRaises(Exception) as _ex:
             _object.getContent("plain2")
 
-        self.assertTrue(_ex.exception.args[0].find("Only support plain text notes right now") != -1)
+        self.assertTrue(_ex.exception.args[0].find(
+            "Only support plain text notes right now") != -1)
         _getFirstChildNodeByTagName.assert_called_once_with(_object, "plain2")
         _topic_mixin_element_init.assert_called_once_with(_object, None, None)
         _plain_notest_init.assert_not_called()

@@ -1,8 +1,8 @@
 import unittest
 from unittest.mock import patch, Mock, MagicMock
 from xmind.core.loader import WorkbookLoader
-import logging
-from . import base
+from xmind.tests import logging_configuration as lc
+from xmind.tests import base
 
 
 class LoaderTest(base.Base):
@@ -10,7 +10,7 @@ class LoaderTest(base.Base):
 
     def getLogger(self):
         if not getattr(self, '_logger', None):
-            self._logger = logging.getLogger('loaderTest')
+            self._logger = lc.get_logger('loaderTest')
         return self._logger
 
     def _patch_get_abs_path(self, return_value=None, thrown_exception=None):
@@ -24,7 +24,8 @@ class LoaderTest(base.Base):
     def test_init_get_abs_path_throws(self):
         """test case when get_abs_path throws exception"""
 
-        self._patch_get_abs_path('c:\\projects\\whatever\\d.aa', Exception("No file with such name"))
+        self._patch_get_abs_path(
+            'c:\\projects\\whatever\\d.aa', Exception("No file with such name"))
 
         with self.assertRaises(Exception) as ex:
             WorkbookLoader('dd')  # create loader and waits for Exception
@@ -64,14 +65,18 @@ class LoaderTest(base.Base):
         _get_abs_path_mock = self._patch_get_abs_path('dd')
         _split_ext_mock = self._patch_split_ext(('a', '.xmind'))
         _input_stream_mock = Mock()
-        _input_stream_mock.namelist = MagicMock(return_value=['something', 'content.xml'])
+        _input_stream_mock.namelist = MagicMock(
+            return_value=['something', 'content.xml'])
         _input_stream_mock.read = MagicMock()
         _stream_mock = Mock()
         _stream_mock.__enter__ = MagicMock(return_value=_input_stream_mock)
         _stream_mock.__exit__ = MagicMock()
-        _utils_extract_mock = self._init_patch_with_name('_utils_extract', 'xmind.utils.extract', _stream_mock)
-        _parse_dom_string_mock = self._init_patch_with_name('_parse_dom_string', 'xmind.utils.parse_dom_string', 'something')
-        _wb_mock = self._init_patch_with_name('_wb', 'xmind.core.loader.WorkbookDocument', autospec=True)
+        _utils_extract_mock = self._init_patch_with_name(
+            '_utils_extract', 'xmind.utils.extract', _stream_mock)
+        _parse_dom_string_mock = self._init_patch_with_name(
+            '_parse_dom_string', 'xmind.utils.parse_dom_string', 'something')
+        _wb_mock = self._init_patch_with_name(
+            '_wb', 'xmind.core.loader.WorkbookDocument', autospec=True)
 
         wb = WorkbookLoader('dd')
         wb.get_workbook()

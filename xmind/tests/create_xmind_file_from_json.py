@@ -12,7 +12,6 @@ class CreateXmindFileFromJson:
                 t = TopicElement(ownerWorkbook=workbook)
                 t.setTitle(i["title"])
                 father_topic.addSubTopic(t, topics_type=topics_type)
-                xmind.save(w, "fil1.xmind")
                 try:
                     if type(i["children"]["topics"]) == list:
                         self.create_topic(i["children"]["topics"][0]["topic"], t, workbook)
@@ -25,7 +24,6 @@ class CreateXmindFileFromJson:
             t = TopicElement(ownerWorkbook=workbook)
             t.setTitle(topic["title"])
             father_topic.addSubTopic(t)
-            xmind.save(w, "fil1.xmind")
             try:
                 if type(topic["children"]["topics"]) == list:
                     self.create_topic(topic["children"]["topics"][0]["topic"], t, workbook)

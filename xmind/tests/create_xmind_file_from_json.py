@@ -1,12 +1,8 @@
 #-*- coding: utf-8 -*-
-import xmind, zipfile, json
+import xmind, json
 from xmind.core import const
 from xmind.core.topic import TopicElement
-from xmlscomparator.xml_diff import create_xml_diff_from_strings
-from xmlscomparator.comparators.type_comparator import TypeComparator
-from xmlscomparator.comparators.text_comparator import TextComparator
-from xmlscomparator.comparators.attr_comparator_policy import AttrComparatorPolicy
-from xmlscomparator.comparators.attr_comparator import AttrComparator
+
 
 class CreateXmindFileFromJson:
 
@@ -122,33 +118,3 @@ class CreateXmindFileFromJson:
             self.create_relationships(sheet)
 
         xmind.save(self.workbook, self.xmind_filename)
-
-
-test = CreateXmindFileFromJson('test.xmind', 'test_file.json')
-test.create_xmind_file()
-
-
-''' comparing block '''
-test1 = zipfile.ZipFile('test.xmind', 'r')
-test_file_to_compare = test1.read(test1.namelist()[0])
-
-test2 = zipfile.ZipFile('test_file.xmind', 'r')
-test_file = test2.read(test2.namelist()[1])
-print(test_file)
-print(test_file_to_compare)
-
-
-_type_comparator = TypeComparator()
-_text_comparator = TextComparator()
-_attr_comparator = AttrComparator("")
-_attr_policy = AttrComparatorPolicy()
-_attr_policy.add_attribute_name_to_skip_compare('extensions')
-_attr_comparator.set_attr_comparator_policy(_attr_policy)
-_attr_comparator.set_check_values(False)
-_text_comparator.set_next_comparator(_attr_comparator)
-_type_comparator.set_next_comparator(_text_comparator)
-_comparator = create_xml_diff_from_strings(test_file, test_file_to_compare)
-_comparator.set_comparator(_type_comparator)
-_comparator.compare()
-
-print(_comparator.compare())

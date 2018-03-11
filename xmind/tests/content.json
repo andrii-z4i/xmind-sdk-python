@@ -1,0 +1,1988 @@
+{
+  "xmap-content": {
+    "-xmlns": "urn:xmind:xmap:xmlns:content:2.0",
+    "-version": "2.0",
+    "-timestamp": "1518015984149",
+    "-modified-by": "ankozin",
+    "-xmlns:xlink": "http://www.w3.org/1999/xlink",
+    "-xmlns:xhtml": "http://www.w3.org/1999/xhtml",
+    "-xmlns:svg": "http://www.w3.org/2000/svg",
+    "-xmlns:fo": "http://www.w3.org/1999/XSL/Format",
+    "sheet": [
+      {
+        "-id": "3t4br4hkamcgpo0doib0sb05fq",
+        "-timestamp": "1518015971249",
+        "-modified-by": "ankozin",
+        "-theme": "6jb41lhihp5jb2o1i6c0e5ruih",
+        "topic": {
+          "-id": "43fvrj0nc255on7lfcfo1btkft",
+          "-timestamp": "1509451826211",
+          "-modified-by": "z4i",
+          "-structure-class": "org.xmind.ui.tree.left",
+          "title": "Aria",
+          "children": {
+            "topics": [
+              {
+                "-type": "attached",
+                "topic": [
+                  {
+                    "-id": "78ca3e77u9smp4eqh2evd7r1u7",
+                    "-timestamp": "1518015953128",
+                    "-modified-by": "ankozin",
+                    "-branch": "folded",
+                    "title": "COSMOS",
+                    "children": {
+                      "topics": {
+                        "-type": "attached",
+                        "topic": [
+                          {
+                            "-id": "0m8q0isb4uaognnt8r7dqfmafq",
+                            "-timestamp": "1509448457287",
+                            "-modified-by": "z4i",
+                            "title": "long term storage (more than 90 days)",
+                            "marker-refs": {
+                              "marker-ref": { "-marker-id": "symbol-plus" }
+                            }
+                          },
+                          {
+                            "-id": "29rn6d6c3hii698h8t6esths5g",
+                            "-timestamp": "1509448443634",
+                            "-modified-by": "z4i",
+                            "title": "hard to get data from it",
+                            "marker-refs": {
+                              "marker-ref": { "-marker-id": "symbol-minus" }
+                            }
+                          },
+                          {
+                            "-id": "0qltgtsci0onv0k0fri4acvtbk",
+                            "-timestamp": "1509448447023",
+                            "-modified-by": "z4i",
+                            "title": {
+                              "-svg:width": "500",
+                              "#text": "has DataPipeline for processing the data and preparing data for visualization in PowerBI"
+                            },
+                            "marker-refs": {
+                              "marker-ref": { "-marker-id": "symbol-minus" }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "-id": "7g2o4e2teo9krt2bugsdu3n2q6",
+                    "-timestamp": "1518015954758",
+                    "-modified-by": "ankozin",
+                    "-branch": "folded",
+                    "title": "Kusto",
+                    "children": {
+                      "topics": {
+                        "-type": "attached",
+                        "topic": [
+                          {
+                            "-id": "5jsv1nplchpdof4o9eepuf858j",
+                            "-timestamp": "1509448521831",
+                            "-modified-by": "z4i",
+                            "title": {
+                              "-svg:width": "500",
+                              "#text": "short term storage (around 4 days currently)"
+                            },
+                            "marker-refs": {
+                              "marker-ref": { "-marker-id": "symbol-minus" }
+                            }
+                          },
+                          {
+                            "-id": "4ei5rlt9t486qtkv9vgj1idcge",
+                            "-timestamp": "1509448539284",
+                            "-modified-by": "z4i",
+                            "title": "nice query language (supports joins)",
+                            "marker-refs": {
+                              "marker-ref": { "-marker-id": "symbol-plus" }
+                            }
+                          },
+                          {
+                            "-id": "15kuljrbsfro8peqjle1rg37nn",
+                            "-timestamp": "1509448542898",
+                            "-modified-by": "z4i",
+                            "title": "easy to do an investigation",
+                            "marker-refs": {
+                              "marker-ref": { "-marker-id": "symbol-plus" }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "notes": {
+                      "html": { "xhtml:p": "https://aka.ms/kwe" },
+                      "plain": "https://aka.ms/kwe"
+                    }
+                  },
+                  {
+                    "-id": "5mfamjr8bc94p3eikaauoud826",
+                    "-timestamp": "1518015956725",
+                    "-modified-by": "ankozin",
+                    "-branch": "folded",
+                    "title": "Interana",
+                    "children": {
+                      "topics": {
+                        "-type": "attached",
+                        "topic": [
+                          {
+                            "-id": "1j2du7kmgse7fu401c76kcf0tl",
+                            "-timestamp": "1509448618399",
+                            "-modified-by": "z4i",
+                            "title": "aggregated data by white-listed scenarios",
+                            "marker-refs": {
+                              "marker-ref": { "-marker-id": "symbol-minus" }
+                            }
+                          },
+                          {
+                            "-id": "76omi2ecjj46g78k390lcks7r5",
+                            "-timestamp": "1509448622549",
+                            "-modified-by": "z4i",
+                            "title": "nice graphs",
+                            "marker-refs": {
+                              "marker-ref": { "-marker-id": "symbol-plus" }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "notes": {
+                      "html": { "xhtml:p": "https://msteams.interana.com/" },
+                      "plain": "https://msteams.interana.com/"
+                    }
+                  },
+                  {
+                    "-id": "6ekvl6f8r069uf1o16mf2oqtj4",
+                    "-timestamp": "1518015958865",
+                    "-modified-by": "ankozin",
+                    "-branch": "folded",
+                    "title": "Jarvis/Geneva",
+                    "children": {
+                      "topics": {
+                        "-type": "attached",
+                        "topic": [
+                          {
+                            "-id": "2ftuu0c0mflr6l76le7gb7sp3i",
+                            "-timestamp": "1509448653586",
+                            "-modified-by": "z4i",
+                            "title": "graphs on pre-aggregated data"
+                          },
+                          {
+                            "-id": "4hvl28vu70jdca1aeu5hlb88hl",
+                            "-timestamp": "1509448706812",
+                            "-modified-by": "z4i",
+                            "title": {
+                              "-svg:width": "500",
+                              "#text": "stores pre-aggregated events (expensive to add new field in pre-aggregation)"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "notes": {
+                      "html": { "xhtml:p": "https://jarvis-west.dc.ad.msft.net/#/dashboard" },
+                      "plain": "https://jarvis-west.dc.ad.msft.net/#/dashboard"
+                    }
+                  }
+                ]
+              },
+              {
+                "-type": "detached",
+                "topic": [
+                  {
+                    "-id": "698v0qp9ukl3t21qt6n81rr2f2",
+                    "-timestamp": "1517827429561",
+                    "-modified-by": "ankozin",
+                    "title": "MDM monitors",
+                    "children": {
+                      "topics": {
+                        "-type": "attached",
+                        "topic": [
+                          {
+                            "-id": "08h0b23mrg6sv11p5q208i0m60",
+                            "-timestamp": "1517911862150",
+                            "-modified-by": "ankozin",
+                            "title": "UUv2",
+                            "children": {
+                              "topics": {
+                                "-type": "attached",
+                                "topic": [
+                                  {
+                                    "-id": "66q27ur7j8stvbpvqpgot8nlm1",
+                                    "-timestamp": "1517827272492",
+                                    "-modified-by": "ankozin",
+                                    "-structure-class": "org.xmind.ui.spreadsheet",
+                                    "-style-id": "039drk0cftvehvvul7ulgi70s5",
+                                    "title": "general logic",
+                                    "children": {
+                                      "topics": {
+                                        "-type": "attached",
+                                        "topic": [
+                                          {
+                                            "-id": "0im318h1csb1ft2kejauvch2hn",
+                                            "-timestamp": "1517827110263",
+                                            "-modified-by": "ankozin",
+                                            "title": "period to check",
+                                            "children": {
+                                              "topics": {
+                                                "-type": "attached",
+                                                "topic": {
+                                                  "-id": "6ecna5sbe61ai12m3gj624pvqv",
+                                                  "-timestamp": "1517827133517",
+                                                  "-modified-by": "ankozin",
+                                                  "title": {
+                                                    "-svg:width": "500",
+                                                    "#text": "= 6 correlated buckets for 30 minutes period (1 bucket - 5 minutes)"
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          },
+                                          {
+                                            "-id": "05d9blnae32b7f2geeo82hmsk3",
+                                            "-timestamp": "1517827078797",
+                                            "-modified-by": "ankozin",
+                                            "title": {
+                                              "-svg:width": "500",
+                                              "#text": "affected UU"
+                                            },
+                                            "children": {
+                                              "topics": {
+                                                "-type": "attached",
+                                                "topic": {
+                                                  "-id": "6loe7t3bb52qqhru447ikcv1nq",
+                                                  "-timestamp": "1517827080650",
+                                                  "-modified-by": "ankozin",
+                                                  "title": "= dcount(UserInfo_Id) per bucket"
+                                                }
+                                              }
+                                            }
+                                          },
+                                          {
+                                            "-id": "1vpmbnfn54rao6o1irvc219r5r",
+                                            "-timestamp": "1517827065590",
+                                            "-modified-by": "ankozin",
+                                            "title": {
+                                              "-svg:width": "500",
+                                              "#text": "percent of affected UU"
+                                            },
+                                            "children": {
+                                              "topics": {
+                                                "-type": "attached",
+                                                "topic": {
+                                                  "-id": "1f88h7o18m7ucem2m1psmbpk05",
+                                                  "-timestamp": "1517827070338",
+                                                  "-modified-by": "ankozin",
+                                                  "title": "= 100 * affected UU / (dcount(UserInfo_Id) per bucket"
+                                                }
+                                              }
+                                            }
+                                          },
+                                          {
+                                            "-id": "5aqus0vso966n1lkouk1ua31ns",
+                                            "-timestamp": "1517827039999",
+                                            "-modified-by": "ankozin",
+                                            "title": "availability",
+                                            "children": {
+                                              "topics": {
+                                                "-type": "attached",
+                                                "topic": {
+                                                  "-id": "3b8o1hmvb9754gc6rf951s7ale",
+                                                  "-timestamp": "1517827053035",
+                                                  "-modified-by": "ankozin",
+                                                  "title": "= 100 * #(success)/#(success + failure + timeout) per bucket"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "-id": "45sge88hkci88un60dqb6nt0tv",
+                                    "-timestamp": "1517827276842",
+                                    "-modified-by": "ankozin",
+                                    "-structure-class": "org.xmind.ui.spreadsheet",
+                                    "-style-id": "039drk0cftvehvvul7ulgi70s5",
+                                    "title": "Availability by Dialtone scenarios",
+                                    "children": {
+                                      "topics": {
+                                        "-type": "attached",
+                                        "topic": [
+                                          {
+                                            "-id": "6f4g5gq08e4u7aticvophkmoi2",
+                                            "-timestamp": "1517827160102",
+                                            "-modified-by": "ankozin",
+                                            "-style-id": "3o1867ft1atuldre1ilr6guvkt",
+                                            "title": "severity2",
+                                            "children": {
+                                              "topics": {
+                                                "-type": "attached",
+                                                "topic": [
+                                                  {
+                                                    "-id": "276d4btf6bsrq61daqm0nqvis0",
+                                                    "-timestamp": "1517826611520",
+                                                    "-modified-by": "ankozin",
+                                                    "title": "availability < 90 %"
+                                                  },
+                                                  {
+                                                    "-id": "2oo97sic0i3jksh3h0jcq1nd7r",
+                                                    "-timestamp": "1517826623326",
+                                                    "-modified-by": "ankozin",
+                                                    "title": "affected UU > 5"
+                                                  },
+                                                  {
+                                                    "-id": "4ctvkjvb4ahgvd2mqr0ptr5ijf",
+                                                    "-timestamp": "1517826651442",
+                                                    "-modified-by": "ankozin",
+                                                    "title": "percent of affected UU > 5 %"
+                                                  },
+                                                  {
+                                                    "-id": "1jcg4o4tnglvd0bqr5d1v37ldp",
+                                                    "-timestamp": "1517827160103",
+                                                    "-modified-by": "ankozin",
+                                                    "title": "3 out of 6 buckets marked as failure"
+                                                  }
+                                                ]
+                                              }
+                                            }
+                                          },
+                                          {
+                                            "-id": "2lcgii4p86gpdcj2t5rsm9jt53",
+                                            "-timestamp": "1517826993148",
+                                            "-modified-by": "ankozin",
+                                            "-style-id": "6cmahknpgc9vl1u5rajcqe0eoe",
+                                            "title": "severity 3",
+                                            "children": {
+                                              "topics": {
+                                                "-type": "attached",
+                                                "topic": [
+                                                  {
+                                                    "-id": "7m39rq750j4ipl0h9d4e6u20h5",
+                                                    "-timestamp": "1517826954152",
+                                                    "-modified-by": "ankozin",
+                                                    "title": "availability < 90 %"
+                                                  },
+                                                  {
+                                                    "-id": "62ilqhvp62ak7rfuak9pfduts5",
+                                                    "-timestamp": "1517826954152",
+                                                    "-modified-by": "ankozin",
+                                                    "title": "affected UU > 5"
+                                                  },
+                                                  {
+                                                    "-id": "5v49r7dvlo07f5ihlmqbaa1897",
+                                                    "-timestamp": "1517826954152",
+                                                    "-modified-by": "ankozin",
+                                                    "title": "percent of affected UU > 5 %"
+                                                  },
+                                                  {
+                                                    "-id": "1skt3kte8upg5vmio217pctsod",
+                                                    "-timestamp": "1517826986872",
+                                                    "-modified-by": "ankozin",
+                                                    "title": "1 out of 6 buckets marked as failure"
+                                                  }
+                                                ]
+                                              }
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "-id": "2l7pnq9kvctos9jmkieq40qobl",
+                                    "-timestamp": "1517827279522",
+                                    "-modified-by": "ankozin",
+                                    "-structure-class": "org.xmind.ui.spreadsheet",
+                                    "-style-id": "039drk0cftvehvvul7ulgi70s5",
+                                    "title": "Availability by Core scenarios",
+                                    "children": {
+                                      "topics": {
+                                        "-type": "attached",
+                                        "topic": [
+                                          {
+                                            "-id": "57r70kdeqm8jk11rep52010u56",
+                                            "-timestamp": "1517827175191",
+                                            "-modified-by": "ankozin",
+                                            "-style-id": "6asrcmphntk827e6nm335m3vuj",
+                                            "title": "severity2",
+                                            "children": {
+                                              "topics": {
+                                                "-type": "attached",
+                                                "topic": [
+                                                  {
+                                                    "-id": "0tbrmuf2l1ve246nfpqmcen1gg",
+                                                    "-timestamp": "1517827175188",
+                                                    "-modified-by": "ankozin",
+                                                    "title": "availability < 90 %"
+                                                  },
+                                                  {
+                                                    "-id": "6dvi5si3srhh8gnatf5lovsi2f",
+                                                    "-timestamp": "1517827225261",
+                                                    "-modified-by": "ankozin",
+                                                    "title": "affected UU > 10"
+                                                  },
+                                                  {
+                                                    "-id": "6iupa81cmp1tga6ucoav0v4pv4",
+                                                    "-timestamp": "1517827175190",
+                                                    "-modified-by": "ankozin",
+                                                    "title": "percent of affected UU > 5 %"
+                                                  },
+                                                  {
+                                                    "-id": "0vag0iuiqaq4b6g0abieatt986",
+                                                    "-timestamp": "1517827175190",
+                                                    "-modified-by": "ankozin",
+                                                    "title": "3 out of 6 buckets marked as failure"
+                                                  }
+                                                ]
+                                              }
+                                            }
+                                          },
+                                          {
+                                            "-id": "0ldmd7r4gckajtrk1baij67evi",
+                                            "-timestamp": "1517827175195",
+                                            "-modified-by": "ankozin",
+                                            "-style-id": "1o78rgdfgqvs1nd1dfmebtiflv",
+                                            "title": "severity 3",
+                                            "children": {
+                                              "topics": {
+                                                "-type": "attached",
+                                                "topic": [
+                                                  {
+                                                    "-id": "14dc92qri711sb9fef39t5gn8n",
+                                                    "-timestamp": "1517827175192",
+                                                    "-modified-by": "ankozin",
+                                                    "title": "availability < 90 %"
+                                                  },
+                                                  {
+                                                    "-id": "61f1r0ljdl9ou7360kq2c6ferm",
+                                                    "-timestamp": "1517827229400",
+                                                    "-modified-by": "ankozin",
+                                                    "title": "affected UU > 10"
+                                                  },
+                                                  {
+                                                    "-id": "5l4oedns1fa0inolf6r9ol9qt9",
+                                                    "-timestamp": "1517827175193",
+                                                    "-modified-by": "ankozin",
+                                                    "title": "percent of affected UU > 5 %"
+                                                  },
+                                                  {
+                                                    "-id": "0q51lr90fvspi6hqvvpc0ncgoh",
+                                                    "-timestamp": "1517827175194",
+                                                    "-modified-by": "ankozin",
+                                                    "title": "1 out of 6 buckets marked as failure"
+                                                  }
+                                                ]
+                                              }
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          },
+                          {
+                            "-id": "168rqp60817ls1t1ifn76o07eb",
+                            "-timestamp": "1517829268645",
+                            "-modified-by": "ankozin",
+                            "-branch": "folded",
+                            "title": "rings",
+                            "children": {
+                              "topics": {
+                                "-type": "attached",
+                                "topic": [
+                                  {
+                                    "-id": "6c6csfeukt8oc7a7b676g5p6vh",
+                                    "-timestamp": "1517827617035",
+                                    "-modified-by": "ankozin",
+                                    "-structure-class": "org.xmind.ui.spreadsheet",
+                                    "-style-id": "73f2cjhi02g6s0ur5335jdm7hk",
+                                    "title": "general logic",
+                                    "children": {
+                                      "topics": {
+                                        "-type": "attached",
+                                        "topic": [
+                                          {
+                                            "-id": "1tdvqqtdessa8pce1lcf73qe09",
+                                            "-timestamp": "1517827451540",
+                                            "-modified-by": "ankozin",
+                                            "title": "period to check",
+                                            "children": {
+                                              "topics": {
+                                                "-type": "attached",
+                                                "topic": {
+                                                  "-id": "328h4d407t0euv43jdbvb7k4rr",
+                                                  "-timestamp": "1517827463907",
+                                                  "-modified-by": "ankozin",
+                                                  "title": {
+                                                    "-svg:width": "500",
+                                                    "#text": "= 5 minutes"
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          },
+                                          {
+                                            "-id": "3uu3166q180i683u356jl4nt9h",
+                                            "-timestamp": "1517827586826",
+                                            "-modified-by": "ankozin",
+                                            "title": {
+                                              "-svg:width": "500",
+                                              "#text": "# requests"
+                                            },
+                                            "children": {
+                                              "topics": {
+                                                "-type": "attached",
+                                                "topic": {
+                                                  "-id": "2nekcgv5gsbcj2nlgh91j7ui02",
+                                                  "-timestamp": "1517827601326",
+                                                  "-modified-by": "ankozin",
+                                                  "title": "= # (all requests)"
+                                                }
+                                              }
+                                            }
+                                          },
+                                          {
+                                            "-id": "6g7oks2sv6ladnoi40or0crq91",
+                                            "-timestamp": "1517827451545",
+                                            "-modified-by": "ankozin",
+                                            "title": "availability",
+                                            "children": {
+                                              "topics": {
+                                                "-type": "attached",
+                                                "topic": {
+                                                  "-id": "3d76602oik0p00lvbj5gve6c1v",
+                                                  "-timestamp": "1517827497423",
+                                                  "-modified-by": "ankozin",
+                                                  "title": "= 100 * #(success)/#(success + failure + timeout)"
+                                                }
+                                              }
+                                            }
+                                          },
+                                          {
+                                            "-id": "181nmj54g8jq2m4q9klna8hn3a",
+                                            "-timestamp": "1517827616980",
+                                            "-modified-by": "ankozin",
+                                            "title": {
+                                              "-svg:width": "500",
+                                              "#text": "affected UU"
+                                            },
+                                            "children": {
+                                              "topics": {
+                                                "-type": "attached",
+                                                "topic": {
+                                                  "-id": "3828duuto1v92ghb7t12jsfqdi",
+                                                  "-timestamp": "1517827625189",
+                                                  "-modified-by": "ankozin",
+                                                  "title": "= dcount(UserInfo_Id)"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "-id": "53i0c779t52bugtn6tk3bbf0eo",
+                                    "-timestamp": "1517827867151",
+                                    "-modified-by": "ankozin",
+                                    "-structure-class": "org.xmind.ui.spreadsheet",
+                                    "title": "[Availability] Meetings - Dialtone by Rings",
+                                    "children": {
+                                      "topics": {
+                                        "-type": "attached",
+                                        "topic": {
+                                          "-id": "3genjdfl2d3hk22pl3njnk5bnb",
+                                          "-timestamp": "1517827829974",
+                                          "-modified-by": "ankozin",
+                                          "-style-id": "028dai7vl488b1j66fumfilg9l",
+                                          "title": "severity 4",
+                                          "children": {
+                                            "topics": {
+                                              "-type": "attached",
+                                              "topic": [
+                                                {
+                                                  "-id": "0r8gof6nahav9jsql73ieej2ug",
+                                                  "-timestamp": "1517827735717",
+                                                  "-modified-by": "ankozin",
+                                                  "title": "availability < 95 %"
+                                                },
+                                                {
+                                                  "-id": "38msbn75f2er1d9jcijai61dv8",
+                                                  "-timestamp": "1517827752540",
+                                                  "-modified-by": "ankozin",
+                                                  "title": "affected UU >= 5"
+                                                },
+                                                {
+                                                  "-id": "4nlcs4c634nqdsgsu06gjt34bh",
+                                                  "-timestamp": "1517827848429",
+                                                  "-modified-by": "ankozin",
+                                                  "title": "# requests > 10"
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "notes": {
+                      "html": { "xhtml:p": "https://jarvis-west.dc.ad.msft.net/#/settings" },
+                      "plain": "https://jarvis-west.dc.ad.msft.net/#/settings"
+                    },
+                    "position": {
+                      "-svg:y": "509",
+                      "-svg:x": "390"
+                    }
+                  },
+                  {
+                    "-id": "6epkss2kmpsm588hjii6rprb86",
+                    "-timestamp": "1518015965319",
+                    "-modified-by": "ankozin",
+                    "-branch": "folded",
+                    "title": "IcM tickets",
+                    "position": {
+                      "-svg:y": "291",
+                      "-svg:x": "296"
+                    },
+                    "children": {
+                      "topics": {
+                        "-type": "attached",
+                        "topic": [
+                          {
+                            "-id": "3efetrkhgrl25jc0rjkdoeo5r6",
+                            "-timestamp": "1510864978242",
+                            "-modified-by": "z4i",
+                            "-style-id": "5i2cs2s9g2i0687re6a6sfbsv0",
+                            "title": "sev 2",
+                            "children": {
+                              "topics": {
+                                "-type": "attached",
+                                "topic": [
+                                  {
+                                    "-id": "3mgdneqs2jrcs257uauf5auoob",
+                                    "-timestamp": "1509448850516",
+                                    "-modified-by": "z4i",
+                                    "title": "SMS"
+                                  },
+                                  {
+                                    "-id": "74r83co8eb8ucfft1dkd0q08eq",
+                                    "-timestamp": "1509448853942",
+                                    "-modified-by": "z4i",
+                                    "title": "Phone call"
+                                  },
+                                  {
+                                    "-id": "2aflu8n43tgs0umupiv90moboh",
+                                    "-timestamp": "1509448879164",
+                                    "-modified-by": "z4i",
+                                    "title": "SLA to acknowledge and mitigate "
+                                  },
+                                  {
+                                    "-id": "09utubdvl7f1jh7vu5mnkjtli1",
+                                    "-timestamp": "1509448916590",
+                                    "-modified-by": "z4i",
+                                    "title": "Postmortems"
+                                  }
+                                ]
+                              }
+                            }
+                          },
+                          {
+                            "-id": "5uron0e6togovf9tcp2o8mv12i",
+                            "-timestamp": "1510865041323",
+                            "-modified-by": "z4i",
+                            "-style-id": "1gl4v5kee4r97gequ1sdhofikm",
+                            "title": "sev 3",
+                            "children": {
+                              "topics": {
+                                "-type": "attached",
+                                "topic": [
+                                  {
+                                    "-id": "4qkq27e1al0fhfuabkmej3f9bt",
+                                    "-timestamp": "1509448946798",
+                                    "-modified-by": "z4i",
+                                    "title": "Investigation in business hours"
+                                  },
+                                  {
+                                    "-id": "26hlfotf08ckosctes8f0rsl84",
+                                    "-timestamp": "1509448988855",
+                                    "-modified-by": "z4i",
+                                    "title": {
+                                      "-svg:width": "500",
+                                      "#text": "most probably less number of affected users"
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          },
+                          {
+                            "-id": "5g8fvmhad6f4o945a7kbkskuvs",
+                            "-timestamp": "1510864943539",
+                            "-modified-by": "z4i",
+                            "-style-id": "6cmahknpgc9vl1u5rajcqe0eoe",
+                            "title": "sev 4",
+                            "children": {
+                              "topics": {
+                                "-type": "attached",
+                                "topic": [
+                                  {
+                                    "-id": "7137tc4rrnnm8j3ebuj9ogcpf8",
+                                    "-timestamp": "1509449001136",
+                                    "-modified-by": "z4i",
+                                    "title": "Heads up"
+                                  },
+                                  {
+                                    "-id": "61navpqg085im843lp521ch5rl",
+                                    "-timestamp": "1509449015925",
+                                    "-modified-by": "z4i",
+                                    "title": "Investigation in business hours"
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "notes": {
+                      "html": { "xhtml:p": "https://aka.ms/icm" },
+                      "plain": "https://aka.ms/icm"
+                    }
+                  },
+                  {
+                    "-id": "6lkcmfbd9po681o4ehdh8aje7t",
+                    "-timestamp": "1509449105093",
+                    "-modified-by": "z4i",
+                    "title": "Teams client",
+                    "position": {
+                      "-svg:y": "-196",
+                      "-svg:x": "34"
+                    }
+                  },
+                  {
+                    "-id": "3nm7uv7ep5bqgidtes4buojuol",
+                    "-timestamp": "1518015971249",
+                    "-modified-by": "ankozin",
+                    "-branch": "folded",
+                    "title": "MS Flow",
+                    "position": {
+                      "-svg:y": "-17",
+                      "-svg:x": "603"
+                    },
+                    "children": {
+                      "topics": {
+                        "-type": "attached",
+                        "topic": [
+                          {
+                            "-id": "09lokvp423t0qc6k84u55hsu84",
+                            "-timestamp": "1516818124063",
+                            "-modified-by": "z4i",
+                            "-structure-class": "org.xmind.ui.spreadsheet",
+                            "title": "Media Drops monitor",
+                            "children": {
+                              "topics": {
+                                "-type": "attached",
+                                "topic": [
+                                  {
+                                    "-id": "5sjcae1ef3smeuc0lkb6uq6cco",
+                                    "-timestamp": "1516817383123",
+                                    "-modified-by": "z4i",
+                                    "title": "job type",
+                                    "children": {
+                                      "topics": {
+                                        "-type": "attached",
+                                        "topic": {
+                                          "-id": "31ulo75lfk0t8jqcs85a80ucqu",
+                                          "-timestamp": "1516817383116",
+                                          "-modified-by": "z4i",
+                                          "title": {
+                                            "-svg:width": "500",
+                                            "#text": "recurrent job -> every day for past 24 hours"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "-id": "3utft78i2amosdkidi7c3e7q27",
+                                    "-timestamp": "1516817399932",
+                                    "-modified-by": "z4i",
+                                    "title": "action",
+                                    "children": {
+                                      "topics": {
+                                        "-type": "attached",
+                                        "topic": [
+                                          {
+                                            "-id": "71fphpdsk0gldj1nmb203ulpqb",
+                                            "-timestamp": "1516817399916",
+                                            "-modified-by": "z4i",
+                                            "title": {
+                                              "-svg:width": "500",
+                                              "#text": "posts to Reliability channel"
+                                            }
+                                          },
+                                          {
+                                            "-id": "65tl69r2er239698e8t8o56nla",
+                                            "-timestamp": "1516817399916",
+                                            "-modified-by": "z4i",
+                                            "-style-id": "04q4qq00nmtr8n2q4qlum9kf74",
+                                            "title": "creates a 'Bug' ticket in VSO"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "-id": "4u7doknt4ic8hjuus5moavraug",
+                                    "-timestamp": "1516817490550",
+                                    "-modified-by": "z4i",
+                                    "title": "threshold",
+                                    "children": {
+                                      "topics": {
+                                        "-type": "attached",
+                                        "topic": {
+                                          "-id": "6ieecv7kt9cfdbc3gco62rq7ag",
+                                          "-timestamp": "1516817504591",
+                                          "-modified-by": "z4i",
+                                          "title": {
+                                            "-svg:width": "500",
+                                            "#text": "more than 5% calls dropped out of all succeeded calls (by Rings)"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          },
+                          {
+                            "-id": "2jgqi492aqrpiiubnqiat5biab",
+                            "-timestamp": "1516818173149",
+                            "-modified-by": "z4i",
+                            "-structure-class": "org.xmind.ui.spreadsheet",
+                            "title": "Availability by tenants ",
+                            "children": {
+                              "topics": {
+                                "-type": "attached",
+                                "topic": [
+                                  {
+                                    "-id": "5svntmcq0dnrhj79ao1vvaopko",
+                                    "-timestamp": "1516817344508",
+                                    "-modified-by": "z4i",
+                                    "title": {
+                                      "-svg:width": "500",
+                                      "#text": "job type"
+                                    },
+                                    "children": {
+                                      "topics": {
+                                        "-type": "attached",
+                                        "topic": {
+                                          "-id": "7l75bf63ppa0s86d8u9iqp2jk2",
+                                          "-timestamp": "1516817344499",
+                                          "-modified-by": "z4i",
+                                          "title": "recurrent job -> every day checks data for last 24 hours"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "-id": "28p980qj7r490npie2crgd65jt",
+                                    "-timestamp": "1509452126572",
+                                    "-modified-by": "z4i",
+                                    "title": "11 tenants",
+                                    "children": {
+                                      "topics": {
+                                        "-type": "attached",
+                                        "topic": [
+                                          {
+                                            "-id": "7hrb9lm2d0hdj7majra0l9i9qj",
+                                            "-timestamp": "1509450381011",
+                                            "-modified-by": "z4i",
+                                            "title": "ACCENTURE"
+                                          },
+                                          {
+                                            "-id": "4th6u0es1mj4vo16faj9f9ok6b",
+                                            "-timestamp": "1509450386502",
+                                            "-modified-by": "z4i",
+                                            "title": "PEPSICO"
+                                          },
+                                          {
+                                            "-id": "4k803qh0anb0moe5vgji6nnne3",
+                                            "-timestamp": "1509450390919",
+                                            "-modified-by": "z4i",
+                                            "title": "WIPRO"
+                                          },
+                                          {
+                                            "-id": "0bll27ubkp6ts02eeae9nqo8i0",
+                                            "-timestamp": "1509450400122",
+                                            "-modified-by": "z4i",
+                                            "title": "FRESNO UNIFIED SCHOOL DISTRICT"
+                                          },
+                                          {
+                                            "-id": "64jptmtpvrhlcq2lptgc3k2ier",
+                                            "-timestamp": "1509450409117",
+                                            "-modified-by": "z4i",
+                                            "title": "SCHNEIDER ELECTRIC"
+                                          },
+                                          {
+                                            "-id": "67b6uvkg3c343j078qp3gnngit",
+                                            "-timestamp": "1509450416769",
+                                            "-modified-by": "z4i",
+                                            "title": "CERNER CORPORATION"
+                                          },
+                                          {
+                                            "-id": "2ipt06rk9qm7m9qpp1umde9ad5",
+                                            "-timestamp": "1509450421407",
+                                            "-modified-by": "z4i",
+                                            "title": "NOKIA"
+                                          },
+                                          {
+                                            "-id": "0du91kandepl95fmhp3qiq15at",
+                                            "-timestamp": "1509450428077",
+                                            "-modified-by": "z4i",
+                                            "title": "GENERAL MOTORS"
+                                          },
+                                          {
+                                            "-id": "41j4ogmdgkuibdvc2sl15h83ef",
+                                            "-timestamp": "1509450432424",
+                                            "-modified-by": "z4i",
+                                            "title": "AVANADE"
+                                          },
+                                          {
+                                            "-id": "6bl1umjnvi5199h9n453pgvmja",
+                                            "-timestamp": "1509450439806",
+                                            "-modified-by": "z4i",
+                                            "title": "KOCHIND.COM"
+                                          },
+                                          {
+                                            "-id": "4cdi8dhsq2g0ru21q3sqhgrqap",
+                                            "-timestamp": "1509450445189",
+                                            "-modified-by": "z4i",
+                                            "title": "Shell"
+                                          },
+                                          {
+                                            "-id": "13cgqv6h6ivkhmag6cq3345ca1",
+                                            "-timestamp": "1509450451735",
+                                            "-modified-by": "z4i",
+                                            "title": "MICROSOFT"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "-id": "5ige4gcjaers4gdte8vskq3hhh",
+                                    "-timestamp": "1516817537450",
+                                    "-modified-by": "z4i",
+                                    "title": "threshold",
+                                    "children": {
+                                      "topics": {
+                                        "-type": "attached",
+                                        "topic": [
+                                          {
+                                            "-id": "6o82c5elklk85n0rqdn40bo992",
+                                            "-timestamp": "1512746316459",
+                                            "-modified-by": "andriikozin",
+                                            "title": "availability < 97%"
+                                          },
+                                          {
+                                            "-id": "1i024jkorgp371e5phheub8d0g",
+                                            "-timestamp": "1509450556489",
+                                            "-modified-by": "z4i",
+                                            "title": "affected users > 10"
+                                          },
+                                          {
+                                            "-id": "6eaov5ra315jjt84g6r4m5l994",
+                                            "-timestamp": "1509450558281",
+                                            "-modified-by": "z4i",
+                                            "title": "scenarios > 10"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "-id": "56j3p7jeffk0bu50q0upgoeu1p",
+                                    "-timestamp": "1516817519503",
+                                    "-modified-by": "z4i",
+                                    "title": "action",
+                                    "children": {
+                                      "topics": {
+                                        "-type": "attached",
+                                        "topic": [
+                                          {
+                                            "-id": "05evas5l474f971e2mvtnrfr8q",
+                                            "-timestamp": "1516817362108",
+                                            "-modified-by": "z4i",
+                                            "-style-id": "31ogil3ca1ia7bh53h9gcfhqsb",
+                                            "title": "creates a Bug in VSO"
+                                          },
+                                          {
+                                            "-id": "691qgtjvjjuf6o4cemld6prjrj",
+                                            "-timestamp": "1516817530795",
+                                            "-modified-by": "z4i",
+                                            "title": "posts to Reliability channel"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          },
+                          {
+                            "-id": "65ve5hnc6u3s2mosogd6c7upgp",
+                            "-timestamp": "1516818203160",
+                            "-modified-by": "z4i",
+                            "-structure-class": "org.xmind.ui.spreadsheet",
+                            "title": {
+                              "-svg:width": "500",
+                              "#text": "Dialtone scenarios for Web Calling experience"
+                            },
+                            "children": {
+                              "topics": {
+                                "-type": "attached",
+                                "topic": [
+                                  {
+                                    "-id": "2ek6no2lqihed071os3p52c1u6",
+                                    "-timestamp": "1516817734137",
+                                    "-modified-by": "z4i",
+                                    "title": "job type",
+                                    "children": {
+                                      "topics": {
+                                        "-type": "attached",
+                                        "topic": {
+                                          "-id": "543v5khda1uni7g3f1srt2d326",
+                                          "-timestamp": "1516817734129",
+                                          "-modified-by": "z4i",
+                                          "title": {
+                                            "-svg:width": "500",
+                                            "#text": "recurrent job -> every half an hour check availability by rings for last 30 minutes"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "-id": "03iscu1dlgs9ojsborjbb38upp",
+                                    "-timestamp": "1516817800278",
+                                    "-modified-by": "z4i",
+                                    "title": "action",
+                                    "children": {
+                                      "topics": {
+                                        "-type": "attached",
+                                        "topic": {
+                                          "-id": "1aab58jsn9q5eb00jcbbp93jee",
+                                          "-timestamp": "1516817792482",
+                                          "-modified-by": "z4i",
+                                          "-style-id": "6cmahknpgc9vl1u5rajcqe0eoe",
+                                          "title": "severity 4"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "-id": "73chm8pdg7cuvkapkdh1c6cr6n",
+                                    "-timestamp": "1516817805015",
+                                    "-modified-by": "z4i",
+                                    "title": "threshold",
+                                    "children": {
+                                      "topics": {
+                                        "-type": "attached",
+                                        "topic": [
+                                          {
+                                            "-id": "6etu8617k2plrdobebg509stio",
+                                            "-timestamp": "1516817763593",
+                                            "-modified-by": "z4i",
+                                            "title": "affected users > 5"
+                                          },
+                                          {
+                                            "-id": "1rl8jv768hg0keiems691a8bsf",
+                                            "-timestamp": "1516817763601",
+                                            "-modified-by": "z4i",
+                                            "title": "requests # > 10"
+                                          },
+                                          {
+                                            "-id": "0oo7poccl0mondeimejb8vvst6",
+                                            "-timestamp": "1516817763609",
+                                            "-modified-by": "z4i",
+                                            "title": {
+                                              "-svg:width": "500",
+                                              "#text": "crucial (timeout + success + failure) requests # > 5"
+                                            }
+                                          },
+                                          {
+                                            "-id": "16jdlcq23ho4rj6kdl2blv737g",
+                                            "-timestamp": "1516817814682",
+                                            "-modified-by": "z4i",
+                                            "title": "availability < 90%"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          },
+                          {
+                            "-id": "48k94t0tj3ui944qdvn56m9ndm",
+                            "-timestamp": "1516818212633",
+                            "-modified-by": "z4i",
+                            "-structure-class": "org.xmind.ui.spreadsheet",
+                            "title": "[Availability] auto_mute_self scenario",
+                            "children": {
+                              "topics": {
+                                "-type": "attached",
+                                "topic": [
+                                  {
+                                    "-id": "2v964a5hnr6udj66o25eo70a4q",
+                                    "-timestamp": "1516817839116",
+                                    "-modified-by": "z4i",
+                                    "title": "job type",
+                                    "children": {
+                                      "topics": {
+                                        "-type": "attached",
+                                        "topic": {
+                                          "-id": "1n81baem700c4p2hrrieu9add3",
+                                          "-timestamp": "1516817839108",
+                                          "-modified-by": "z4i",
+                                          "title": {
+                                            "-svg:width": "500",
+                                            "#text": "recurrent job -> every day checks data for last 24 hours"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "-id": "42ps3ahbnhlkqtpqqpa7p1qud3",
+                                    "-timestamp": "1516817857584",
+                                    "-modified-by": "z4i",
+                                    "title": "action",
+                                    "children": {
+                                      "topics": {
+                                        "-type": "attached",
+                                        "topic": {
+                                          "-id": "08791jr85mfguoqe7jqq9o5bca",
+                                          "-timestamp": "1516817862713",
+                                          "-modified-by": "z4i",
+                                          "-style-id": "4bi4h8irgojm434vj8tbjtmpcg",
+                                          "title": "severity 4"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "-id": "302h76084tjhoriutmmenobqir",
+                                    "-timestamp": "1516818217378",
+                                    "-modified-by": "z4i",
+                                    "title": "threshold",
+                                    "children": {
+                                      "topics": {
+                                        "-type": "attached",
+                                        "topic": [
+                                          {
+                                            "-id": "6vpntu38s6ecm3q70j4iod1i4c",
+                                            "-timestamp": "1516817852118",
+                                            "-modified-by": "z4i",
+                                            "title": "affected users > 10"
+                                          },
+                                          {
+                                            "-id": "6pkhfqditog7sogcmdna8id7r0",
+                                            "-timestamp": "1516817852125",
+                                            "-modified-by": "z4i",
+                                            "title": "threshold 95%"
+                                          },
+                                          {
+                                            "-id": "5pbvq9p0rpub6itmu2lkqsdes1",
+                                            "-timestamp": "1516817852133",
+                                            "-modified-by": "z4i",
+                                            "title": "requests # > 10"
+                                          },
+                                          {
+                                            "-id": "07cu35ahrf0ca4p4qb2pp9t477",
+                                            "-timestamp": "1516818223055",
+                                            "-modified-by": "z4i",
+                                            "title": "by rings"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          },
+                          {
+                            "-id": "54ve869k7es472065s981a7tge",
+                            "-timestamp": "1516817876915",
+                            "-modified-by": "z4i",
+                            "-branch": "folded",
+                            "title": {
+                              "-svg:width": "500",
+                              "#text": "[DISABLED] [Availability] Meetings get_meeting_info"
+                            },
+                            "children": {
+                              "topics": {
+                                "-type": "attached",
+                                "topic": [
+                                  {
+                                    "-id": "4u6776javbs6f0o1tjsi877v70",
+                                    "-timestamp": "1513184145619",
+                                    "-modified-by": "ankozin",
+                                    "title": {
+                                      "-svg:width": "500",
+                                      "#text": "recurrent job -> every 15 minutes for last 30 minutes data"
+                                    }
+                                  },
+                                  {
+                                    "-id": "6jki22f0m461gicv15igevs2u5",
+                                    "-timestamp": "1513184154316",
+                                    "-modified-by": "ankozin",
+                                    "-style-id": "0v52u2dkirumfh55jhqqh29hrd",
+                                    "title": "severity",
+                                    "children": {
+                                      "topics": {
+                                        "-type": "attached",
+                                        "topic": {
+                                          "-id": "6spvp9kipcsi1g4rvndc7tnnrn",
+                                          "-timestamp": "1513184193427",
+                                          "-modified-by": "ankozin",
+                                          "-style-id": "2gm1752c5rm6odboods3n4h13k",
+                                          "title": "3",
+                                          "children": {
+                                            "topics": {
+                                              "-type": "attached",
+                                              "topic": [
+                                                {
+                                                  "-id": "7kd2q13gt1pfr1autpojogp3gb",
+                                                  "-timestamp": "1513184165924",
+                                                  "-modified-by": "ankozin",
+                                                  "title": "affected users > 5"
+                                                },
+                                                {
+                                                  "-id": "2ip14cmepnb8gsfqv2belf43k0",
+                                                  "-timestamp": "1513184170541",
+                                                  "-modified-by": "ankozin",
+                                                  "title": "threshold 90%"
+                                                },
+                                                {
+                                                  "-id": "5f45onleql4r4m2fpfpjtsi1fc",
+                                                  "-timestamp": "1513184178237",
+                                                  "-modified-by": "ankozin",
+                                                  "title": "requests # > 5"
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            },
+                            "marker-refs": {
+                              "marker-ref": { "-marker-id": "symbol-wrong" }
+                            }
+                          },
+                          {
+                            "-id": "69eh2vf16cido5c38hdgs2r0qf",
+                            "-timestamp": "1516818235234",
+                            "-modified-by": "z4i",
+                            "-structure-class": "org.xmind.ui.spreadsheet",
+                            "title": "Crashes",
+                            "children": {
+                              "topics": {
+                                "-type": "attached",
+                                "topic": [
+                                  {
+                                    "-id": "04p9stti90vv4pref3r8ch4rg6",
+                                    "-timestamp": "1516817881883",
+                                    "-modified-by": "z4i",
+                                    "title": "job type",
+                                    "children": {
+                                      "topics": {
+                                        "-type": "attached",
+                                        "topic": {
+                                          "-id": "1bjkovnq7pe80ql3pn9ime8dpm",
+                                          "-timestamp": "1516817881875",
+                                          "-modified-by": "z4i",
+                                          "title": {
+                                            "-svg:width": "500",
+                                            "#text": "recurrent job -> every day checks crashes for past 24 hours"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "-id": "1aigla09cka445rdutrkhcsge6",
+                                    "-timestamp": "1516817906610",
+                                    "-modified-by": "z4i",
+                                    "title": "action",
+                                    "children": {
+                                      "topics": {
+                                        "-type": "attached",
+                                        "topic": {
+                                          "-id": "1a5tss621r07vj8a76vf13pumn",
+                                          "-timestamp": "1516817906601",
+                                          "-modified-by": "z4i",
+                                          "title": {
+                                            "-svg:width": "500",
+                                            "#text": "posts message to reliability channel"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "-id": "1pl0aiiqimbmbulj3oavt4ouvl",
+                                    "-timestamp": "1516817908261",
+                                    "-modified-by": "z4i",
+                                    "title": "threshold",
+                                    "children": {
+                                      "topics": {
+                                        "-type": "attached",
+                                        "topic": {
+                                          "-id": "46igjdpqfgq0o0nqros2se59gv",
+                                          "-timestamp": "1516817922794",
+                                          "-modified-by": "z4i",
+                                          "title": {
+                                            "-svg:width": "500",
+                                            "#text": "any crashes we spot from calling_call_disconnected scenario"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          },
+                          {
+                            "-id": "4d42oo5ss8bksau8bamdkorr16",
+                            "-timestamp": "1516818242488",
+                            "-modified-by": "z4i",
+                            "-structure-class": "org.xmind.ui.spreadsheet",
+                            "title": "Post top 5 mem + top 5 cpu sessions",
+                            "children": {
+                              "topics": {
+                                "-type": "attached",
+                                "topic": [
+                                  {
+                                    "-id": "3fv3cor91bnk8a2m00dvagbmsm",
+                                    "-timestamp": "1516817931694",
+                                    "-modified-by": "z4i",
+                                    "title": "job type",
+                                    "children": {
+                                      "topics": {
+                                        "-type": "attached",
+                                        "topic": {
+                                          "-id": "6ie4o5ag18gskh0ulqo48ocoho",
+                                          "-timestamp": "1516817931685",
+                                          "-modified-by": "z4i",
+                                          "title": {
+                                            "-svg:width": "500",
+                                            "#text": "recurrent job -> every day checks video performance telemetry for past 24 hours"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "-id": "2tbog608c8kdju3c4gdroif4pl",
+                                    "-timestamp": "1516817935264",
+                                    "-modified-by": "z4i",
+                                    "title": "action",
+                                    "children": {
+                                      "topics": {
+                                        "-type": "attached",
+                                        "topic": {
+                                          "-id": "4u9bqrqgp2qn9ccmvgrn9450j8",
+                                          "-timestamp": "1516817935255",
+                                          "-modified-by": "z4i",
+                                          "title": "posts message to performance channel"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "-id": "4mf1no83le5v3ts6h6e7bilmem",
+                                    "-timestamp": "1516817939820",
+                                    "-modified-by": "z4i",
+                                    "title": "threshold",
+                                    "children": {
+                                      "topics": {
+                                        "-type": "attached",
+                                        "topic": {
+                                          "-id": "7ldo806j26l31chg5fhhs2r0ka",
+                                          "-timestamp": "1516817967933",
+                                          "-modified-by": "z4i",
+                                          "title": "top 5 mem + top 5 cpu consumers (max peak)"
+                                        }
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          },
+                          {
+                            "-id": "34frlf68qo3u8jp4aad8mn70l1",
+                            "-timestamp": "1516818246347",
+                            "-modified-by": "z4i",
+                            "-structure-class": "org.xmind.ui.spreadsheet",
+                            "title": "Open incidents",
+                            "children": {
+                              "topics": {
+                                "-type": "attached",
+                                "topic": [
+                                  {
+                                    "-id": "535tpsmoc18h0b9ml3evg9tibg",
+                                    "-timestamp": "1516818088524",
+                                    "-modified-by": "z4i",
+                                    "title": "job type",
+                                    "children": {
+                                      "topics": {
+                                        "-type": "attached",
+                                        "topic": {
+                                          "-id": "2cttra7iahmcvdfks42bmc7154",
+                                          "-timestamp": "1516818088514",
+                                          "-modified-by": "z4i",
+                                          "title": {
+                                            "-svg:width": "500",
+                                            "#text": "recurrent job -> every day checks how many open incidents we have in our IcM system"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "-id": "1p2o1v1uhljpqbvc5jfjt036kc",
+                                    "-timestamp": "1516818095226",
+                                    "-modified-by": "z4i",
+                                    "title": "action",
+                                    "children": {
+                                      "topics": {
+                                        "-type": "attached",
+                                        "topic": {
+                                          "-id": "1pac4hhaonkkpd49cg1qm0l70k",
+                                          "-timestamp": "1516818095217",
+                                          "-modified-by": "z4i",
+                                          "title": {
+                                            "-svg:width": "500",
+                                            "#text": "posts message to reliability channel with the names of onCall DRIs"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "-id": "5d30p8g11s2akiim4f9im9p31n",
+                                    "-timestamp": "1516818096413",
+                                    "-modified-by": "z4i",
+                                    "title": "threshold",
+                                    "children": {
+                                      "topics": {
+                                        "-type": "attached",
+                                        "topic": {
+                                          "-id": "4hkrh29uigadiqrob1fi5ebnkn",
+                                          "-timestamp": "1516818104355",
+                                          "-modified-by": "z4i",
+                                          "title": "any active incidents"
+                                        }
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "notes": {
+                      "html": { "xhtml:p": "https://preview.flow.microsoft.com/manage/environments/839eace6-59ab-4243-97ec-a5b8fcc104e4/flows " },
+                      "plain": "https://preview.flow.microsoft.com/manage/environments/839eace6-59ab-4243-97ec-a5b8fcc104e4/flows \r\n"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "notes": {
+            "html": { "xhtml:p": "https://aka.ms/aria" },
+            "plain": "https://aka.ms/aria\r\n"
+          }
+        },
+        "title": "Source of IcMs",
+        "relationships": {
+          "relationship": [
+            {
+              "-id": "3vv41iatqiqi8645iad1rbg5m4",
+              "-timestamp": "1509448806009",
+              "-modified-by": "z4i",
+              "-end2": "6ekvl6f8r069uf1o16mf2oqtj4",
+              "-end1": "698v0qp9ukl3t21qt6n81rr2f2",
+              "control-points": {
+                "control-point": [
+                  {
+                    "-index": "0",
+                    "-angle": "0.2617993877991494",
+                    "-amount": "0.3"
+                  },
+                  {
+                    "-index": "1",
+                    "-angle": "0.2617993877991494",
+                    "-amount": "0.3"
+                  }
+                ]
+              },
+              "title": "uses"
+            },
+            {
+              "-id": "69p3p4th38v4nqvoiqckv0a318",
+              "-timestamp": "1509449030091",
+              "-modified-by": "z4i",
+              "-end2": "6epkss2kmpsm588hjii6rprb86",
+              "-end1": "698v0qp9ukl3t21qt6n81rr2f2",
+              "control-points": {
+                "control-point": [
+                  {
+                    "-index": "0",
+                    "-angle": "0.2617993877991494",
+                    "-amount": "0.3"
+                  },
+                  {
+                    "-index": "1",
+                    "-angle": "0.2617993877991494",
+                    "-amount": "0.3"
+                  }
+                ]
+              },
+              "title": "generates"
+            },
+            {
+              "-id": "790a3asarhonvaj5kn5k969906",
+              "-timestamp": "1509449101231",
+              "-modified-by": "z4i",
+              "-end2": "43fvrj0nc255on7lfcfo1btkft",
+              "-end1": "6lkcmfbd9po681o4ehdh8aje7t",
+              "control-points": {
+                "control-point": [
+                  {
+                    "-index": "0",
+                    "-angle": "0.2617993877991494",
+                    "-amount": "0.3"
+                  },
+                  {
+                    "-index": "1",
+                    "-angle": "0.2617993877991494",
+                    "-amount": "0.3"
+                  }
+                ]
+              },
+              "title": "sends telemetry"
+            },
+            {
+              "-id": "59tf4eqvkq8i900cg0n2h92bci",
+              "-timestamp": "1509449760231",
+              "-modified-by": "z4i",
+              "-end2": "7g2o4e2teo9krt2bugsdu3n2q6",
+              "-end1": "3nm7uv7ep5bqgidtes4buojuol",
+              "control-points": {
+                "control-point": [
+                  {
+                    "-index": "0",
+                    "-angle": "0.2617993877991494",
+                    "-amount": "0.3"
+                  },
+                  {
+                    "-index": "1",
+                    "-angle": "0.2617993877991494",
+                    "-amount": "0.3"
+                  }
+                ]
+              },
+              "title": "Fetches data"
+            },
+            {
+              "-id": "5dk452vkfev6o5bcbmat2f4lqd",
+              "-timestamp": "1518015622157",
+              "-modified-by": "ankozin",
+              "-end2": "6lkcmfbd9po681o4ehdh8aje7t",
+              "-end1": "3nm7uv7ep5bqgidtes4buojuol",
+              "control-points": {
+                "control-point": [
+                  {
+                    "-index": "0",
+                    "-angle": "0.2617993877991494",
+                    "-amount": "0.3"
+                  },
+                  {
+                    "-index": "1",
+                    "-angle": "0.2617993877991494",
+                    "-amount": "0.3"
+                  }
+                ]
+              },
+              "title": "posts message to a channel"
+            },
+            {
+              "-id": "752bvv40kt545bheg0ku8idaal",
+              "-timestamp": "1509532671465",
+              "-modified-by": "z4i",
+              "-end2": "6epkss2kmpsm588hjii6rprb86",
+              "-end1": "3nm7uv7ep5bqgidtes4buojuol",
+              "control-points": {
+                "control-point": [
+                  {
+                    "-index": "0",
+                    "-angle": "0.2617993877991494",
+                    "-amount": "0.3"
+                  },
+                  {
+                    "-index": "1",
+                    "-angle": "0.2617993877991494",
+                    "-amount": "0.3"
+                  }
+                ]
+              },
+              "title": "generates"
+            }
+          ]
+        }
+      },
+      {
+        "-id": "2ik7rm8o7e9hq3a2glv89mu5s3",
+        "-timestamp": "1517910735978",
+        "-modified-by": "ankozin",
+        "-theme": "65et4tbn548nr5o54og1bhmv4m",
+        "topic": {
+          "-id": "23flpmdjijals51tsngios4emm",
+          "-timestamp": "1516718724400",
+          "-modified-by": "z4i",
+          "-structure-class": "org.xmind.ui.map.unbalanced",
+          "title": "Scenarios",
+          "extensions": {
+            "extension": {
+              "-provider": "org.xmind.ui.map.unbalanced",
+              "content": { "right-number": "1" }
+            }
+          },
+          "children": {
+            "topics": {
+              "-type": "attached",
+              "topic": [
+                {
+                  "-id": "1g9hctbcnkebo6hp17337hceuu",
+                  "-timestamp": "1516718597044",
+                  "-modified-by": "z4i",
+                  "title": "Core",
+                  "children": {
+                    "topics": {
+                      "-type": "attached",
+                      "topic": [
+                        {
+                          "-id": "7p82ng0j6hmn5m0btrelbm7q96",
+                          "-timestamp": "1516718607813",
+                          "-modified-by": "z4i",
+                          "title": "behind the jail (85% threshold)",
+                          "children": {
+                            "topics": {
+                              "-type": "attached",
+                              "topic": [
+                                {
+                                  "-id": "76n8ln0hlso2fgpks1cbsbdgdq",
+                                  "-timestamp": "1516718577888",
+                                  "-modified-by": "z4i",
+                                  "title": "add_participant"
+                                },
+                                {
+                                  "-id": "4dh9it878f263je0skpgkvtjsq",
+                                  "-timestamp": "1516718588184",
+                                  "-modified-by": "z4i",
+                                  "title": "create_group_call"
+                                },
+                                {
+                                  "-id": "79rlu1r9k810j8d78j2jik9ap9",
+                                  "-timestamp": "1516718588184",
+                                  "-modified-by": "z4i",
+                                  "title": "join_group_call"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "-id": "340g05u8jhrfe4thilllpdl3rp",
+                          "-timestamp": "1516718624530",
+                          "-modified-by": "z4i",
+                          "title": "normal one (90% threshold)",
+                          "children": {
+                            "topics": {
+                              "-type": "attached",
+                              "topic": [
+                                {
+                                  "-id": "0ai4cb1g54ojf03aijsfmg4q5m",
+                                  "-timestamp": "1516718598460",
+                                  "-modified-by": "z4i",
+                                  "title": "screen_sharing_sender_end"
+                                },
+                                {
+                                  "-id": "2p1mkup1n3ud093d85tcc9mcog",
+                                  "-timestamp": "1516718598460",
+                                  "-modified-by": "z4i",
+                                  "title": "start_video"
+                                },
+                                {
+                                  "-id": "19iak61tudilcbl11bce3h6a7j",
+                                  "-timestamp": "1516718598460",
+                                  "-modified-by": "z4i",
+                                  "title": "stop_video"
+                                },
+                                {
+                                  "-id": "2n831abrved4fjlaa9fi6pc9sm",
+                                  "-timestamp": "1516718598460",
+                                  "-modified-by": "z4i",
+                                  "title": "video_stream_rendering"
+                                },
+                                {
+                                  "-id": "09qqv53mj5vg2iuab7rioq38mg",
+                                  "-timestamp": "1516718598460",
+                                  "-modified-by": "z4i",
+                                  "title": "screen_sharing_sender"
+                                },
+                                {
+                                  "-id": "16e1m7i3bt27bqcnpaf6q9o62b",
+                                  "-timestamp": "1516718598460",
+                                  "-modified-by": "z4i",
+                                  "title": "join_or_create_call_from_link"
+                                },
+                                {
+                                  "-id": "08duu8ssu2p49n3kka6395on20",
+                                  "-timestamp": "1516718598460",
+                                  "-modified-by": "z4i",
+                                  "title": "calling_service_init"
+                                },
+                                {
+                                  "-id": "3gea736r46bjnjo4ba6t41h1vb",
+                                  "-timestamp": "1516718598460",
+                                  "-modified-by": "z4i",
+                                  "title": "calling_relay_manager_query_relays_async"
+                                },
+                                {
+                                  "-id": "5qk2d4dsf4o03e5sfipsb8sa1k",
+                                  "-timestamp": "1516718598460",
+                                  "-modified-by": "z4i",
+                                  "title": "ecs_config_request"
+                                },
+                                {
+                                  "-id": "2hlle1hutsfedvpfdv4s36dqvd",
+                                  "-timestamp": "1516718598460",
+                                  "-modified-by": "z4i",
+                                  "title": "add_pstn_participant"
+                                },
+                                {
+                                  "-id": "34a822s99q9flrm9dtsjm0pkbe",
+                                  "-timestamp": "1516718598460",
+                                  "-modified-by": "z4i",
+                                  "title": "call_me_back"
+                                },
+                                {
+                                  "-id": "6p663gf3ukpq7fe2u900n9361n",
+                                  "-timestamp": "1516718598460",
+                                  "-modified-by": "z4i",
+                                  "title": "calling_mute_participant"
+                                },
+                                {
+                                  "-id": "42a4tvu1nbqg8oevr9li34664h",
+                                  "-timestamp": "1516718598460",
+                                  "-modified-by": "z4i",
+                                  "title": "server_unmute_self"
+                                },
+                                {
+                                  "-id": "4ekogfooarskbd4tf9543212nv",
+                                  "-timestamp": "1516718598460",
+                                  "-modified-by": "z4i",
+                                  "title": "calling_mute_all"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "-id": "3aairf1djgvpn28q22phnmmmq7",
+                  "-timestamp": "1517910730689",
+                  "-modified-by": "ankozin",
+                  "title": "Optimal",
+                  "children": {
+                    "topics": {
+                      "-type": "attached",
+                      "topic": [
+                        {
+                          "-id": "50eskd3p03acofgkkrp4uauohp",
+                          "-timestamp": "1513239274039",
+                          "-modified-by": "ankozin",
+                          "title": "get_meeting_info"
+                        },
+                        {
+                          "-id": "4pctor3nlsdjk3o9h6k247chq0",
+                          "-timestamp": "1515434278282",
+                          "-modified-by": "z4i",
+                          "title": "get_exchange_meeting_info"
+                        },
+                        {
+                          "-id": "1bjieqbbccgq2puj0hru7t5cqu",
+                          "-timestamp": "1517910705741",
+                          "-modified-by": "ankozin",
+                          "title": "start_recording"
+                        },
+                        {
+                          "-id": "41l0gk837oajnvpudfdamn7tjt",
+                          "-timestamp": "1517910735978",
+                          "-modified-by": "ankozin",
+                          "title": "stop_recording???"
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "-id": "21igq2ogn5j00047d4qf90hn7l",
+                  "-timestamp": "1516718724400",
+                  "-modified-by": "z4i",
+                  "title": "Dialtone",
+                  "children": {
+                    "topics": {
+                      "-type": "attached",
+                      "topic": [
+                        {
+                          "-id": "055i6romc3me1cm0hnlukuje97",
+                          "-timestamp": "1516718712355",
+                          "-modified-by": "z4i",
+                          "title": "behind the jail (80%)",
+                          "children": {
+                            "topics": {
+                              "-type": "attached",
+                              "topic": [
+                                {
+                                  "-id": "2ir3hdg6b3ea232ha4rcron0fb",
+                                  "-timestamp": "1517825520586",
+                                  "-modified-by": "andriikozin",
+                                  "title": "create_one_to_one_call",
+                                  "children": {
+                                    "topics": {
+                                      "-type": "attached",
+                                      "topic": {
+                                        "-id": "0c03473n0shgh2c51apugek80a",
+                                        "-timestamp": "1517825520580",
+                                        "-modified-by": "andriikozin",
+                                        "title": "https://domoreexp.visualstudio.com/MSTeams/_queries?id=222450&fullScreen=false&_a=edit"
+                                      }
+                                    }
+                                  }
+                                },
+                                {
+                                  "-id": "6k7c1t81c9fhbd5eobiqj1dqdn",
+                                  "-timestamp": "1517232430563",
+                                  "-modified-by": "z4i",
+                                  "title": "join_or_create_meetup_from_link",
+                                  "children": {
+                                    "topics": {
+                                      "-type": "attached",
+                                      "topic": {
+                                        "-id": "1tt7gfadf0nda4s7to96eo02vb",
+                                        "-timestamp": "1517232430555",
+                                        "-modified-by": "z4i",
+                                        "title": "https://domoreexp.visualstudio.com/MSTeams/_workitems/edit/221727"
+                                      }
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "-id": "45lk3k84qqahq5v4b058bofimc",
+                          "-timestamp": "1516718725613",
+                          "-modified-by": "z4i",
+                          "title": "normal one (90%)",
+                          "children": {
+                            "topics": {
+                              "-type": "attached",
+                              "topic": [
+                                {
+                                  "-id": "7h41ek121jl1j6iocrvp8dlqnk",
+                                  "-timestamp": "1516718725587",
+                                  "-modified-by": "z4i",
+                                  "title": "media_connected"
+                                },
+                                {
+                                  "-id": "0g29pdps8ae7u5ffefmkn0vgc1",
+                                  "-timestamp": "1516718725587",
+                                  "-modified-by": "z4i",
+                                  "title": "create_meetup"
+                                },
+                                {
+                                  "-id": "0eo71r0f0sinqksqk9m782ekot",
+                                  "-timestamp": "1516718725587",
+                                  "-modified-by": "z4i",
+                                  "title": "join_meetup_reply_chain"
+                                },
+                                {
+                                  "-id": "2ogccs8qb007aeqc1kfbhcm6l7",
+                                  "-timestamp": "1516718725587",
+                                  "-modified-by": "z4i",
+                                  "title": "join_scheduled_meetup"
+                                },
+                                {
+                                  "-id": "7h9evf8nud676lip8nic05os7l",
+                                  "-timestamp": "1516718725587",
+                                  "-modified-by": "z4i",
+                                  "title": "call_accept"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "title": "Scenarios"
+      }
+    ],
+    "extensions": {
+      "extension": { "-provider": "org.xmind.ui.presentation.stories" }
+    }
+  }
+}

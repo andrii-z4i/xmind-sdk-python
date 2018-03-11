@@ -1,4 +1,4 @@
-import logging
+from xmind.tests import logging_configuration as lc
 from xmind.core.workbook import WorkbookDocument
 from xmind.tests import base
 from unittest.mock import patch, Mock, MagicMock
@@ -10,7 +10,7 @@ class TestWorkbookDocument(base.Base):
 
     def getLogger(self):
         if not getattr(self, '_logger', None):
-            self._logger = logging.getLogger('workbookDocument')
+            self._logger = lc.get_logger('workbookDocument')
         return self._logger
 
     def setUp(self):

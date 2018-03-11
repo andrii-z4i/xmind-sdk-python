@@ -1,4 +1,4 @@
-import logging
+from xmind.tests import logging_configuration as lc
 from xmind.core.title import TitleElement
 from xmind.tests import base
 from unittest.mock import call
@@ -10,20 +10,23 @@ class TestTitleElement(base.Base):
 
     def setUp(self):
         super(TestTitleElement, self).setUp()
-        self._workbook_mixin_element_mock = self._init_patch_with_name('_wb_mixin_mock', 'xmind.core.topic.WorkbookMixinElement.__init__', autospec=True)
+        self._workbook_mixin_element_mock = self._init_patch_with_name(
+            '_wb_mixin_mock', 'xmind.core.topic.WorkbookMixinElement.__init__', autospec=True)
 
     def getLogger(self):
         if not getattr(self, '_logger', None):
-            self._logger = logging.getLogger('titleElement')
+            self._logger = lc.get_logger('titleElement')
         return self._logger
 
     def test_excessive_parameters(self):
         _title_element = TitleElement()
 
-        self._test_method_by_excessive_parameters(('__init__', (2, False)), _title_element)
+        self._test_method_by_excessive_parameters(
+            ('__init__', (2, False)), _title_element)
 
         self.assertEqual(_title_element.TAG_NAME, TAG_TITLE)
-        self._workbook_mixin_element_mock.assert_called_once_with(_title_element, None, None)
+        self._workbook_mixin_element_mock.assert_called_once_with(
+            _title_element, None, None)
 
     def test_init(self):
         _element1 = TitleElement(node='a1')

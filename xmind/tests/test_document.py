@@ -1,4 +1,4 @@
-import logging
+from xmind.tests import logging_configuration as lc
 from xmind.core import Document
 from xmind.tests import base
 from unittest.mock import patch, MagicMock
@@ -9,7 +9,7 @@ class TestDocument(base.Base):
 
     def getLogger(self):
         if not getattr(self, '_logger', None):
-            self._logger = logging.getLogger('document')
+            self._logger = lc.get_logger('document')
         return self._logger
 
     def test_excessive_parameters(self):

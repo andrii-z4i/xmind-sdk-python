@@ -1,8 +1,8 @@
 import unittest
 from unittest.mock import patch, Mock, MagicMock, PropertyMock
 from xmind.core.mixin import WorkbookMixinElement
-import logging
-from . import base
+from xmind.tests import logging_configuration as lc
+from xmind.tests import base
 from xmind.core.const import ATTR_TIMESTAMP, ATTR_ID
 
 
@@ -30,7 +30,7 @@ class WorkbookMixinElementTest(base.Base):
 
     def getLogger(self):
         if not getattr(self, '_logger', None):
-            self._logger = logging.getLogger('WorkbookMixinElementTest')
+            self._logger = lc.get_logger('WorkbookMixinElementTest')
         return self._logger
 
     def test_init_with_parameters(self):

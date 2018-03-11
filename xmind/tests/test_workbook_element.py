@@ -1,5 +1,5 @@
-import logging
-from . import base
+from xmind.tests import logging_configuration as lc
+from xmind.tests import base
 from unittest.mock import patch, MagicMock, call, Mock
 from xmind.core.workbook import WorkbookElement
 from xmind.core.const import TAG_WORKBOOK, NAMESPACE, XMAP, NS_FO, NS_XHTML, NS_XLINK, NS_SVG, TAG_SHEET, ATTR_VERSION
@@ -13,7 +13,7 @@ class TestWorkbookElement(base.Base):
         self._workbook_mixin_element_init = self._init_patch_with_name(
             '_mixin_init', 'xmind.core.workbook.WorkbookMixinElement.__init__')
         self._getSheets = self._init_patch_with_name('_getSheets', 'xmind.core.workbook.WorkbookElement.getSheets',
-                                                return_value=True)
+                                                     return_value=True)
         self._setAttributeNS = self._init_patch_with_name(
             '_setAttributeNS', 'xmind.core.Element.setAttributeNS')
         self._owner_workbook = MagicMock()
@@ -31,7 +31,7 @@ class TestWorkbookElement(base.Base):
 
     def getLogger(self):
         if not getattr(self, '_logger', None):
-            self._logger = logging.getLogger('TestWoorkbookElement')
+            self._logger = lc.get_logger('TestWoorkbookElement')
         return self._logger
 
     def test_excessive_parameters(self):
@@ -58,9 +58,11 @@ class TestWorkbookElement(base.Base):
     def test_WorkbookElement_init_is_getSheet(self):
         self._remove_patched_function('_getSheets')
         _getSheets = self._init_patch_with_name('_getSheets', 'xmind.core.workbook.WorkbookElement.getSheets',
-                                                return_value= True, autospec=True)
-        _createSheet = self._init_patch_with_name('_createSheet', 'xmind.core.workbook.WorkbookElement.createSheet', autospec=True)
-        _addSheet = self._init_patch_with_name('_addSheet', 'xmind.core.workbook.WorkbookElement.addSheet', autospec=True)
+                                                return_value=True, autospec=True)
+        _createSheet = self._init_patch_with_name(
+            '_createSheet', 'xmind.core.workbook.WorkbookElement.createSheet', autospec=True)
+        _addSheet = self._init_patch_with_name(
+            '_addSheet', 'xmind.core.workbook.WorkbookElement.addSheet', autospec=True)
 
         _test_el = WorkbookElement()
 
@@ -81,8 +83,9 @@ class TestWorkbookElement(base.Base):
         _getSheets = self._init_patch_with_name('_getSheets', 'xmind.core.workbook.WorkbookElement.getSheets',
                                                 return_value=False, autospec=True)
         _createSheet = self._init_patch_with_name('_createSheet', 'xmind.core.workbook.WorkbookElement.createSheet',
-                                                  return_value= 'sheet', autospec=True)
-        _addSheet = self._init_patch_with_name('_addSheet', 'xmind.core.workbook.WorkbookElement.addSheet', autospec=True)
+                                                  return_value='sheet', autospec=True)
+        _addSheet = self._init_patch_with_name(
+            '_addSheet', 'xmind.core.workbook.WorkbookElement.addSheet', autospec=True)
 
         _test_el = WorkbookElement()
 
@@ -99,13 +102,15 @@ class TestWorkbookElement(base.Base):
 
     def test_WorkbookElement_init_called_with_diff_parameters(self):
         _test_el_1 = WorkbookElement('node1')
-        self._workbook_mixin_element_init.assert_called_once_with('node1', None)
+        self._workbook_mixin_element_init.assert_called_once_with(
+            'node1', None)
 
         _test_el_2 = WorkbookElement(ownerWorkbook='workbook2')
         self._workbook_mixin_element_init.assert_called_with(None, 'workbook2')
 
         _test_el_3 = WorkbookElement('node3', 'workbook3')
-        self._workbook_mixin_element_init.assert_called_with('node3', 'workbook3')
+        self._workbook_mixin_element_init.assert_called_with(
+            'node3', 'workbook3')
 
         self.assertEqual(self._workbook_mixin_element_init.call_count, 3)
 
@@ -116,7 +121,8 @@ class TestWorkbookElement(base.Base):
         with self.assertRaises(Exception) as _ex:
             _test_el.setOwnerWorkbook('ownerbook')
 
-        self.assertTrue(_ex.exception.args[0].find("WorkbookDocument allowed only contains one WorkbookElement") == 0)
+        self.assertTrue(_ex.exception.args[0].find(
+            "WorkbookDocument allowed only contains one WorkbookElement") == 0)
 
     def test_WorkbookElement_getSheet_sheets_is_none(self):
         _test_el = WorkbookElement()
@@ -135,7 +141,8 @@ class TestWorkbookElement(base.Base):
 
         _getChildNodesByTagName.assert_called_once_with(_test_el, TAG_SHEET)
         _getOwnerWorkbook.assert_called_once_with(_test_el)
-        self.assertTrue(_ex.exception.args[0].find("'NoneType' object is not iterable") != -1)
+        self.assertTrue(_ex.exception.args[0].find(
+            "'NoneType' object is not iterable") != -1)
 
     def test_WorkbookElement_getSheet_is_sheets_ownerbook_none(self):
         _test_el = WorkbookElement()
@@ -150,7 +157,7 @@ class TestWorkbookElement(base.Base):
             return_value=None, autospec=True)
 
         with patch('xmind.core.workbook.SheetElement') as _sheet_element_constructor:
-            _sheet_element_constructor.side_effect = ['a','b','c']
+            _sheet_element_constructor.side_effect = ['a', 'b', 'c']
 
             _sheets = _test_el.getSheets()
 
@@ -269,7 +276,7 @@ class TestWorkbookElement(base.Base):
 
         _getSheets = self._init_patch_with_name(
             '_getSheets', 'xmind.core.workbook.WorkbookElement.getSheets',
-            return_value=['sheet1', 'sheet2', 'sheet3'],autospec=True)
+            return_value=['sheet1', 'sheet2', 'sheet3'], autospec=True)
         _appendChild = self._init_patch_with_name(
             '_appendChild', 'xmind.core.Node.appendChild', autospec=True)
         _insertBefore = self._init_patch_with_name(
@@ -283,7 +290,8 @@ class TestWorkbookElement(base.Base):
         _result4 = _test_el.addSheet('sheet', 4)
 
         self.assertListEqual(_getSheets.call_args_list, [call(_test_el)]*4)
-        self.assertListEqual(_appendChild.call_args_list, [call(_test_el, 'sheet')]*4)
+        self.assertListEqual(_appendChild.call_args_list,
+                             [call(_test_el, 'sheet')]*4)
         _insertBefore.assert_not_called()
         self.assertEqual(_updateModifiedTime.call_count, 4)
         self._assert_init_methods_called()
@@ -322,7 +330,7 @@ class TestWorkbookElement(base.Base):
             return_value=[[], ['sheet1']], autospec=True, return_value_as_side_effect=True)
         _getImplementation = self._init_patch_with_name(
             '_getImplementation', 'xmind.core.Node.getImplementation',
-            return_value= 'implementation', autospec=True)
+            return_value='implementation', autospec=True)
         _sheet = Mock()
         with patch.object(_sheet, 'getParentNode') as _getParentNode:
             _getParentNode.return_value = 'not equal'
@@ -347,7 +355,7 @@ class TestWorkbookElement(base.Base):
             return_value=['sheet1', 'sheet2', 'sheet3'], autospec=True)
         _getImplementation = self._init_patch_with_name(
             '_getImplementation', 'xmind.core.Node.getImplementation',
-            return_value= 'implementation', autospec=True)
+            return_value='implementation', autospec=True)
         _removeChild = self._init_patch_with_name(
             '_removeChild', 'xmind.core.Node.removeChild', autospec=True)
         _updateModifiedTime = self._init_patch_with_name(
@@ -376,7 +384,7 @@ class TestWorkbookElement(base.Base):
             return_value=['sheet1', 'sheet2', 'sheet3'], autospec=True)
         _getImplementation = self._init_patch_with_name(
             '_getImplementation', 'xmind.core.Node.getImplementation',
-            return_value= 'implementation', autospec=True)
+            return_value='implementation', autospec=True)
         _removeChild = self._init_patch_with_name(
             '_removeChild', 'xmind.core.Node.removeChild', autospec=True)
         _updateModifiedTime = self._init_patch_with_name(
@@ -408,7 +416,8 @@ class TestWorkbookElement(base.Base):
             _result = _test_el.removeSheet('sheet')
 
         _getSheets.assert_called_once_with(_test_el)
-        self.assertTrue(_ex.exception.args[0].find("object of type 'NoneType' has no len()") != -1)
+        self.assertTrue(_ex.exception.args[0].find(
+            "object of type 'NoneType' has no len()") != -1)
         self._assert_init_methods_called()
 
     def test_WorkbookElement_moveSheet_origin_index_less_then_0(self):
@@ -512,9 +521,12 @@ class TestWorkbookElement(base.Base):
         self.assertIsNone(_result3)
 
         self.assertListEqual(_getSheets.call_args_list, [call(_test_el)]*3)
-        self.assertListEqual(_removeChild.call_args_list, [call(_test_el, 'sheet3')] * 3)
-        self.assertListEqual(_appendChild.call_args_list, [call(_test_el, 'sheet3')] * 3)
-        self.assertListEqual(_updateModifiedTime.call_args_list, [call(_test_el)] * 3)
+        self.assertListEqual(_removeChild.call_args_list, [
+                             call(_test_el, 'sheet3')] * 3)
+        self.assertListEqual(_appendChild.call_args_list, [
+                             call(_test_el, 'sheet3')] * 3)
+        self.assertListEqual(_updateModifiedTime.call_args_list, [
+                             call(_test_el)] * 3)
         self._assert_init_methods_called()
 
     def test_WorkbookElement_moveSheet_prev_true_origin_less_target_target_equal_sheet(self):
@@ -595,7 +607,8 @@ class TestWorkbookElement(base.Base):
 
         _getSheets.assert_called_once_with(_test_el)
         _removeChild.assert_called_once_with(_test_el, 'sheet_not_equal')
-        _insertBefore.assert_called_once_with(_test_el, 'sheet_not_equal', 'sheet_equal')
+        _insertBefore.assert_called_once_with(
+            _test_el, 'sheet_not_equal', 'sheet_equal')
         _appendChild.assert_not_called()
         _updateModifiedTime.assert_called_once_with(_test_el)
         self.assertIsNone(_result)
@@ -623,7 +636,8 @@ class TestWorkbookElement(base.Base):
 
         _getSheets.assert_called_once_with(_test_el)
         _removeChild.assert_called_once_with(_test_el, 'sheet_equal')
-        _insertBefore.assert_called_once_with(_test_el, 'sheet_equal', 'sheet_not_equal')
+        _insertBefore.assert_called_once_with(
+            _test_el, 'sheet_equal', 'sheet_not_equal')
         _appendChild.assert_not_called()
         _updateModifiedTime.assert_called_once_with(_test_el)
         self.assertIsNone(_result)

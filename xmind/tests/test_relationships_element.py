@@ -1,4 +1,4 @@
-import logging
+from xmind.tests import logging_configuration as lc
 from xmind.core.relationship import RelationshipsElement
 from xmind.tests import base
 from xmind.core.const import TAG_RELATIONSHIPS
@@ -9,7 +9,7 @@ class TestRelationshipsElement(base.Base):
 
     def getLogger(self):
         if not getattr(self, '_logger', None):
-            self._logger = logging.getLogger('relationshipsElement')
+            self._logger = lc.get_logger('relationshipsElement')
         return self._logger
 
     def test_init(self):

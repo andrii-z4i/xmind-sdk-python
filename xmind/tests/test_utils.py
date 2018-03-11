@@ -1,4 +1,4 @@
-import logging
+from xmind.tests import logging_configuration as lc
 from xmind.utils import (
     extract,
     compress,
@@ -18,7 +18,7 @@ class TestUtils(base.Base):
 
     def getLogger(self):
         if not getattr(self, '_logger', None):
-            self._logger = logging.getLogger('Utils')
+            self._logger = lc.get_logger('Utils')
         return self._logger
 
     @patch('xmind.utils.zipfile.ZipFile')

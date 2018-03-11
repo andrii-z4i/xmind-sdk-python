@@ -1,9 +1,9 @@
-import logging
+from xmind.tests import logging_configuration as lc
 import xml
 from unittest.mock import MagicMock, patch, Mock, PropertyMock, call
 
 from xmind.core import Node, create_document, create_element
-from . import base
+from xmind.tests import base
 
 
 class TestNode(base.Base):
@@ -11,7 +11,7 @@ class TestNode(base.Base):
 
     def getLogger(self):
         if not getattr(self, '_logger', None):
-            self._logger = logging.getLogger('node')
+            self._logger = lc.get_logger('node')
         return self._logger
 
     def test_excessive_parameters(self):

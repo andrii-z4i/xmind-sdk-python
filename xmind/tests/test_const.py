@@ -1,6 +1,6 @@
 from xmind.core import const
-import logging
-from . import base
+from xmind.tests import logging_configuration as lc
+from xmind.tests import base
 
 
 class ConstTest(base.Base):
@@ -8,7 +8,7 @@ class ConstTest(base.Base):
 
     def getLogger(self):
         if not getattr(self, '_logger', None):
-            self._logger = logging.getLogger('ConstTest')
+            self._logger = lc.get_logger('ConstTest')
         return self._logger
 
     def test_all_const_values(self):
@@ -29,11 +29,12 @@ class ConstTest(base.Base):
         self.assertEqual(const.META_XML, "meta.xml")
         self.assertEqual(const.MANIFEST_XML, "META-INF/manifest.xml")
         self.assertEqual(const.MARKER_SHEET_XML, "markerSheet.xml")
-        self.assertEqual(const.MARKER_SHEET, (const.MARKERS_DIR + const.MARKER_SHEET_XML))
+        self.assertEqual(const.MARKER_SHEET,
+                         (const.MARKERS_DIR + const.MARKER_SHEET_XML))
         self.assertEqual(const.REVISIONS_XML, "revisions.xml")
 
-        self.assertEqual(const.TAG_WORKBOOK,"xmap-content")
-        self.assertEqual(const.TAG_TOPIC,"topic")
+        self.assertEqual(const.TAG_WORKBOOK, "xmap-content")
+        self.assertEqual(const.TAG_TOPIC, "topic")
         self.assertEqual(const.TAG_TOPICS, "topics")
         self.assertEqual(const.TAG_SHEET, "sheet")
         self.assertEqual(const.TAG_TITLE, "title")
@@ -60,11 +61,16 @@ class ConstTest(base.Base):
 
         self.assertEqual(const.NS_URI, "http://www.w3.org/1999/xhtml")
 
-        self.assertEqual(const.NS_XHTML, (const.NS_URI, "xhtml", "http://www.w3.org/1999/xhtml"))
-        self.assertEqual(const.NS_XHTML, (const.NS_URI, "xhtml", "http://www.w3.org/1999/xhtml"))
-        self.assertEqual(const.NS_XLINK, (const.NS_URI, "xlink", "http://www.w3.org/1999/xlink"))
-        self.assertEqual(const.NS_SVG, (const.NS_URI, "svg", "http://www.w3.org/2000/svg"))
-        self.assertEqual(const.NS_FO, (const.NS_URI, "fo", "http://www.w3.org/1999/XSL/Format"))
+        self.assertEqual(const.NS_XHTML, (const.NS_URI,
+                                          "xhtml", "http://www.w3.org/1999/xhtml"))
+        self.assertEqual(const.NS_XHTML, (const.NS_URI,
+                                          "xhtml", "http://www.w3.org/1999/xhtml"))
+        self.assertEqual(const.NS_XLINK, (const.NS_URI,
+                                          "xlink", "http://www.w3.org/1999/xlink"))
+        self.assertEqual(const.NS_SVG, (const.NS_URI, "svg",
+                                        "http://www.w3.org/2000/svg"))
+        self.assertEqual(const.NS_FO, (const.NS_URI, "fo",
+                                       "http://www.w3.org/1999/XSL/Format"))
 
         self.assertEqual(const.VAL_FOLDED, "folded")
 

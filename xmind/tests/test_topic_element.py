@@ -1,4 +1,4 @@
-import logging
+from xmind.tests import logging_configuration as lc
 from xmind.core.topic import TopicElement
 from xmind.tests import base
 from unittest.mock import patch, Mock, PropertyMock, call
@@ -26,7 +26,7 @@ class TestTopicElement(base.Base):
 
     def getLogger(self):
         if not getattr(self, '_logger', None):
-            self._logger = logging.getLogger('TopicElement')
+            self._logger = lc.get_logger('TopicElement')
         return self._logger
 
     def setUp(self):
@@ -1428,7 +1428,7 @@ class TestTopicElement(base.Base):
             'xmind.core.topic.TopicsElement',
             return_value=_topics_element
         )
-        
+
         with patch('xmind.core.topic.TopicElement') as _TopicElement_mock:
             _TopicElement_mock.side_effect = [66, 77]
             self.assertEqual('value', _element.addSubTopic('value', 0))

@@ -18,10 +18,8 @@ class CreateXmindFileFromJson:
                 t = TopicElement(ownerWorkbook=self.workbook)
                 self.add_title(t, i)
                 self.add_markers(t, i)
-                self.add_plain_notes(t, i)
                 self.add_position(t, i)
                 self.add_attr_branch_folded(t, i)
-                self.DB_of_topics.update({i["-id"]: t})
                 father_topic.addSubTopic(t, topics_type=topics_type)
                 try:
                     if type(i["children"]["topics"]) == list:
@@ -31,6 +29,9 @@ class CreateXmindFileFromJson:
                         self.create_topics(i["children"]["topics"]["topic"], t, sheet)
                 except:
                     print("the end of branch")
+                finally:
+                    self.add_plain_notes(t, i)
+                    self.DB_of_topics.update({i["-id"]: t})
         elif type(topic) == dict:
             if not father_topic:
                 t = sheet.getRootTopic()
@@ -39,10 +40,8 @@ class CreateXmindFileFromJson:
                 father_topic.addSubTopic(t, topics_type=topics_type)
             self.add_title(t, topic)
             self.add_markers(t, topic)
-            self.add_plain_notes(t, topic)
             self.add_position(t, topic)
             self.add_attr_branch_folded(t, topic)
-            self.DB_of_topics.update({topic["-id"]: t})
             try:
                 if type(topic["children"]["topics"]) == list:
                     self.create_topics(topic["children"]["topics"][0]["topic"], t, sheet)
@@ -51,6 +50,9 @@ class CreateXmindFileFromJson:
                     self.create_topics(topic["children"]["topics"]["topic"], t, sheet)
             except:
                 print("the end of branch")
+            finally:
+                self.add_plain_notes(t, topic)
+                self.DB_of_topics.update({topic["-id"]: t})
 
     def create_relationships(self, sheet, sheet_number=-1):
         try:

@@ -1,6 +1,7 @@
 ### /Users/monster/.gitignore-boilerplates/Python.gitignore
 
 *.py[cod]
+*.py.swp
 
 # C extensions
 *.so
@@ -43,3 +44,4 @@ nosetests.xml
 .vscode
 .idea
 
+venv

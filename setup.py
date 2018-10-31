@@ -8,7 +8,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="xmind-sdk",
-    version="0.1a0",
+    version="1.1a",
     author="Woody Ai",
     author_email="aiqi@xmind.net",
     description="The offical XMind python SDK",
@@ -16,7 +16,6 @@ setup(
     
     packages=find_packages(),
 
-    install_requires=["distribute"],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
@@ -28,5 +27,5 @@ setup(
     python_requires='>=3.6',
 
     url="https://github.com/andrii-z4i/xmind-sdk-python.git",
-    download_url='https://github.com/andrii-z4i/xmind-sdk-python/archive/v1.0.tar.gz',
+    download_url='https://github.com/andrii-z4i/xmind-sdk-python/archive/v1.1.tar.gz',
 )
